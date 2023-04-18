@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmaterial=self.webpackChunkmaterial||[]).push([[592],{7456:(_,n,r)=>{r.d(n,{E:()=>o});var t=r(2340),a=r(4650);let o=(()=>{class e{getApiUrl(){return t.N.apiUrl}}return e.\u0275fac=function(i){return new(i||e)},e.\u0275prov=a.Yz7({token:e,factory:e.\u0275fac,providedIn:"root"}),e})()}}]);
