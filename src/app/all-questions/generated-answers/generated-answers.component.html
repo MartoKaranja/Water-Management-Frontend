@@ -1,47 +1,35 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-subtitle>Available questions: {{ question_titles?.count }}</mat-card-subtitle>
+    <mat-card-subtitle>Generated Answers: {{ answer_titles?.count }}</mat-card-subtitle>
     <mat-card-title>Generate Answers with Chat GPT</mat-card-title>
   </mat-card-header>
   <mat-card-content>
 
-<app-control-panel [dataService]="getQuestionService()"></app-control-panel>
 
-<div class="row"  *ngIf="status_response">
-  <div class="col-md-12">
-    <mat-toolbar color="accent">
-      <span><code class="">Status: </code></span>
-
-      <!-- This fills the remaining space of the current row -->
-      <span class="example-fill-remaining-space">&nbsp;</span>
-
-      <span>{{ status_response }}</span>
-      <button mat-raised-button color="link" class="ml-auto" *ngIf="show_complete_button" (click)="viewResults()">View Results</button>
-    </mat-toolbar>
-
-  </div>
-</div>
-
-<div class = "row">
-<div class="col-md-1"></div>
-<div class="col-md-10">
-  <mat-table [dataSource]="table_source" class="mat-elevation-z8 custom-table">
+  <mat-table  matTableExporter [dataSource]="table_source" class="mat-elevation-z8 custom-table" #exporter="matTableExporter">
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
       <mat-cell *matCellDef="let element" >
-        <a [routerLink]="['question-details', element.no]">{{ element.title }}</a>
+        {{ element.question.title }}
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <a [routerLink]="['question-details', element.no]">{{ element.category }}</a>
+       {{ element.question.category }}
       </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="generate">
-      <mat-header-cell *matHeaderCellDef>Generate Answers</mat-header-cell>
+    <ng-container matColumnDef="question">
+      <mat-header-cell *matHeaderCellDef>Question Text</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary" [routerLink]="['question-details', element.no]">Process Text</button>
+        {{ element.question.content}}
+
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="generated_text">
+      <mat-header-cell *matHeaderCellDef>Generated Answers</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.generated_text}}
 
       </mat-cell>
     </ng-container>
@@ -59,18 +47,13 @@
     <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
   </mat-table>
 
-</div>
-<div class="col-md-1">
-</div>
-</div>
 
 </mat-card-content>
 <mat-card-actions>
 <div class="button-row">
   <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
 
-  <button mat-raised-button color="primary" (click)="generateAnswers()">Process Text Using Chat GPT</button>
-  <button mat-raised-button color="primary" >Queue Questions for Processing</button>
+  <button mat-raised-button color="primary"  (click)="exporter.exportTable('csv')" ><mat-icon>get_app</mat-icon>Export to CSV<mat-icon> insert_chart_outlined</mat-icon></button>
 
 </div>
 

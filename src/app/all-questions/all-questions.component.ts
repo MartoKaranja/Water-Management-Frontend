@@ -6,6 +6,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router, NavigationExtras } from '@angular/router';
+import { DataStorage } from '../services/data-store';
 
 
 
@@ -34,7 +36,7 @@ export class AllQuestionsComponent implements OnInit, AfterViewInit {
 
   columnsToDisplay = ['title', 'category', 'generate', 'select'];
 
-  constructor(private questionService: QuestionService) {
+  constructor(private questionService: QuestionService, private router: Router, private data: DataStorage) {
     this.table_source = new MatTableDataSource<Titledetail>();
   }
 
@@ -161,6 +163,12 @@ export class AllQuestionsComponent implements OnInit, AfterViewInit {
 
   public getQuestionService(): QuestionService {
     return this.questionService;
+  }
+
+  viewResults():void
+  {
+    this.data.setData(this.saved_ids)
+    this.router.navigate(['/questions/generated-answers']);
   }
 
 }

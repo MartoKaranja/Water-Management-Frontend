@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }*/
 
     // Add the authentication token to the request headers
-    const authToken = sessionStorage.getItem('auth_token');
+    const authToken = localStorage.getItem('auth_token');
     if (authToken && req.url.indexOf('/login') === -1) { // Check if the auth token is set and the request URL does not contain '/login'
     req = req.clone({
       setHeaders: { Authorization: `Token ${authToken}` }

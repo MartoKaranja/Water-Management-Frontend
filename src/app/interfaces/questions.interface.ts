@@ -36,3 +36,23 @@ export interface Titledetail {
   category: string;
   selected: boolean;
 }
+
+export interface GeneratedAnswer {
+  no: number;
+  question :
+  {
+    title: string;
+    category: string;
+    content : string;
+  },
+  generated_text : string;
+  selected: boolean;
+}
+
+export interface Answer{
+  count: number;
+  next: string;
+  previous: string;
+  results: GeneratedAnswer[]
+
+}

@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     console.log("Auth guard executing..")
-    const authToken = sessionStorage.getItem('auth_token');
+    const authToken = localStorage.getItem('auth_token');
 
 if (authToken !== null){
   console.log("Auth guard allowing access..")
@@ -36,7 +36,7 @@ export class LoginGuard implements CanActivate {
   canActivate(): boolean {
     console.log("Login guard executing..")
 
-    const authToken = sessionStorage.getItem('auth_token');
+    const authToken = localStorage.getItem('auth_token');
 
     if (authToken === null) {
       console.log("Allowing access to login page");

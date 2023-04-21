@@ -9,6 +9,8 @@ import { QuestionDetailsComponent } from '../question-details/question-details.c
 import { FormsModule } from '@angular/forms';
 import { ControlPanelComponent } from '../control-panel/control-panel.component';
 import { PromptDialogComponent } from '../control-panel/prompt-dialog/prompt-dialog.component';
+import { GeneratedAnswersComponent } from '../all-questions/generated-answers/generated-answers.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 
 
@@ -18,6 +20,7 @@ import { PromptDialogComponent } from '../control-panel/prompt-dialog/prompt-dia
     QuestionDetailsComponent,
     ControlPanelComponent,
     PromptDialogComponent,
+    GeneratedAnswersComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +28,7 @@ import { PromptDialogComponent } from '../control-panel/prompt-dialog/prompt-dia
     RouterModule.forChild(QuestionRoutes),
     DemoMaterialModule,
     FormsModule,
+    MatTableExporterModule,
   ]
 })
 export class QuestionsModule { }

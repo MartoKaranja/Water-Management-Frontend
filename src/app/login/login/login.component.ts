@@ -30,7 +30,8 @@ export class LoginComponent {
           console.log(response)
           const token = response.token;
           // Store the token in session storage
-          sessionStorage.setItem('auth_token', token);
+          //sessionStorage.setItem('auth_token', token);
+          localStorage.setItem('auth_token', token);
 
           // Redirect to the dashboard'
 

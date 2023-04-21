@@ -24,9 +24,11 @@ import { MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
 
+
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard, LoginGuard } from './auth.guard';
+import { DataStorage } from './services/data-store';
 
 
 
@@ -54,6 +56,7 @@ import { AuthGuard, LoginGuard } from './auth.guard';
   providers: [
     LoginGuard,
     AuthGuard,
+    DataStorage,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

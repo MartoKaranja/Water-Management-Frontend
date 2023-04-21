@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Question, Title } from '../interfaces/questions.interface';
+import { Question, Title, Answer } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -44,6 +44,31 @@ export class QuestionService {
       );
   }
 
+  getGeneratedAnswers(ids: any[], pageSize?: number, pageNumber?: string, ): Observable<Answer> {
+    let apiUrl = this.configService.getApiUrl() + `questions/generated_answers/`;
+    let params = new HttpParams();
+
+    if (pageSize) {
+      params = params.set('page_size', pageSize.toString());
+    }
+    if (pageNumber) {
+      params = params.set('page', pageNumber.toString());
+    }
+
+    console.log(apiUrl)
+    console.log('Params:', params);
+
+    const body = { ids: ids };
+    console.log(body)
+
+    return this.http.post<Answer>(apiUrl, body, { params })
+      .pipe(
+        map((answer: Answer) => {
+          answer.results = answer.results.map(item => ({ ...item, selected: false }));
+          return answer;
+        })
+      );
+  }
 
   getQuestionDetails(id: string): Observable<any> {
     const url = this.configService.getApiUrl() + `questions/details/${id}`;
