@@ -24,6 +24,10 @@ export const AppRoutes: Routes = [
       },
       {
         path: 'dashboard',
+        loadChildren: () => import('./admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
+      },
+      {
+        path: 'dashboard-old',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {

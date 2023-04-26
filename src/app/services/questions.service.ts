@@ -75,6 +75,11 @@ export class QuestionService {
     return this.http.get(url);
   }
 
+  getGeneratedAnswersHistory(): Observable<any> {
+    const url = this.configService.getApiUrl() + `questions/generated-answers-history/`;
+    return this.http.get(url);
+  }
+
   processQuestion(question: { question: string }): Observable<any> {
     const url = this.configService.getApiUrl() + 'questions/answer_single/';
     return this.http.post(url, { question });

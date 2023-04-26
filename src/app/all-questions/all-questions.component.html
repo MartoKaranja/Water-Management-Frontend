@@ -9,14 +9,14 @@
 
 <div class="row"  *ngIf="status_response">
   <div class="col-md-12">
-    <mat-toolbar color="accent">
+    <mat-toolbar color="primary">
       <span><code class="">Status: </code></span>
 
       <!-- This fills the remaining space of the current row -->
       <span class="example-fill-remaining-space">&nbsp;</span>
 
       <span>{{ status_response }}</span>
-      <button mat-raised-button color="link" class="ml-auto" *ngIf="show_complete_button" (click)="viewResults()">View Results</button>
+      <button mat-raised-button color="accent" class="ml-auto" (click)="viewResults()">View/Export Results</button>
     </mat-toolbar>
 
   </div>

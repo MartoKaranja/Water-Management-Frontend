@@ -48,7 +48,8 @@ export class AllQuestionsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     //this.table_source.paginator = this.paginator;
     this.table_source.sort = this.sort;
-    this.paginator.page.subscribe(() => {
+    this.table_source.paginator = this.paginator;
+    this.table_source.paginator.page.subscribe(() => {
       this.progressBar.mode = 'indeterminate';
       console.log(this.paginator.pageSize, (this.paginator.pageIndex).toString())
       this.fetchData(this.paginator.pageSize, (this.paginator.pageIndex).toString());

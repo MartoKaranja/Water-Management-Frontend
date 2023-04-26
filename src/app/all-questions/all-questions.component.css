@@ -12,6 +12,10 @@
 .custom-table  mat-cell.mat-column-selct {
   width: 5%;
 }
+.mat-toolbar
+{
+  font:500 15px / 22px Poppins, sans-serif;;
+}
 
 
 mat-cell, mat-header-cell, mat-footer-cell {

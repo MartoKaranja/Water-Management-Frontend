@@ -9,6 +9,7 @@ export interface Menu {
 
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
+  { state: 'dashboard-old', name: 'Old Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'questions', type: 'link', name: 'Questions', icon: 'assignment' },
   { state: 'customer-order', type: 'link', name: 'Place Order', icon: 'paid' },
   { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },

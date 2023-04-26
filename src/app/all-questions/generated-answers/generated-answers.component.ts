@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { QuestionService } from 'src/app/services/questions.service';
 import { Question, Title, Titledetail, GeneratedAnswer, Answer } from 'src/app/interfaces/questions.interface';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
@@ -14,7 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   templateUrl: './generated-answers.component.html',
   styleUrls: ['./generated-answers.component.css']
 })
-export class GeneratedAnswersComponent {
+export class GeneratedAnswersComponent implements OnDestroy, AfterViewInit  {
   idList!: any;
   totalItems = 0;
   answer_titles: Answer | undefined;
@@ -39,8 +39,18 @@ export class GeneratedAnswersComponent {
 
   }
 
+  ngAfterViewInit() {
+    //this.table_source.paginator = this.paginator;
+    this.table_source.sort = this.sort;
+    this.paginator.page.subscribe(() => {
+      this.progressBar.mode = 'indeterminate';
+      console.log(this.paginator.pageSize, (this.paginator.pageIndex).toString())
+      this.fetchData(this.paginator.pageSize, (this.paginator.pageIndex).toString());
+    });
+  }
+
   fetchData(pageSize?: number, pageNumber?: string) {
-    this.questionService.getGeneratedAnswers(this.idList, pageSize, pageNumber, ).subscribe({
+    this.questionService.getGeneratedAnswers(this.idList, pageSize, pageNumber).subscribe({
       next: (answer_titles: Answer) => {
         this.answer_titles = answer_titles;
         console.log('Value of question titles:', this.answer_titles);
@@ -53,7 +63,7 @@ export class GeneratedAnswersComponent {
         this.progressBar.mode = 'determinate';
         //this.table_source.paginator = this.paginator;
 
-        console.log('Paginator:', this.table_source.paginator);
+        //console.log('Paginator:', this.table_source.paginator);
         console.log('Value of this.table_source:', this.table_source.data);
       },
       error: (error: any) => {
@@ -65,6 +75,10 @@ export class GeneratedAnswersComponent {
   export() {
 
 
+  }
+
+  ngOnDestroy(): void {
+    this.data.deleteData()
   }
 
 }
