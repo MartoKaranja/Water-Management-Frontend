@@ -118,6 +118,13 @@ export class QuestionService {
 
   }
 
+  getDatabaseSummary()
+{
+  const url = this.configService.getApiUrl() + `questions/database-summary`;
+  return this.http.get(url);
+
+}
+
 
 }
 

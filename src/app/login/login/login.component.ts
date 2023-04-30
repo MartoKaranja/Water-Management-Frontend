@@ -3,6 +3,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsercredentialsService } from 'src/app/services/usercredentials.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private authService: LoginService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private authService: LoginService, private formBuilder: FormBuilder, private router: Router, private UsercredentialsService : UsercredentialsService) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -34,6 +35,8 @@ export class LoginComponent {
           localStorage.setItem('auth_token', token);
 
           // Redirect to the dashboard'
+
+          this.UsercredentialsService.username = username;
 
           this.router.navigateByUrl('/questions')
             .then(() => {

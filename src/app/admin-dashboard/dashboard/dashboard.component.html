@@ -1,35 +1,9 @@
 <div class="row">
   <div class ="col-md-6">
-    <mat-card>
-      <mat-card-header>
-        <h5 class="tw-underline">Previous CHAT GPT runs</h5>
-      </mat-card-header>
-
-      <mat-card-content>
-        <table width="100%" class="tw-table-auto tw-shadow-lg tw-bg-white">
-          <tr>
-            <th class="tw-bg-blue-100 tw-border tw-text-left">Questions</th><th class="tw-bg-blue-100 tw-border tw-text-left"> Batch processing date</th><th class="tw-bg-blue-100 tw-border tw-text-left">Time Processed</th><th class="tw-bg-blue-100 tw-border tw-text-left">View Results</th>
-          </tr>
-          <tr *ngFor="let result of results">
-            <td class="tw-border">{{result.count}}</td>
-            <td class="tw-border">{{result.date_recorded | date:'EEEE, MMMM d, y'}}</td>
-            <td class="tw-border">{{result.date_recorded | date:'h:mm a'}}</td>
-            <td class="tw-border">
-              <button mat-raised-button color="primary" [routerLink]="['question-details', result.date_recorded]">View Results</button>
-            </td>
-
-          </tr>
-          <tr *ngIf="summary_records === 0">
-            <td colspan = "4" style = "text-align: center"><div class="alert alert-secondary" role="alert">No production runs have been processed yet</div></td>
-
-          </tr>
-        </table>
-
-      </mat-card-content>
-    </mat-card>
+    <app-answers-summary [dataService]="getQuestionService()"></app-answers-summary>
   </div>
   <div class ="col-md-6">
-    <button class="tw-py-2 tw-px-3 tw-m-2 tw-bg-blue-500 tw-hover:bg-nav-hover-blue tw-rounded-md tw-text-white">Click Me!</button>
+    <app-database-summary [dataService]="getQuestionService()"></app-database-summary>
   </div>
 
 

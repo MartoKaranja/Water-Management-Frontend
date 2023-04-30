@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <h5 class="tw-underline">Previous CHAT GPT generated answers</h5>
+  </mat-card-header>
+
+  <mat-card-content>
+    <table width="100%" class="tw-table-auto tw-shadow-lg tw-bg-white">
+      <thead class="tw-bg-gray-100 dark:tw-bg-gray-700">
+        <tr>
+          <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2">Questions</th>
+          <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2"> Batch processing date</th>
+          <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2">Time Processed</th>
+          <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2">View Results</th>
+      </tr>
+    </thead>
+    <tbody class="tw-bg-white tw-divide-y tw-divide-gray-200">
+      <tr  class="tw-hover:bg-gray-100 dark:hover:tw-bg-gray-700" *ngFor="let result of results">
+        <td class="tw-py-2 tw-px-2 tw-text-center">{{result.count}}</td>
+        <td class="tw-py-2 tw-px-2">{{result.date_processed_minute | date:'EEEE, MMMM d, y'}}</td>
+        <td class="tw-py-2 tw-px-2">{{result.date_processed_minute | date:'h:mm a'}}</td>
+        <td class="tw-py-2 tw-px-2">
+          <button mat-raised-button color="primary" [routerLink]="['question-details', result.date_recorded]">View Results</button>
+        </td>
+
+      </tr>
+      <tr *ngIf="summary_records !== 0">
+        <td class="tw-py-2 tw-px-2" colspan = "4" style = "text-align: center"><button mat-raised-button color="primary">View All</button></td>
+
+      </tr>
+
+      <tr *ngIf="summary_records === 0">
+        <td colspan = "4" style = "text-align: center"><div class="alert alert-secondary" role="alert">No production runs have been processed yet</div></td>
+
+      </tr>
+    </tbody>
+
+
+    </table>
+
+  </mat-card-content>
+</mat-card>
