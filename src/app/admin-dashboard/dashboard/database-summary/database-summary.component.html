@@ -21,7 +21,7 @@
           <button mat-raised-button color="primary">Schedule</button>
         </td>
         <td class="tw-py-2 tw-px-2">
-          <button mat-raised-button color="primary" (click)="viewQuestions(result[0])">View</button>
+          <button mat-raised-button color="primary" [routerLink]="['/questions/database-questions', result[0]]">View</button>
         </td>
 
       </tr>

@@ -1,32 +1,29 @@
-import { Component, OnInit, AfterViewInit, ViewChild  } from '@angular/core';
-import { QuestionService } from '../services/questions.service';
-import { Question, Title, Titledetail } from '../interfaces/questions.interface';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { QuestionService } from 'src/app/services/questions.service';
+import { Question, Title, Titledetail, DatabaseQuestion } from 'src/app/interfaces/questions.interface';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router, NavigationExtras } from '@angular/router';
-import { DataStorage } from '../services/data-store';
-
-
+import { DataStorage } from 'src/app/services/data-store';
 
 @Component({
-  selector: 'app-questions-all-questions',
-  templateUrl: './all-questions.component.html',
-  styleUrls: ['./all-questions.component.css']
+  selector: 'app-database-questions',
+  templateUrl: './database-questions.component.html',
+  styleUrls: ['./database-questions.component.css']
 })
-
-
-export class AllQuestionsComponent implements OnInit, AfterViewInit {
+export class DatabaseQuestionsComponent {
   allSelected = false;
   intervalId !: any;
   saved_ids !: any[];
   process_status !: any;
-  question_titles: Title | undefined;
+  database_questions: DatabaseQuestion | undefined;
   @ViewChild(MatProgressBar, {static: true}) progressBar!: MatProgressBar;
   @ViewChild(MatProgressSpinnerModule, {static: true}) progressBarSpinner!: MatProgressSpinnerModule;
-  table_source: MatTableDataSource<Titledetail>;
+  table_source :MatTableDataSource<Titledetail>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   totalItems = 0;
@@ -36,11 +33,17 @@ export class AllQuestionsComponent implements OnInit, AfterViewInit {
 
   columnsToDisplay = ['title', 'category', 'generate', 'select'];
 
-  constructor(private questionService: QuestionService, private router: Router, private data: DataStorage) {
-    this.table_source = new MatTableDataSource<Titledetail>();
-  }
+  db_name:any = '';
 
+  constructor(private route: ActivatedRoute, private questionService: QuestionService, private router: Router, private data: DataStorage) {
+    this.table_source = new MatTableDataSource<Titledetail>();
+   }
+
+  // In ngOnInit
   ngOnInit() {
+    this.db_name= this.route.snapshot.paramMap.get("db");
+
+    console.log(this.db_name)
     this.progressBar.mode = 'indeterminate';
     this.fetchData();
   }
@@ -57,12 +60,12 @@ export class AllQuestionsComponent implements OnInit, AfterViewInit {
   }
 
   fetchData(pageSize?: number, pageNumber?: string) {
-    this.questionService.getQuestionTitles(pageSize, pageNumber).subscribe({
-      next: (question_titles: Title) => {
-        this.question_titles = question_titles;
-        console.log('Value of question titles:', this.question_titles);
-        this.totalItems = this.question_titles.count;
-        this.table_source.data = this.question_titles.results;
+    this.questionService.getDatabaseQuestions(pageSize, pageNumber, this.db_name).subscribe({
+      next: (database_questions: DatabaseQuestion) => {
+        this.database_questions = database_questions;
+
+        this.totalItems = this.database_questions.count;
+        this.table_source.data = this.database_questions.results;
 
         this.paginator.length = this.totalItems;
         this.paginator.pageIndex = this.paginator.pageIndex; // reset the paginator's pageIndex to zero

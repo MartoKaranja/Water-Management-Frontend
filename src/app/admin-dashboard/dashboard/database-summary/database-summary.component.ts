@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { QuestionService } from 'src/app/services/questions.service';
+import { Router, NavigationExtras } from '@angular/router';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-database-summary',
@@ -12,8 +14,7 @@ export class DatabaseSummaryComponent {
 
   public database_tables:any = [];
 
-  constructor() {
-
+  constructor(private router : Router) {
   }
 
   ngOnInit() {
@@ -33,8 +34,5 @@ export class DatabaseSummaryComponent {
     });
   }
 
-  viewQuestions(database_name:string){
-    console.log(database_name)
-  }
 
 }

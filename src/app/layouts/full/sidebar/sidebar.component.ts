@@ -4,6 +4,7 @@ import { MenuItems } from '../../../shared/menu-items/menu-items';
 import { ProdMenuItems } from '../../../shared/menu-items/prod-menu-items';
 import { environment } from 'src/environments/environment';
 import { UsercredentialsService } from 'src/app/services/usercredentials.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class AppSidebarComponent implements OnDestroy {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    private UsercredentialsService : UsercredentialsService
+    private UsercredentialsService : UsercredentialsService,
+    private router: Router
   ) {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -31,10 +33,17 @@ export class AppSidebarComponent implements OnDestroy {
 
     this.menuItems = environment.production ?  new ProdMenuItems() : new MenuItems();
     this.username = this.UsercredentialsService.username;
+    console.log("Username: "+this.username)
   }
 
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  signout(){
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('username');
+    this.router.navigate(['/auth/login'])
   }
 }

@@ -5,15 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class UsercredentialsService {
 
-  private _username: string = "Welcome new user";
+  private _username !: string;
 
-  constructor() { }
+  constructor() {
+
+   }
 
   get username(): string {
-    return this._username;
+    return 'Welcome ' + localStorage.getItem("username")
   }
 
   set username(username: string) {
-    this._username = username;
+    localStorage.setItem("username", username)
   }
 }

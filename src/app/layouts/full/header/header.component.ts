@@ -14,6 +14,7 @@ export class AppHeaderComponent {
   signout(){
     //sessionStorage.removeItem('auth_token');
     localStorage.removeItem('auth_token');
+    localStorage.removeItem('username');
     this.router.navigate(['/auth/login'])
 
   }

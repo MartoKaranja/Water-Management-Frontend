@@ -14,7 +14,7 @@ import { UsercredentialsService } from 'src/app/services/usercredentials.service
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private authService: LoginService, private formBuilder: FormBuilder, private router: Router, private UsercredentialsService : UsercredentialsService) {
+  constructor(private authService: LoginService, private formBuilder: FormBuilder, private router: Router, private usercredentialsService : UsercredentialsService) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -33,10 +33,9 @@ export class LoginComponent {
           // Store the token in session storage
           //sessionStorage.setItem('auth_token', token);
           localStorage.setItem('auth_token', token);
+          this.usercredentialsService.username = username
 
           // Redirect to the dashboard'
-
-          this.UsercredentialsService.username = username;
 
           this.router.navigateByUrl('/questions')
             .then(() => {

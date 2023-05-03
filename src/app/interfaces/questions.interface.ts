@@ -56,3 +56,10 @@ export interface Answer{
   results: GeneratedAnswer[]
 
 }
+
+
+export interface DatabaseQuestion{
+  count: number;
+  results: Titledetail[]
+
+}

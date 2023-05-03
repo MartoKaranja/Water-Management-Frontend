@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Question, Title, Answer } from '../interfaces/questions.interface';
+import { Question, Title, Answer, DatabaseQuestion } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -125,6 +125,57 @@ export class QuestionService {
 
 }
 
+getDatabaseQuestions(pageSize?: number, pageNumber?: string, databaseName?:string): Observable<DatabaseQuestion> {
+  let apiUrl = this.configService.getApiUrl() + `questions/database-questions`;
+  let params = new HttpParams();
+
+  if (pageSize) {
+    params = params.set('page_size', pageSize.toString());
+  }
+  if (pageNumber) {
+    params = params.set('page', pageNumber.toString());
+  }
+  if (databaseName){
+    params = params.set('name', databaseName.toString());
+  }
+
+  console.log(apiUrl)
+  console.log('Params:', params);
+
+  return this.http.get<DatabaseQuestion>(apiUrl, { params })
+    .pipe(
+      map((question: DatabaseQuestion) => {
+        question.results = question.results.map(item => ({ ...item, selected: false }));
+        return question;
+      })
+    );
+}
+
+getGeneratedTimestampAnswers(timestamp: any, pageSize?: number, pageNumber?: string, ): Observable<Answer> {
+  let apiUrl = this.configService.getApiUrl() + `questions/generated_timestamp_answers/`;
+  let params = new HttpParams();
+
+  if (pageSize) {
+    params = params.set('page_size', pageSize.toString());
+  }
+  if (pageNumber) {
+    params = params.set('page', pageNumber.toString());
+  }
+
+  console.log(apiUrl)
+  console.log('Params:', params);
+
+  const body = { timestamp: timestamp };
+  console.log(body)
+
+  return this.http.post<Answer>(apiUrl, body, { params })
+    .pipe(
+      map((answer: Answer) => {
+        answer.results = answer.results.map(item => ({ ...item, selected: false }));
+        return answer;
+      })
+    );
+}
 
 }
 

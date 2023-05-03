@@ -11,6 +11,8 @@ import { ControlPanelComponent } from '../control-panel/control-panel.component'
 import { PromptDialogComponent } from '../control-panel/prompt-dialog/prompt-dialog.component';
 import { GeneratedAnswersComponent } from '../all-questions/generated-answers/generated-answers.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { DatabaseQuestionsComponent } from './database-questions/database-questions.component';
+import { GeneratedAnswersHistoryComponent } from '../all-questions/generated-answers-history/generated-answers-history.component';
 
 
 
@@ -21,6 +23,8 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     ControlPanelComponent,
     PromptDialogComponent,
     GeneratedAnswersComponent,
+    DatabaseQuestionsComponent,
+    GeneratedAnswersHistoryComponent,
   ],
   imports: [
     CommonModule,

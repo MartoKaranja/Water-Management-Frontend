@@ -1,20 +1,20 @@
-import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { QuestionService } from 'src/app/services/questions.service';
-import { Question, Title, Titledetail, GeneratedAnswer, Answer } from 'src/app/interfaces/questions.interface';
+import { GeneratedAnswer, Answer } from 'src/app/interfaces/questions.interface';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { DataStorage } from 'src/app/services/data-store';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-
 @Component({
-  selector: 'app-generated-answers',
-  templateUrl: './generated-answers.component.html',
-  styleUrls: ['./generated-answers.component.css']
+  selector: 'app-generated-answers-history',
+  templateUrl: './generated-answers-history.component.html',
+  styleUrls: ['./generated-answers-history.component.css']
 })
-export class GeneratedAnswersComponent implements OnDestroy, AfterViewInit  {
+export class GeneratedAnswersHistoryComponent {
+
   idList!: any;
   totalItems = 0;
   answer_titles: Answer | undefined;
@@ -27,17 +27,19 @@ export class GeneratedAnswersComponent implements OnDestroy, AfterViewInit  {
   columnsToDisplay = ['title', 'category', 'question', 'generated_text', 'select'];
 
 
-  constructor(private data : DataStorage, private questionService: QuestionService) {
-    this.table_source = new MatTableDataSource<GeneratedAnswer>();
+  timestamp !:any;
 
+  constructor(private route: ActivatedRoute, private questionService: QuestionService)
+  {
+    this.table_source = new MatTableDataSource<GeneratedAnswer>();
   }
 
   ngOnInit() {
-    this.idList = this.data.getData()
+    this.timestamp= this.route.snapshot.paramMap.get("id");
     this.progressBar.mode = 'indeterminate'
     this.fetchData()
-
   }
+
 
   ngAfterViewInit() {
     //this.table_source.paginator = this.paginator;
@@ -50,7 +52,7 @@ export class GeneratedAnswersComponent implements OnDestroy, AfterViewInit  {
   }
 
   fetchData(pageSize?: number, pageNumber?: string) {
-    this.questionService.getGeneratedAnswers(this.idList, pageSize, pageNumber).subscribe({
+    this.questionService.getGeneratedTimestampAnswers(this.timestamp, pageSize, pageNumber).subscribe({
       next: (answer_titles: Answer) => {
         this.answer_titles = answer_titles;
         console.log('Value of question titles:', this.answer_titles);
@@ -78,7 +80,8 @@ export class GeneratedAnswersComponent implements OnDestroy, AfterViewInit  {
   }
 
   ngOnDestroy(): void {
-    this.data.deleteData()
+    //this.data.deleteData()
   }
+
 
 }
