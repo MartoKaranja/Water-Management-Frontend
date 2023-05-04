@@ -92,7 +92,7 @@ export class DatabaseQuestionsComponent {
       this.status_response = "Please choose atleast one question"
       this.progressBar.mode = 'determinate';
       return }
-    this.questionService.processQuestions(this.selected_ids).subscribe({
+    this.questionService.processDbQuestions(this.selected_ids, this.db_name).subscribe({
       next:(response:any) => {
         this.status_response = response.status;
 

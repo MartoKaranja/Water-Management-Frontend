@@ -90,6 +90,15 @@ export class QuestionService {
     return this.http.post(url, { ids });
   }
 
+  processDbQuestions(ids: any, table_name:string): Observable<any>{
+    const url = this.configService.getApiUrl() + 'questions/answer_db_multiple/';
+    var body = {
+      ids: ids,
+      table_name : table_name
+     };
+    return this.http.post(url, body);
+  }
+
   checkProgress(ids: any): Observable<any>{
     const url = this.configService.getApiUrl() + 'questions/check_progress/';
     return this.http.post(url, { ids });

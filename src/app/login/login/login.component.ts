@@ -37,7 +37,7 @@ export class LoginComponent {
 
           // Redirect to the dashboard'
 
-          this.router.navigateByUrl('/questions')
+          this.router.navigateByUrl('/dashboard')
             .then(() => {
               console.log('Navigation successful');
             })

@@ -28,13 +28,13 @@
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
       <mat-cell *matCellDef="let element" >
-        <a [routerLink]="['question-details', element.no]">{{ element.title }}</a>
+        {{ element.title }}
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <a [routerLink]="['question-details', element.no]">{{ element.category }}</a>
+        {{ element.category }}
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="generate">
