@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-md-8">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle>Question details</mat-card-subtitle>
+        <mat-card-title>{{ question_details.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-divider></mat-divider>
+        <p>{{ question_details.content }}</p>
+        <mat-divider></mat-divider>
+        <div *ngIf="is_cleaned">
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-title>Generated answer:</mat-card-title>
+          <p>{{ cleaned_text }}</p>
+          <mat-divider></mat-divider>
+        </div>
+        <mat-card-actions>
+          <div class="button-row">
+            <button mat-raised-button color="primary" (click)="processText()">Process Text Using Chat GPT</button>
+            <button mat-raised-button color="primary" >Edit Question Using Chat GPT</button>
+          </div>
+
+        </mat-card-actions>
+        <div *ngFor="let result of fetched_answers">
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-title>Generated on {{ result.date_processed | date:'EEEE, MMMM d, y h:mm a'}}</mat-card-title>
+          <p>{{ result.generated_text }}</p>
+          <mat-divider></mat-divider>
+        </div>
+
+
+      </mat-card-content>
+
+      <mat-card-footer>
+        <mat-progress-bar mode="determinate"></mat-progress-bar>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+  <div class="col-md-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle>Summarized details</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <table class="tw-table-auto tw-bg-white">
+          <tr>
+            <th>Content Length</th><td>{{ question_details.content_length }}</td>
+          </tr>
+          <tr>
+            <th>Category</th><td>{{ question_details.category}}</td>
+          </tr>
+          <tr>
+            <th>Date Scraped</th><td>{{ question_details.date_scraped  | date:'EEEE, MMMM d, y h:mm a'}}</td>
+          </tr>
+          <tr>
+            <th>Date Updated</th><td>{{ question_details.date_recorded  | date:'EEEE, MMMM d, y h:mm a'}}</td>
+        </tr>
+        </table>
+      </mat-card-content>
+
+  </mat-card>
+  <br/>
+  <mat-card *ngIf="question_details.num_generated_answers !== 0">
+    <mat-card-content>
+      Previous answers generated : {{ question_details.num_generated_answers }}
+      <button mat-raised-button color="primary" (click)="fetchAnswers()">View Previous Answers</button>
+    </mat-card-content>
+
+</mat-card>
+
+  </div>
+</div>

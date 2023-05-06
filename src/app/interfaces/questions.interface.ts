@@ -60,6 +60,12 @@ export interface Answer{
 
 export interface DatabaseQuestion{
   count: number;
-  results: Titledetail[]
+  results: Dbdetail[]
 
+}
+export interface Dbdetail {
+  link_no: number
+  title: string,
+  category: string;
+  selected: boolean;
 }

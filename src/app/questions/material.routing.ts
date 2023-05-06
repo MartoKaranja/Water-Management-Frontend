@@ -5,6 +5,7 @@ import { QuestionDetailsComponent } from '../question-details/question-details.c
 import { GeneratedAnswersComponent } from '../all-questions/generated-answers/generated-answers.component';
 import { DatabaseQuestionsComponent } from './database-questions/database-questions.component';
 import { GeneratedAnswersHistoryComponent } from '../all-questions/generated-answers-history/generated-answers-history.component';
+import { QuestionDbDetailsComponent } from '../all-questions/question-db-details/question-db-details.component';
 
 
 export const QuestionRoutes: Routes = [
@@ -15,6 +16,10 @@ export const QuestionRoutes: Routes = [
   {
     path: 'question-details/:id',
     component: QuestionDetailsComponent
+  },
+  {
+    path: 'question-db-details/:id/:table_name',
+    component: QuestionDbDetailsComponent
   },
   {
     path: 'generated-answers',

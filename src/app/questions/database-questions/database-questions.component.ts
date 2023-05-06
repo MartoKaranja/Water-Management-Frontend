@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionService } from 'src/app/services/questions.service';
-import { Question, Title, Titledetail, DatabaseQuestion } from 'src/app/interfaces/questions.interface';
+import { Question, Title, Titledetail, DatabaseQuestion, Dbdetail } from 'src/app/interfaces/questions.interface';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -23,7 +23,7 @@ export class DatabaseQuestionsComponent {
   database_questions: DatabaseQuestion | undefined;
   @ViewChild(MatProgressBar, {static: true}) progressBar!: MatProgressBar;
   @ViewChild(MatProgressSpinnerModule, {static: true}) progressBarSpinner!: MatProgressSpinnerModule;
-  table_source :MatTableDataSource<Titledetail>;
+  table_source :MatTableDataSource<Dbdetail>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   totalItems = 0;
@@ -36,7 +36,7 @@ export class DatabaseQuestionsComponent {
   db_name:any = '';
 
   constructor(private route: ActivatedRoute, private questionService: QuestionService, private router: Router, private data: DataStorage) {
-    this.table_source = new MatTableDataSource<Titledetail>();
+    this.table_source = new MatTableDataSource<Dbdetail>();
    }
 
   // In ngOnInit
@@ -85,9 +85,9 @@ export class DatabaseQuestionsComponent {
   generateAnswers():void{
     this.progressBar.mode = 'indeterminate';
     this.selected_ids = []
-    this.selected_ids = this.getSelectedItems().map(item => item.no);
+    this.selected_ids = this.getSelectedItems().map(item => item.link_no);
     console.log(this.selected_ids)
-    this.selected_ids = this.getSelectedItems().map(item => item.no);
+    this.selected_ids = this.getSelectedItems().map(item => item.link_no);
     if (this.selected_ids.length === 0) {
       this.status_response = "Please choose atleast one question"
       this.progressBar.mode = 'determinate';
@@ -160,7 +160,7 @@ export class DatabaseQuestionsComponent {
     console.log('Value of this.table_source:', this.table_source.data);
   }
 
-  getSelectedItems(): Titledetail[] {
+  getSelectedItems(): Dbdetail[] {
     console.log('Value of this.table_source:', this.table_source.data.filter(item => item.selected));
     return this.table_source.data.filter(item => item.selected);
   }

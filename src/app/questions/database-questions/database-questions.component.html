@@ -40,7 +40,7 @@
     <ng-container matColumnDef="generate">
       <mat-header-cell *matHeaderCellDef>Generate Answers</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary" [routerLink]="['question-details', element.no]">Process Text</button>
+        <button mat-raised-button color="primary" [routerLink]="['/questions/question-db-details', element.link_no, db_name]">Process Question</button>
 
       </mat-cell>
     </ng-container>

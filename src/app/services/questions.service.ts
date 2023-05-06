@@ -74,6 +74,10 @@ export class QuestionService {
     const url = this.configService.getApiUrl() + `questions/details/${id}`;
     return this.http.get(url);
   }
+  getQuestionDbDetails(id: string, table_name: any): Observable<any> {
+    const url = this.configService.getApiUrl() + `questions/db-details/${id}/${table_name}`;
+    return this.http.get(url);
+  }
 
   getGeneratedAnswersHistory(): Observable<any> {
     const url = this.configService.getApiUrl() + `questions/generated-answers-history/`;
@@ -83,6 +87,10 @@ export class QuestionService {
   processQuestion(question: { question: string }): Observable<any> {
     const url = this.configService.getApiUrl() + 'questions/answer_single/';
     return this.http.post(url, { question });
+  }
+  fetchGeneratedAnswers(id: { id: string }): Observable<any> {
+    const url = this.configService.getApiUrl() + 'questions/generated_single_answers/';
+    return this.http.post(url, { id });
   }
 
   processQuestions(ids: any): Observable<any>{
