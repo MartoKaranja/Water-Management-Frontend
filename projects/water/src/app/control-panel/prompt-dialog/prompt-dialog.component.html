@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Chat GPT PROMPT</h1>
+<div mat-dialog-content>
+  <p style="white-space: pre-line"> {{ data.prompt }}</p>
+  <mat-form-field>
+    <textarea matInput rows="8" placeholder="Type your message here" [(ngModel)]="data.prompt"></textarea>
+  </mat-form-field>
+</div>
+<mat-progress-bar #progressBar mode="determinate" value = 0></mat-progress-bar>
+<br/>
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  Error: Unable to save Chat GPT Prompt
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button  (click)="updatePrompt()" color="primary" tabindex="2">Update Prompt</button>
+  <button mat-raised-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+</div>

@@ -1,0 +1,12 @@
+@use '@ng-matero/extensions' as mtx;
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+
+// Include all the component themes
+@include mtx.all-component-themes($theme);
+
+

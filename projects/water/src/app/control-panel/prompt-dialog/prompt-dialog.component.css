@@ -1,0 +1,4 @@
+mat-form-field,mat-dialog-content {
+  flex: none ;
+  display: inline;
+}

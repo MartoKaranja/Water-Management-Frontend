@@ -1,0 +1,4 @@
+@use '@ng-matero/extensions' as mtx;
+
+// Include all the component themes
+@include mtx.all-component-themes($theme);

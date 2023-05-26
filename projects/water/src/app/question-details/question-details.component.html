@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-subtitle>Question details</mat-card-subtitle>
+    <mat-card-title>{{ question_details.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <p>{{ question_details.content }}</p>
+    <mat-divider></mat-divider>
+    <br/>
+    <table width="70%" align = "center">
+      <tr><th>Content Length</th><td>{{ question_details.content_length }}</td><th>Category</th><td>{{ question_details.category}}</td></tr>
+      <tr><th>Date Scraped</th><td>{{ question_details.date_scraped }}</td>
+      <th>Date Updated</th><td>{{ question_details.date_recorded }}</td></tr>
+    </table>
+    <br/>
+    <div *ngIf="is_cleaned">
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-title>Generated answer</mat-card-title>
+      <p>{{ cleaned_text }}</p>
+      <mat-divider></mat-divider>
+    </div>
+
+
+  </mat-card-content>
+  <mat-card-actions>
+  <div class="button-row">
+    <button mat-raised-button color="primary" (click)="processText()">Process Text Using Chat GPT</button>
+    <button mat-raised-button color="primary" >Edit Question Using Chat GPT</button>
+  </div>
+
+</mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar mode="determinate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
+

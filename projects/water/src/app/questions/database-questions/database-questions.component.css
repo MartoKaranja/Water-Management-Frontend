@@ -1,0 +1,23 @@
+.custom-table mat-header-cell.mat-column-title, mat-cell.mat-column-title {
+  width: 60%;
+}
+
+.custom-table mat-header-cell.mat-column-category, mat-cell.mat-column-category {
+  width: 15%;
+}
+
+.custom-table mat-header-cell.mat-column-generate, mat-cell.mat-column-generate {
+  width: 20%;
+}
+.custom-table  mat-cell.mat-column-selct {
+  width: 5%;
+}
+.mat-toolbar
+{
+  font:500 15px / 22px Poppins, sans-serif;;
+}
+
+
+mat-cell, mat-header-cell, mat-footer-cell {
+  flex: none ;
+}
