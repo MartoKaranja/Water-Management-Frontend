@@ -6,12 +6,6 @@
   <mat-card-content>
 
       <mat-table [dataSource]="table_source" class="mat-elevation-z8 custom-table">
-        <ng-container matColumnDef="no">
-          <mat-header-cell *matHeaderCellDef>No</mat-header-cell>
-          <mat-cell *matCellDef="let element" >
-            <a [routerLink]="['question-details', element.no]">{{ element.no }}</a>
-          </mat-cell>
-        </ng-container>
         <ng-container matColumnDef="questions_queued">
           <mat-header-cell *matHeaderCellDef>Questions Queued</mat-header-cell>
           <mat-cell *matCellDef="let element">
@@ -33,7 +27,7 @@
         <ng-container matColumnDef="time_started">
           <mat-header-cell *matHeaderCellDef>Time Started</mat-header-cell>
           <mat-cell *matCellDef="let element">
-            {{ element.time_started | date:'EEEE, MMMM d, y h:mm a'}}
+            {{ element.time_started | date:'EE, MMM d, yy h:mm a'}}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="time_completed">
@@ -46,6 +40,12 @@
           <mat-header-cell *matHeaderCellDef>Processed</mat-header-cell>
           <mat-cell *matCellDef="let element">
             {{ element.processed }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="no">
+          <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+          <mat-cell *matCellDef="let element" >
+            <a [routerLink]="['question-details', element.no]" mat-raised-button color="primary">View Results</a>
           </mat-cell>
         </ng-container>
 

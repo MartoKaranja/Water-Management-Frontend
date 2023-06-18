@@ -18,7 +18,7 @@ export class ScheduleSummaryComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   //@ViewChild(MatProgressBar, {static: true}) progressBar!: MatProgressBar;
   @ViewChild(MatSort) sort!: MatSort;
-  columnsToDisplay = ['no',  'questions_queued','questions_completed', 'total_tokens','time_started','time_completed','processed']
+  columnsToDisplay = ['questions_queued','questions_completed', 'total_tokens','time_started','time_completed','processed','no']
   task !: Task
   totalItems = 0;
   progressBarMode = 'determinate'

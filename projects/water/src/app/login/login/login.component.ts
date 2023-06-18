@@ -37,7 +37,7 @@ export class LoginComponent {
 
           // Redirect to the dashboard'
 
-          this.router.navigateByUrl('/dashboard')
+          this.router.navigateByUrl('/admin-dashboard')
             .then(() => {
               console.log('Navigation successful');
             })

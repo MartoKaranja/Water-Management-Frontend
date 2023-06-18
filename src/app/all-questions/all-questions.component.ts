@@ -135,7 +135,7 @@ export class AllQuestionsComponent implements OnInit, AfterViewInit {
         // This code will run regardless of whether the subscribe function succeeded or failed
       }
       });
-    }, 5000);
+    }, 15000);
 
   }
 

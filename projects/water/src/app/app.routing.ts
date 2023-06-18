@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
-import { LoginLayoutComponent } from './login/login-layout/login-layout.component';
 import { AuthGuard, LoginGuard } from './auth.guard';
 
 export const AppRoutes: Routes = [
@@ -16,15 +15,13 @@ export const AppRoutes: Routes = [
         redirectTo: '/auth/login',
         pathMatch: 'full'
       },
-
       {
-        path: '',
-        loadChildren:
-          () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
+        path: 'admin-dashboard',
+        loadChildren: () => import('./admin/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
       },
       {
-        path: 'dashboard',
-        loadChildren: () => import('./admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
+        path: 'client-dashboard',
+        loadChildren: () => import('./client/client-dashboard/client-dashboard.module').then(m => m.ClientDashboardModule)
       },
       {
         path: 'dashboard-old',

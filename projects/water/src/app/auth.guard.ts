@@ -42,7 +42,7 @@ export class LoginGuard implements CanActivate {
       console.log("Allowing access to login page");
       return true;
     } else {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/admin-dashboard']);
       console.log("Navigating to dashboard");
       return false;
     }

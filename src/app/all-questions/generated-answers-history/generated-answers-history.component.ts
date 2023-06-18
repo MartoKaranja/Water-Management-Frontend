@@ -24,7 +24,7 @@ export class GeneratedAnswersHistoryComponent {
   @ViewChild(MatProgressBar, {static: true}) progressBar!: MatProgressBar;
   @ViewChild(MatProgressSpinnerModule, {static: true}) progressBarSpinner!: MatProgressSpinnerModule;
 
-  columnsToDisplay = ['title', 'category', 'question', 'generated_text', 'select'];
+  columnsToDisplay = ['title', 'category', 'question', 'generated_text', 'status', 'select'];
 
 
   timestamp !:any;

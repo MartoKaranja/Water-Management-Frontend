@@ -45,6 +45,7 @@ export interface GeneratedAnswer {
     category: string;
     content : string;
   },
+  processed : string;
   generated_text : string;
   selected: boolean;
 }

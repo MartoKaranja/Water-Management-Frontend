@@ -88,3 +88,42 @@ export interface Taskdetail {
   time_completed:string
   processed : string
 }
+
+export interface WaterRecords{
+  count: number;
+  next: string;
+  previous: string;
+  results: Water[]
+}
+
+export interface Water{
+  current_balance : number;
+  meter_reading : number;
+  valve_state : number;
+  record_id : string;
+}
+
+export interface MeterRecord{
+  errMsg: string;
+  pageInfo: PageInfo;
+  values: Meter[]
+}
+
+export interface Meter{
+  balance: number;
+  customerName: string;
+  id: number;
+  readings : number;
+  valveStatus : number;
+
+
+}
+export interface PageInfo{
+  pageNumber : number;
+  pageSize : number;
+  pageTotal : number;
+}
+
+export interface Msg{
+  errMsg : string;
+}

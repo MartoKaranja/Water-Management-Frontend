@@ -8,6 +8,8 @@ export interface Menu {
 }
 
 const MENUITEMS = [
+  { state: 'admin-dashboard', name: 'Dashboard', type: 'link', icon: 'water_drop'},
+  { state: 'client-dashboard', name: 'Client Dashboard', type: 'link', icon: 'water_damage'},
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'schedule', type: 'link', name: 'Schedule questions', icon: 'insert_invitation' },
   { state: 'dashboard-old', name: 'Old Dashboard', type: 'link', icon: 'av_timer' },
