@@ -127,3 +127,19 @@ export interface PageInfo{
 export interface Msg{
   errMsg : string;
 }
+
+export interface UserRecords {
+  user : UserDashboard;
+  meter : Meter;
+  landlord : Landlord;
+}
+
+export interface UserDashboard{
+  username : string,
+  id : number;
+}
+
+export interface Landlord {
+  tenant_name : string;
+  id : number;
+}

@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { WaterService } from '../../../services/water.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
+import { MatDialog } from '@angular/material/dialog';
+import { NewUserComponent } from './new-user/new-user.component';
+import { NewLandlordComponent } from './new-landlord/new-landlord.component';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -18,7 +20,7 @@ export class AddUserComponent {
   meters !: any[]; // Populate with the list of meters
   landlords !: any[]; // Populate with the list of landlords
 
-  constructor(private waterService : WaterService, private snackBar: MatSnackBar, private fb: FormBuilder)
+  constructor(private waterService : WaterService, private snackBar: MatSnackBar, private fb: FormBuilder, private dialog : MatDialog)
   {}
 
 
@@ -26,9 +28,9 @@ export class AddUserComponent {
     this.fetchAddUserFormDetails();
 
     this.form = this.fb.group({
-      users: [this.users],
-      meters: [this.meters],
-      landlords: [this.landlords]
+      user: [this.users],
+      meter: [this.meters],
+      landlord: [this.landlords]
     });
 
   }
@@ -50,11 +52,59 @@ export class AddUserComponent {
     });
   }
 
+
+  openCreateUserDialog() {
+    const dialogRef = this.dialog.open(NewUserComponent, {
+      width: '37%', // Set the desired width here
+      data: { /* Optional data to pass to the dialog component */ }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true )
+      {
+        this.fetchAddUserFormDetails()
+      }
+      // Handle any actions after the dialog is closed
+      // For example, you can refresh the list of existing users
+    });
+  }
+
+
+  openCreateLandlordDialog() {
+    const dialogRef = this.dialog.open(NewLandlordComponent, {
+      width: '37%', // Set the desired width here
+      data: { users: this.users  }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true )
+      {
+        this.fetchAddUserFormDetails()
+      }
+      // Handle any actions after the dialog is closed
+      // For example, you can refresh the list of existing users
+    });
+  }
+
   submitForm() {
     if (this.form.valid) {
       // Handle form submission
       console.log(this.form.value);
+      const formData = this.form.value;
+
+      // Close the dialog and pass any necessary data back to the main component
+      this.waterService.createUserRecords(formData).subscribe({
+        next: (response: any) => {
+          this.snackBar.open("User Record created successfully!", 'Close', {
+            duration: 10000,
+          });
+          console.log(response)
+        },
+        error: (error: any) => {
+          console.log(error)
+        }
+      });
+      }
     }
-  }
 
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { WaterService } from '../../../../services/water.service';
-import { WaterRecords, Msg} from '../../../../interfaces/questions.interface';
+import { UserRecords, Msg} from '../../../../interfaces/questions.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -15,7 +15,7 @@ export class UserRecordsComponent {
 
 
 
-  public record_tables !: WaterRecords;
+  public record_tables !: UserRecords;
   public msg !: Msg;
 
 
@@ -29,7 +29,7 @@ export class UserRecordsComponent {
 
   fetchUserRecords() {
     this.waterService.fetchActiveUsers().subscribe({
-      next: (database_results: any) => {
+      next: (database_results: UserRecords) => {
         console.log(database_results)
         this.record_tables = database_results
         this.progressBarMode = 'determinate';

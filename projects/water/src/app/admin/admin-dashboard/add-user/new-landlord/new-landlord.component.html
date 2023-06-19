@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Create New Landlord Ac</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="createUser()" class="vertical-form">
+    <mat-form-field>
+      <input matInput placeholder="Tenant Name" formControlName="tenant_name">
+      <mat-error *ngIf="form.get('tenant_name')?.hasError('required')">Tenant Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-select id="user_id" name="user_id" formControlName="user_id">
+        <mat-option *ngFor="let user of users" [value]="user.id">{{ user.username }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="createUser()" [disabled]="form.invalid">Create User</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

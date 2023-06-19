@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
     <span class='material-icons tw-px-2'>group_add</span>
-    <h5>Active Users</h5>
+    <h5>Active User Records</h5>
 
   </mat-card-header>
 
@@ -12,15 +12,15 @@
           <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2">User Name</th>
           <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2"> Current Balance</th>
           <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2"> Meter Reading</th>
+          <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2"> Landlord</th>
       </tr>
     </thead>
     <tbody class="tw-bg-white tw-divide-y tw-divide-gray-200" *ngIf="record_tables">
       <tr  class="tw-hover:bg-gray-100 dark:hover:tw-bg-gray-700" *ngFor="let result of record_tables.results">
-        <td class="tw-py-2 tw-px-2">{{result.user_name}}</td>
-        <td class="tw-py-2 tw-px-2">{{result.reading_time}}</td>
-        <td class="tw-py-2 tw-px-2">{{result.water_reading}}</td>
-
-      </tr>
+        <td class="tw-py-2 tw-px-2">{{result.user.username}}</td>
+        <td class="tw-py-2 tw-px-2">{{result.meter.current_balance}}</td>
+        <td class="tw-py-2 tw-px-2">{{result.meter.meter_reading}}</td>
+        <td class="tw-py-2 tw-px-2">{{result.landlord.tenant_name}}</td>
 
       <tr *ngIf="record_tables.results.length === 0">
         <td colspan = "4" style = "text-align: center"><div class="alert alert-secondary" role="alert">No users found</div></td>

@@ -3,27 +3,27 @@
     <div class="col-md-6">
       <mat-card>
         <mat-card-header>
-          <mat-card-title>Add New User</mat-card-title>
+          <mat-card-title>Add New Record Ac</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form [formGroup]="form" class="row g-3">
+          <form [formGroup]="form" (ngSubmit)="submitForm()" class="row g-3">
             <div class="col-md-3">
               <label for="users" class="col-form-label">Select Existing User</label>
             </div>
             <div class="col-md-9 form-group">
               <mat-form-field appearance="fill" class="w-100">
-                <mat-select id="users" name="users" formControlName="users">
+                <mat-select id="users" name="users" formControlName="user">
                   <mat-option *ngFor="let user of users" [value]="user.id">{{ user.username }}</mat-option>
                 </mat-select>
               </mat-form-field>
-              <small class="text-muted">Can't find the user? <a href="#">Add new user</a></small>
+              <small class="text-muted">Can't find the user? <a href="#" (click)="openCreateUserDialog(); $event.preventDefault()">Add new user</a></small>
             </div>
             <div class="col-md-3">
               <label for="meters" class="col-form-label">Select Existing Meter</label>
             </div>
             <div class="col-md-9 form-group">
               <mat-form-field appearance="fill" class="w-100">
-                <mat-select id="meters" name="meters" formControlName="meters">
+                <mat-select id="meters" name="meters" formControlName="meter">
                   <mat-option *ngFor="let meter of meters" [value]="meter.id">{{ meter.meter_name }}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -34,11 +34,11 @@
             </div>
             <div class="col-md-9 form-group">
               <mat-form-field appearance="fill" class="w-100">
-                <mat-select id="landlords" name="landlords" formControlName="landlords">
+                <mat-select id="landlords" name="landlords" formControlName="landlord">
                   <mat-option *ngFor="let landlord of landlords" [value]="landlord.id">{{ landlord.tenant_name }}</mat-option>
                 </mat-select>
               </mat-form-field>
-              <small class="text-muted">Can't find the landlord? <a href="#">Add new landlord</a></small>
+              <small class="text-muted">Can't find the landlord? <a href="#" (click)="openCreateLandlordDialog(); $event.preventDefault()">Add new landlord</a></small>
             </div>
             <div class="col-md-12">
               <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Submit</button>
