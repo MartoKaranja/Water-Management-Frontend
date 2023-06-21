@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-6">
   <mat-card>
   <mat-card-header>
     <h5 class="tw-underline">Schedule processing settings</h5>
@@ -7,7 +7,8 @@
 
   <mat-card-content>
     <div class="row my-2">
-      <div class="col-md-7">
+      <div class="col-md-5">
+
         <mat-form-field >
           <mat-label>Available Databases</mat-label>
           <mat-select [(ngModel)]="selectedOption">
@@ -16,22 +17,34 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button class = "mx-2" mat-raised-button color="primary" (click)="fetchCategories()">Fetch Database</button>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field >
+          <mat-label>Min Length</mat-label>
+          <input matInput type="number" [(ngModel)]="content_length">
+          </mat-form-field>
 
       </div>
 
-      <div class="col-md-5">
+      <div class="col-md-4">
         <mat-form-field *ngIf = "showCategory">
           <mat-label>Choose a Category</mat-label>
           <mat-select [(ngModel)]="selectedCategory">
-            <mat-option *ngFor="let option of options" [value]="option[0]">
+            <mat-option *ngFor="let option of options" [value]="option[1]">
               {{ option[0] }} - {{ option[1] }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
-    </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <button style="display: block; width: 100%;" mat-raised-button color="primary" (click)="fetchCategories()">Fetch Database</button>
+        </div>
+      </div>
+
     <mat-divider></mat-divider>
 
     <div class = "row" *ngIf = "showCategory">
@@ -56,6 +69,9 @@
           <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="[offset_number]" [style.width]="progress_width + '%'" aria-valuemin="0" aria-valuemax="[question_max]" id="question_progress"></div>
         </div>
         <br/>
+        <div class="alert alert-warning" role="alert" *ngIf="progress_status">
+          <strong>Status: {{ progress_status}}</strong> {{ progress_message }}
+        </div>
         <button mat-raised-button color="primary" (click)="processQuestions()" style="display: block; width: 100%;">Process questions</button>
       </div>
     </div>
@@ -63,7 +79,7 @@
   </mat-card-content>
 </mat-card>
   </div>
-  <div class="col-md-7">
+  <div class="col-md-6">
     <app-schedule-summary [dataService]="getQuestionService()"></app-schedule-summary>
 
 

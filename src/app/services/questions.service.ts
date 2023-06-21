@@ -127,10 +127,10 @@ export class QuestionService {
     const url = this.configService.getApiUrl() + `questions/fetch_prompt`;
     return this.http.get(url);
   }
-  getCategories(databaseName : string)
+  getCategories(data : any)
   {
     const url = this.configService.getApiUrl() + `questions/categories/`;
-    return this.http.post(url, { databaseName });
+    return this.http.post(url, { data });
   }
 
   updatePrompt(prompt: string)
@@ -145,6 +145,12 @@ export class QuestionService {
   const url = this.configService.getApiUrl() + `questions/database-summary`;
   return this.http.get(url);
 
+}
+
+checkBulkScheduleProgress(data:any)
+{
+  const url = this.configService.getApiUrl() + 'questions/bulk_schedule_progress/';
+  return this.http.post(url, { data });
 }
 
 getDatabaseQuestions(pageSize?: number, pageNumber?: string, databaseName?:string): Observable<DatabaseQuestion> {

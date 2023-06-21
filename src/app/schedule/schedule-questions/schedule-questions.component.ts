@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { QuestionService } from 'src/app/services/questions.service';
+import { ScheduleSummaryComponent } from '../schedule-summary/schedule-summary.component';
 
 @Component({
   selector: 'app-schedule-questions',
@@ -8,6 +9,10 @@ import { QuestionService } from 'src/app/services/questions.service';
   styleUrls: ['./schedule-questions.component.css']
 })
 export class ScheduleQuestionsComponent {
+
+  @ViewChild(ScheduleSummaryComponent) scheduleSummary !: ScheduleSummaryComponent;
+
+
   selectedOption !: string;
   showCategory : boolean = false
   selectedCategory !: string;
@@ -19,6 +24,10 @@ export class ScheduleQuestionsComponent {
   offset_width : number = 25
   progress_width : number = 25
   progress_status !: string;
+  progress_message !: string;
+  task_no !: number;
+  content_length : number = 80;
+  intervalId !: any;
 
 
   constructor(private dataService: QuestionService) {}
@@ -39,7 +48,12 @@ export class ScheduleQuestionsComponent {
 
   fetchCategories(){
 
-    this.dataService.getCategories(this.selectedOption).subscribe((data) => {
+    let data = {
+      'table_name':this.selectedOption,
+      'content_length' : this.content_length
+      }
+
+    this.dataService.getCategories(data).subscribe((data) => {
       for (let i = 0; i < this.database_tables.length; i++) {
         if (this.database_tables[i][0] === this.selectedOption){
           this.question_max = this.database_tables[i][1]
@@ -95,19 +109,61 @@ export class ScheduleQuestionsComponent {
 
   processQuestions()
   {
+    this.scheduleSummary.progressBarMode = 'indeterminate';
+
     console.log(this.selectedOption)
 
     let data = {
       'table_name': this.selectedOption,
       'questions': this.database_questions,
       'offset': this.offset_number,
-      'category' : this.selectedCategory
+      'category' : this.selectedCategory,
+      'content_length' : this.content_length
     }
 
-    this.dataService.scheduleBulkQuestions(data).subscribe((results) => {
-      this.progress_status = results.status;
+    this.dataService.scheduleBulkQuestions(data).subscribe ({
+      next: (results : any) => {
+        console.log(results)
+        this.progress_status = results.status;
+        this.progress_message = results.message;
+        this.task_no = results.task_no
+
+        this.intervalId = setInterval(() => {
+          this.checkProgress();
+          this.scheduleSummary.getTasksHistory()
+        }, 10000);
+
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+
     });
 
+
+  }
+
+  checkProgress()
+  {
+    let data = {
+      'task_no' : this.task_no
+    }
+    this.dataService.checkBulkScheduleProgress(data).subscribe ({
+      next: (results : any) => {
+        this.progress_message = results.message
+        this.progress_status = results.status;
+        if (results.status === "Completed")
+        {
+          clearInterval(this.intervalId);
+          this.scheduleSummary.progressBarMode = 'determinate';
+        }
+      }
+      ,
+      error: (error: any) => {
+        console.error(error);
+      }
+
+    });
 
   }
 
