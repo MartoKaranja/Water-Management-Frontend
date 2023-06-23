@@ -36,5 +36,12 @@ export class DatabaseSummaryComponent {
     });
   }
 
+  public getQuestionService(): QuestionService {
+    return this.dataService;
+  }
+
+
+
+
 
 }

@@ -1,5 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { QuestionService } from 'src/app/services/questions.service';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatSort } from '@angular/material/sort';
+import { Task, Taskdetail } from 'src/app/interfaces/questions.interface';
 
 @Component({
   selector: 'app-answers-summary',
@@ -9,29 +14,51 @@ import { QuestionService } from 'src/app/services/questions.service';
 export class AnswersSummaryComponent {
 
   @Input() dataService !: QuestionService;
-  progressBarMode = 'indeterminate';
-
-  public summary_records = 0;
-  public results:any = 0;
+  table_source !: MatTableDataSource<Taskdetail>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  //@ViewChild(MatProgressBar, {static: true}) progressBar!: MatProgressBar;
+  @ViewChild(MatSort) sort!: MatSort;
+  columnsToDisplay = ['questions_queued','questions_completed', 'total_tokens','time_started','time_completed','processed','no']
+  task !: Task
+  totalItems = 0;
+  progressBarMode = 'determinate'
 
   constructor() {
+    this.table_source = new MatTableDataSource<Taskdetail>();
   }
 
   ngOnInit() {
-    this.fetchData();
+    this.progressBarMode = 'indeterminate';
+    this.getTasksHistory();
   }
 
-  fetchData() {
-    this.dataService.getGeneratedAnswersHistory().subscribe({
-      next: (results: any) => {
-        this.summary_records = results.length
-        this.results = results;
+  ngAfterViewInit() {
+    //this.table_source.paginator = this.paginator;
+    this.table_source.sort = this.sort;
+    //this.table_source.paginator = this.paginator;
+    this.paginator.page.subscribe(() => {
+      this.progressBarMode = 'indeterminate';
+      console.log(this.paginator.pageSize, (this.paginator.pageIndex).toString())
+      this.getTasksHistory(this.paginator.pageSize, (this.paginator.pageIndex).toString());
+    });
+  }
+
+  getTasksHistory(pageSize?: number, pageNumber?: string){
+    this.dataService.getTaskHistory(pageSize, pageNumber).subscribe({
+      next:(task: Task) => {
+        this.task = task;
+        this.totalItems = this.task.count;
+        this.table_source.data = this.task.results;
+
+        this.paginator.length = this.totalItems;
+        this.paginator.pageIndex = this.paginator.pageIndex; // reset the paginator's pageIndex to zero
+        this.paginator.pageSize = pageSize || this.paginator.pageSize; // update the paginator's pageSize
         this.progressBarMode = 'determinate';
-        console.log('Result:', results);
-      },
-      error: (error: any) => {
-        console.error(error);
-      }
+    },
+    error: (error: any) => {
+      console.error(error);
+
+    }
     });
   }
 

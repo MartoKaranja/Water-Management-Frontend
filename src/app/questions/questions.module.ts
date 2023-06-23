@@ -7,7 +7,7 @@ import { QuestionRoutes } from './material.routing';
 import { MatTableModule } from '@angular/material/table';
 import { QuestionDetailsComponent } from '../question-details/question-details.component';
 import { FormsModule } from '@angular/forms';
-import { ControlPanelComponent } from '../control-panel/control-panel.component';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { PromptDialogComponent } from '../control-panel/prompt-dialog/prompt-dialog.component';
 import { GeneratedAnswersComponent } from '../all-questions/generated-answers/generated-answers.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
@@ -21,7 +21,6 @@ import { QuestionDbDetailsComponent } from '../all-questions/question-db-details
   declarations: [
     AllQuestionsComponent,
     QuestionDetailsComponent,
-    ControlPanelComponent,
     PromptDialogComponent,
     GeneratedAnswersComponent,
     DatabaseQuestionsComponent,
@@ -35,6 +34,7 @@ import { QuestionDbDetailsComponent } from '../all-questions/question-db-details
     DemoMaterialModule,
     FormsModule,
     MatTableExporterModule,
+    SharedModuleModule
   ]
 })
 export class QuestionsModule { }

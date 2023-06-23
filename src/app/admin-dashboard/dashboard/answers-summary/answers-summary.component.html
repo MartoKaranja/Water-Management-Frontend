@@ -4,39 +4,61 @@
   </mat-card-header>
 
   <mat-card-content>
-    <table width="100%" class="tw-table-auto tw-shadow-lg tw-bg-white">
-      <thead class="tw-bg-gray-100 dark:tw-bg-gray-700">
-        <tr>
-          <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2">Questions</th>
-          <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2"> Batch processing date</th>
-          <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2">Time Processed</th>
-          <th class="tw-bg-blue-100 tw-border tw-text-left tw-py-4 tw-px-2">View Results</th>
-      </tr>
-    </thead>
-    <tbody class="tw-bg-white tw-divide-y tw-divide-gray-200">
-      <tr  class="tw-hover:bg-gray-100 dark:hover:tw-bg-gray-700" *ngFor="let result of results">
-        <td class="tw-py-2 tw-px-2 tw-text-center">{{result.count}}</td>
-        <td class="tw-py-2 tw-px-2">{{result.date_processed_minute | date:'EEEE, MMMM d, y'}}</td>
-        <td class="tw-py-2 tw-px-2">{{result.date_processed_minute | date:'h:mm a'}}</td>
-        <td class="tw-py-2 tw-px-2">
-          <button mat-raised-button color="primary" [routerLink]="['/questions/generated-answers-history', result.date_processed_minute]">View Results</button>
-        </td>
 
-      </tr>
-      <tr *ngIf="summary_records !== 0">
-        <td class="tw-py-2 tw-px-2" colspan = "4" style = "text-align: center"><button mat-raised-button color="primary">View All</button></td>
+    <mat-table [dataSource]="table_source" class="mat-elevation-z8 custom-table">
+      <ng-container matColumnDef="questions_queued">
+        <mat-header-cell *matHeaderCellDef>Questions Queued</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.questions_queued }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="questions_completed">
+        <mat-header-cell *matHeaderCellDef>Questions Completed</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.questions_completed }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="total_tokens">
+        <mat-header-cell *matHeaderCellDef>Tokens Consumed</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.total_tokens }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="time_started">
+        <mat-header-cell *matHeaderCellDef>Time Started</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.time_started | date:'EE, MMM d, yy h:mm a'}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="time_completed">
+        <mat-header-cell *matHeaderCellDef>Time Completed</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.time_completed | date: 'EEEE h:mm a' }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="processed">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.processed }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="no">
+        <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+        <mat-cell *matCellDef="let element" >
+          <a [routerLink]="['/questions/generated-answers-history', element.task_name]" mat-raised-button color="primary">Export CSV</a>
+        </mat-cell>
+      </ng-container>
 
-      </tr>
-
-      <tr *ngIf="summary_records === 0">
-        <td colspan = "4" style = "text-align: center"><div class="alert alert-secondary" role="alert">No production runs have been processed yet</div></td>
-
-      </tr>
-    </tbody>
 
 
-    </table>
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    </mat-table>
 
-  </mat-card-content>
-  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+
+</mat-card-content>
+<mat-card-footer>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+</mat-card-footer>
+<mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
 </mat-card>
