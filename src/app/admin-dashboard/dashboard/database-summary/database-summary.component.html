@@ -4,7 +4,14 @@
   </mat-card-header>
 
   <mat-card-content>
-    <app-control-panel [dataService]="getQuestionService()"></app-control-panel>
+    <div class = "row">
+      <div class="col-md-6"><app-control-panel [dataService]="getQuestionService()"></app-control-panel></div>
+      <div class="col-md-6"><app-key-control-panel [dataService]="getQuestionService()"></app-key-control-panel></div>
+
+
+    </div>
+    <hr/>
+
     <table width="100%" class="tw-table-auto tw-shadow-lg tw-bg-white">
       <thead class="tw-bg-gray-100 dark:tw-bg-gray-700">
         <tr>

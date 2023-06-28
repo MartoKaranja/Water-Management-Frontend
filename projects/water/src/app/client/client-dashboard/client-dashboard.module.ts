@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { ClientDashboardRoutes } from './client-dashboard.routing';
+import { DemoMaterialModule } from '../../demo-material-module';
 
 
 
@@ -13,6 +14,7 @@ import { ClientDashboardRoutes } from './client-dashboard.routing';
   imports: [
     CommonModule,
     RouterModule.forChild(ClientDashboardRoutes),
+    DemoMaterialModule
   ]
 })
 export class ClientDashboardModule { }

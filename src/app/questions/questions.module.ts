@@ -8,7 +8,6 @@ import { MatTableModule } from '@angular/material/table';
 import { QuestionDetailsComponent } from '../question-details/question-details.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModuleModule } from '../shared-module/shared-module.module';
-import { PromptDialogComponent } from '../control-panel/prompt-dialog/prompt-dialog.component';
 import { GeneratedAnswersComponent } from '../all-questions/generated-answers/generated-answers.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { DatabaseQuestionsComponent } from './database-questions/database-questions.component';
@@ -21,7 +20,6 @@ import { QuestionDbDetailsComponent } from '../all-questions/question-db-details
   declarations: [
     AllQuestionsComponent,
     QuestionDetailsComponent,
-    PromptDialogComponent,
     GeneratedAnswersComponent,
     DatabaseQuestionsComponent,
     GeneratedAnswersHistoryComponent,

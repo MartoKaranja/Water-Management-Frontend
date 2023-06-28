@@ -17,7 +17,7 @@
     </thead>
     <tbody class="tw-bg-white tw-divide-y tw-divide-gray-200" *ngIf="record_tables">
       <tr  class="tw-hover:bg-gray-100 dark:hover:tw-bg-gray-700" *ngFor="let result of record_tables.results">
-        <td class="tw-py-2 tw-px-2">{{result.user.username}}</td>
+        <td class="tw-py-2 tw-px-2"><a [routerLink]="['/client', result.user.username]" class="tw-no-underline tw-text-blue-500 hover:tw-text-blue-700">{{result.user.username}}</a></td>
         <td class="tw-py-2 tw-px-2">{{result.meter.current_balance}}</td>
         <td class="tw-py-2 tw-px-2">{{result.meter.meter_reading}}</td>
         <td class="tw-py-2 tw-px-2">{{result.landlord.tenant_name}}</td>
@@ -34,7 +34,7 @@
         <button type="button" class="btn btn-primary w-100"[routerLink]="['/admin-dashboard/add-user']">Add New User</button>
       </div>
       <div class="col-md-6">
-        <button type="button" class="btn btn-warning w-100" >View All Users</button>
+        <button type="button" class="btn btn-warning w-100" (click)="updateRecords()" >Update Records</button>
       </div>
 
 

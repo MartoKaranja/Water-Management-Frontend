@@ -127,6 +127,13 @@ export class QuestionService {
     const url = this.configService.getApiUrl() + `questions/fetch_prompt`;
     return this.http.get(url);
   }
+
+  fetchApiKey()
+  {
+    const url = this.configService.getApiUrl() + `questions/fetch_api_key`;
+    return this.http.get(url);
+  }
+
   getCategories(data : any)
   {
     const url = this.configService.getApiUrl() + `questions/categories/`;
@@ -137,6 +144,13 @@ export class QuestionService {
   {
     const url = this.configService.getApiUrl() + 'questions/update_prompt/';
     return this.http.post(url, { prompt });
+
+  }
+
+  updateApiKey(key: string)
+  {
+    const url = this.configService.getApiUrl() + 'questions/update_api_key/';
+    return this.http.patch(url, {key} );
 
   }
 

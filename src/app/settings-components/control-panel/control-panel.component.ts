@@ -1,7 +1,7 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PromptDialogComponent } from './prompt-dialog/prompt-dialog.component';
-import { QuestionService } from '../services/questions.service';
+import { QuestionService } from 'src/app/services/questions.service';
 import { lastValueFrom } from 'rxjs';
 
 @Component({

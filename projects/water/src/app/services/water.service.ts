@@ -37,6 +37,13 @@ export class WaterService {
 
   }
 
+  updateMeterReadings(): Observable<UserRecords>
+  {
+    const apiUrl =  this.configService.getApiUrl() + 'water/update_meter_readings';
+    return this.http.get<UserRecords>(apiUrl);
+
+  }
+
   fetchAddUsersForm(): Observable<any>
   {
     const apiUrl =  this.configService.getApiUrl() + 'water/fetch-user-form-details';

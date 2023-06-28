@@ -1,4 +1,5 @@
 <mat-card>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
   <mat-card-header>
     <h5 class="tw-underline">Previous CHAT GPT generated answers</h5>
   </mat-card-header>
@@ -45,7 +46,7 @@
       <ng-container matColumnDef="no">
         <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
         <mat-cell *matCellDef="let element" >
-          <a [routerLink]="['/questions/generated-answers-history', element.task_name]" mat-raised-button color="primary">Export CSV</a>
+          <a [routerLink]="['/questions/generated-answers-history', element.task_name]" mat-raised-button color="primary">Export</a>
         </mat-cell>
       </ng-container>
 
@@ -60,5 +61,4 @@
 <mat-card-footer>
   <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
 </mat-card-footer>
-<mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
 </mat-card>

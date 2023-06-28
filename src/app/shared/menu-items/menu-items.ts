@@ -12,6 +12,7 @@ const MENUITEMS = [
   { state: 'schedule', type: 'link', name: 'Schedule questions', icon: 'insert_invitation' },
   { state: 'dashboard-old', name: 'Old Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'questions', type: 'link', name: 'Questions', icon: 'assignment' },
+  { state: 'export', type: 'link', name: 'Export Results', icon: 'import_export' },
   { state: 'customer-order', type: 'link', name: 'Place Order', icon: 'paid' },
   { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
   { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },

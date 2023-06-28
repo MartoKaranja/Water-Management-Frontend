@@ -42,6 +42,23 @@ export class UserRecordsComponent {
   }
 
 
+  updateRecords()
+  {
+    this.waterService.updateMeterReadings().subscribe({
+      next: (database_results: UserRecords) => {
+        console.log(database_results)
+        this.record_tables = database_results
+        this.progressBarMode = 'determinate';
+
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    });
+
+  }
+
+
 
 
 }
