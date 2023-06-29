@@ -1,19 +1,32 @@
 <div class="row">
   <div class="col-md-8">
     <mat-card>
-      <mat-card-header>
+      <mat-card-header *ngIf="question_details">
         <mat-card-subtitle>Question details</mat-card-subtitle>
         <mat-card-title>{{ question_details.title }}</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content *ngIf="question_details">
         <mat-divider></mat-divider>
         <p>{{ question_details.content }}</p>
         <mat-divider></mat-divider>
         <div *ngIf="is_cleaned">
           <mat-divider></mat-divider>
           <br>
-          <mat-card-title>Generated answer:</mat-card-title>
-          <p>{{ cleaned_text }}</p>
+          <table class="tw-min-w-full tw-divide-y tw-divide-gray-200 dark:tw-divide-gray-700">
+            <thead class="tw-bg-gray-50 dark:tw-bg-gray-700">
+              <tr><th colspan = "4">Generated Answer</th></tr>
+            </thead>
+            <tbody class="tw-bg-white tw-divide-y tw-divide-gray-200">
+              <tr>
+                <th>Chat GPT processing status:</th><td>{{ cleaned_text.processed }}</td><th>Total tokens consumed</th><td>{{ cleaned_text.total_tokens}}</td>
+              </tr>
+              <tr>
+                <th>Prompt tokens consumed</th><td>{{ cleaned_text.prompt_tokens }}</td><th>Question tokens consumed</th><td>{{ cleaned_text.completion_tokens}}</td>
+            </tr>
+          </tbody>
+
+          </table>
+          <p>{{ cleaned_text.generated_text }}</p>
           <mat-divider></mat-divider>
         </div>
         <mat-card-actions>
@@ -39,13 +52,13 @@
       </mat-card-footer>
     </mat-card>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4" *ngIf="question_details">
     <mat-card>
       <mat-card-header>
         <mat-card-subtitle>Summarized details</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <table class="tw-table-auto tw-bg-white">
+        <table class="tw-table-auto tw-bg-white" >
           <tr>
             <th>Content Length</th><td>{{ question_details.content_length }}</td>
           </tr>

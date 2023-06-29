@@ -1,5 +1,5 @@
-<mat-card>
-  <mat-card-header>
+<mat-card *ngIf="question_details">
+  <mat-card-header >
     <mat-card-subtitle>Question details</mat-card-subtitle>
     <mat-card-title>{{ question_details.title }}</mat-card-title>
   </mat-card-header>

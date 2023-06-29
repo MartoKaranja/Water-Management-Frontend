@@ -46,7 +46,7 @@ export class QuestionDbDetailsComponent {
     console.log(data)
     this.questionService.processQuestion(data).subscribe({
       next:(response:any) => {
-        this.cleaned_text = response.cleaned_text;
+        this.cleaned_text = response.response;
         console.log(this.cleaned_text);
     },
     error: (error: any) => {
