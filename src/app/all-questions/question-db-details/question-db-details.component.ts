@@ -17,6 +17,7 @@ export class QuestionDbDetailsComponent {
   cleaned_text !: string;
   is_cleaned : boolean = false;
   fetched_answers : any;
+  renderHtml = true;
 
   constructor(private route : ActivatedRoute, private questionService: QuestionService) { }
 
@@ -79,6 +80,10 @@ export class QuestionDbDetailsComponent {
     }
 
   });
+}
+
+toggle() {
+  this.renderHtml = !this.renderHtml;
 }
 
 }

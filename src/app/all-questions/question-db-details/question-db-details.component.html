@@ -6,8 +6,11 @@
         <mat-card-title>{{ question_details.title }}</mat-card-title>
       </mat-card-header>
       <mat-card-content *ngIf="question_details">
+        <button (click)="toggle()" class="btn btn-warning btn-sm">View HTML</button>
+        <br/>
         <mat-divider></mat-divider>
-        <p>{{ question_details.content }}</p>
+        <p  *ngIf="renderHtml" [innerHTML]=" question_details.content"></p>
+        <p *ngIf="!renderHtml">{{ question_details.content }}</p>
         <mat-divider></mat-divider>
         <div *ngIf="is_cleaned">
           <mat-divider></mat-divider>
@@ -27,6 +30,7 @@
 
           </table>
           <p>{{ cleaned_text.generated_text }}</p>
+
           <mat-divider></mat-divider>
         </div>
         <mat-card-actions>

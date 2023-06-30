@@ -4,8 +4,10 @@
     <mat-card-title>{{ question_details.title }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
+    <button (click)="toggle()">Toggle</button>
     <mat-divider></mat-divider>
-    <p>{{ question_details.content }}</p>
+    <p *ngIf="renderHtml" [innerHTML]="content"></p>
+    <p *ngIf="!renderHtml">{{ question_details.content }}</p>
     <mat-divider></mat-divider>
     <br/>
     <table width="70%" align = "center">

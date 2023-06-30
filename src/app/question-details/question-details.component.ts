@@ -16,6 +16,7 @@ export class QuestionDetailsComponent implements OnInit {
   question_details : any;
   cleaned_text !: string;
   is_cleaned : boolean = false;
+  renderHtml = true;
 
   constructor(private route : ActivatedRoute, private questionService: QuestionService) { }
 
@@ -56,6 +57,10 @@ export class QuestionDetailsComponent implements OnInit {
     }
     });
 
+  }
+
+  toggle() {
+    this.renderHtml = !this.renderHtml;
   }
 
 }

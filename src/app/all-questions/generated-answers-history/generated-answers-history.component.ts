@@ -27,7 +27,7 @@ export class GeneratedAnswersHistoryComponent {
   columnsToDisplay = ['title', 'category', 'question', 'generated_text', 'status', 'select'];
 
 
-  timestamp !:any;
+  task !:any;
 
   constructor(private route: ActivatedRoute, private questionService: QuestionService)
   {
@@ -35,9 +35,17 @@ export class GeneratedAnswersHistoryComponent {
   }
 
   ngOnInit() {
-    this.timestamp= this.route.snapshot.paramMap.get("id");
+    this.task= this.route.snapshot.paramMap.get("id");
     this.progressBar.mode = 'indeterminate'
-    this.fetchData()
+    if (!isNaN(this.task))
+    {
+      this.fetchTask()
+    }
+    else
+    {
+      this.fetchData()
+    }
+
   }
 
 
@@ -52,7 +60,7 @@ export class GeneratedAnswersHistoryComponent {
   }
 
   fetchData(pageSize?: number, pageNumber?: string) {
-    this.questionService.getGeneratedTimestampAnswers(this.timestamp, pageSize, pageNumber).subscribe({
+    this.questionService.getGeneratedTimestampAnswers(this.task, pageSize, pageNumber).subscribe({
       next: (answer_titles: Answer) => {
         this.answer_titles = answer_titles;
         console.log('Value of question titles:', this.answer_titles);
@@ -76,6 +84,31 @@ export class GeneratedAnswersHistoryComponent {
 
   export() {
 
+
+  }
+
+  fetchTask(pageSize?: number, pageNumber?: string)
+  {
+    this.questionService.getTaskGeneratedAnswers(this.task, pageSize, pageNumber).subscribe({
+      next: (answer_titles: Answer) => {
+        this.answer_titles = answer_titles;
+        console.log('Value of question titles:', this.answer_titles);
+        this.totalItems = this.answer_titles.count;
+        this.table_source.data = this.answer_titles.results;
+
+        this.paginator.length = this.totalItems;
+        //this.paginator.pageIndex = this.paginator.pageIndex; // reset the paginator's pageIndex to zero
+        this.paginator.pageSize = pageSize || this.paginator.pageSize; // update the paginator's pageSize
+        this.progressBar.mode = 'determinate';
+        //this.table_source.paginator = this.paginator;
+
+        //console.log('Paginator:', this.table_source.paginator);
+        console.log('Value of this.table_source:', this.table_source.data);
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    });
 
   }
 

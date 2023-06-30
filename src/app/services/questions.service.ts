@@ -219,6 +219,32 @@ getGeneratedTimestampAnswers(timestamp: any, pageSize?: number, pageNumber?: str
     );
 }
 
+getTaskGeneratedAnswers(task: any, pageSize?: number, pageNumber?: string, ): Observable<Answer> {
+  let apiUrl = this.configService.getApiUrl() + `questions/tasks_generated_answers/`;
+  let params = new HttpParams();
+
+  if (pageSize) {
+    params = params.set('page_size', pageSize.toString());
+  }
+  if (pageNumber) {
+    params = params.set('page', pageNumber.toString());
+  }
+
+  console.log(apiUrl)
+  console.log('Params:', params);
+
+  const body = { task: task };
+  console.log(body)
+
+  return this.http.post<Answer>(apiUrl, body, { params })
+    .pipe(
+      map((answer: Answer) => {
+        answer.results = answer.results.map(item => ({ ...item, selected: false }));
+        return answer;
+      })
+    );
+}
+
 scheduleBulkQuestions(data: any):Observable<any>{
   const url = this.configService.getApiUrl() + 'questions/bulk_schedule/';
   return this.http.post(url, { data });

@@ -34,7 +34,7 @@
       <ng-container matColumnDef="time_completed">
         <mat-header-cell *matHeaderCellDef>Time Completed</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{ element.time_completed | date: 'EEEE h:mm a' }}
+          {{ element.time_completed | date: 'EE h:mm a' }}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="processed">
