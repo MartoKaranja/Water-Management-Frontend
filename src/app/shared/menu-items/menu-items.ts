@@ -10,6 +10,7 @@ export interface Menu {
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'schedule', type: 'link', name: 'Schedule questions', icon: 'insert_invitation' },
+  { state: 'usage', type: 'link', name: 'API Usage', icon: 'trending_up' },
   { state: 'dashboard-old', name: 'Old Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'questions', type: 'link', name: 'Questions', icon: 'assignment' },
   { state: 'export', type: 'link', name: 'Export Results', icon: 'import_export' },

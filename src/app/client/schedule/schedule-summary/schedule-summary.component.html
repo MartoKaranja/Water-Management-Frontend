@@ -1,0 +1,64 @@
+<mat-card>
+  <mat-card-header>
+    <h5 class="tw-underline">Previous runs</h5>
+  </mat-card-header>
+
+  <mat-card-content>
+
+      <mat-table [dataSource]="table_source" class="mat-elevation-z8 custom-table">
+        <ng-container matColumnDef="questions_queued">
+          <mat-header-cell *matHeaderCellDef>Questions Queued</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.questions_queued }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="questions_completed">
+          <mat-header-cell *matHeaderCellDef>Questions Completed</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.questions_completed }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="total_tokens">
+          <mat-header-cell *matHeaderCellDef>Tokens Consumed</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a [routerLink]="['/usage']" class="tw-no-underline tw-text-blue-500 hover:tw-text-blue-700">{{ element.total_tokens }}</a>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="time_started">
+          <mat-header-cell *matHeaderCellDef>Time Started</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.time_started | date:'EE, MMM d, yy h:mm a'}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="time_completed">
+          <mat-header-cell *matHeaderCellDef>Time Completed</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.time_completed | date: 'EE h:mm a' }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="processed">
+          <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.processed }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="no">
+          <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+          <mat-cell *matCellDef="let element" >
+            <a [routerLink]="['/questions/generated-answers-history', element.no]" mat-raised-button color="primary">Export</a>
+          </mat-cell>
+        </ng-container>
+
+
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+      </mat-table>
+
+
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+  </mat-card-footer>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+</mat-card>

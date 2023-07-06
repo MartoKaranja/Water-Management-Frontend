@@ -19,7 +19,6 @@ import { LoginLayoutComponent } from './login/login-layout/login-layout.componen
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { LoginModule } from './login/login.module';
-import { OrderModule } from './order-form/order-form.module';
 import { MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';

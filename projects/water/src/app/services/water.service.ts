@@ -39,7 +39,7 @@ export class WaterService {
 
   updateMeterReadings(): Observable<UserRecords>
   {
-    const apiUrl =  this.configService.getApiUrl() + 'water/update_meter_readings';
+    const apiUrl =  this.configService.getApiUrl() + 'water/update-meter-readings';
     return this.http.get<UserRecords>(apiUrl);
 
   }
@@ -64,6 +64,13 @@ export class WaterService {
   createUserRecords(userData: any) {
     const apiUrl =  this.configService.getApiUrl() + 'water/add-user-records';
     return this.http.post(apiUrl, userData);
+  }
+
+  fetchSingleUser(username: string): Observable<UserRecords>
+  {
+    const apiUrl =  this.configService.getApiUrl() + `water/fetch-single-user/${username}`;
+    return this.http.get<UserRecords>(apiUrl);
+
   }
 
 }

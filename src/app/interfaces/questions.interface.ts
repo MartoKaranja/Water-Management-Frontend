@@ -89,3 +89,27 @@ export interface Taskdetail {
   time_completed:string
   processed : string
 }
+
+export interface TaskUsage{
+  count: number;
+  next: string;
+  previous: string;
+  results: TaskTokens[]
+
+}
+
+export interface TaskTokens {
+  no: number
+  task_name: string
+  prompt_tokens: number
+  completion_tokens : number
+  total_tokens : number
+  questions_queued:number
+  questions_completed :number
+  time_started : string
+  time_completed:string
+  processed : string
+  input_cost ?: number;
+  output_cost ?: number;
+  total_cost ?: number;
+}

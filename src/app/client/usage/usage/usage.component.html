@@ -1,6 +1,7 @@
 <mat-card>
   <mat-card-header>
-    <h5 class="tw-underline">Previous runs</h5>
+    <h5 class="tw-underline">Task Cost Usage</h5>
+    <span class='material-icons'>document_scanner</span>
   </mat-card-header>
 
   <mat-card-content>
@@ -18,12 +19,6 @@
             {{ element.questions_completed }}
           </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="total_tokens">
-          <mat-header-cell *matHeaderCellDef>Tokens Consumed</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            {{ element.total_tokens }}
-          </mat-cell>
-        </ng-container>
         <ng-container matColumnDef="time_started">
           <mat-header-cell *matHeaderCellDef>Time Started</mat-header-cell>
           <mat-cell *matCellDef="let element">
@@ -36,10 +31,40 @@
             {{ element.time_completed | date: 'EE h:mm a' }}
           </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="processed">
-          <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <ng-container matColumnDef="prompt_tokens">
+          <mat-header-cell *matHeaderCellDef>Prompt Tokens</mat-header-cell>
           <mat-cell *matCellDef="let element">
-            {{ element.processed }}
+            {{ element.prompt_tokens }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="input_cost">
+          <mat-header-cell *matHeaderCellDef>Input Cost</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            $ {{ element.input_cost }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="completion_tokens">
+          <mat-header-cell *matHeaderCellDef>Completion Tokens</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.completion_tokens }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="output_cost">
+          <mat-header-cell *matHeaderCellDef>Output cost</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            $ {{ element.output_cost }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="total_tokens">
+          <mat-header-cell *matHeaderCellDef>Total Tokens</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.total_tokens }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="total_cost">
+          <mat-header-cell *matHeaderCellDef>Total Cost</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            $ {{ element.total_cost }}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="no">

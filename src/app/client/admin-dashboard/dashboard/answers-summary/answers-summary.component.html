@@ -22,7 +22,7 @@
       <ng-container matColumnDef="total_tokens">
         <mat-header-cell *matHeaderCellDef>Tokens Consumed</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{ element.total_tokens }}
+          <a [routerLink]="['/usage']" class="tw-no-underline tw-text-blue-500 hover:tw-text-blue-700">{{ element.total_tokens }}</a>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="time_started">

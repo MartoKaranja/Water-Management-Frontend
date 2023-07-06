@@ -1,13 +1,13 @@
 import { Component, OnInit, AfterViewInit, ViewChild  } from '@angular/core';
-import { QuestionService } from '../services/questions.service';
-import { Question, Title, Titledetail } from '../interfaces/questions.interface';
+import { QuestionService } from 'src/app/services/questions.service';
+import { Question, Title, Titledetail } from '../../interfaces/questions.interface';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router, NavigationExtras } from '@angular/router';
-import { DataStorage } from '../services/data-store';
+import { DataStorage } from 'src/app/services/data-store';
 
 
 

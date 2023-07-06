@@ -5,7 +5,7 @@
 /tmp
 /out-tsc
 /dist-build
-
+/water-dist
 
 # dependencies
 /node_modules

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { DemoMaterialModule } from '../demo-material-module';
+import { DemoMaterialModule } from 'src/app/demo-material-module';
 import { AllQuestionsComponent } from '../all-questions/all-questions.component';
 import { QuestionRoutes } from './material.routing';
 import { MatTableModule } from '@angular/material/table';

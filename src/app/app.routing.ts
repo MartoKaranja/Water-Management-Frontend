@@ -24,7 +24,7 @@ export const AppRoutes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
+        loadChildren: () => import('./client/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
       },
       {
         path: 'dashboard-old',
@@ -32,16 +32,21 @@ export const AppRoutes: Routes = [
       },
       {
         path: 'schedule',
-        loadChildren: () => import('./schedule/schedule.module').then(m => m.ScheduleModule)
+        loadChildren: () => import('./client/schedule/schedule.module').then(m => m.ScheduleModule)
       },
       {
         path: 'customer-order',
-        loadChildren: () => import('./order-form/order-form.module').then(m => m.OrderModule)
+        loadChildren: () => import('./client/order-form/order-form.module').then(m => m.OrderModule)
       },
       {
         path: 'questions',
         loadChildren:
-          () => import('./questions/questions.module').then(m => m.QuestionsModule)
+          () => import('./client/questions/questions.module').then(m => m.QuestionsModule)
+      },
+      {
+        path: 'usage',
+        loadChildren:
+          () => import('./client/usage/usage.module').then(m => m.UsageModule)
       }
     ],
     canActivate: [AuthGuard],

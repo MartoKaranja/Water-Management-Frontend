@@ -12,6 +12,7 @@ const PRODMENUITEMS = [
   { state: 'schedule', type: 'link', name: 'Schedule questions', icon: 'insert_invitation' },
   { state: 'questions', type: 'link', name: 'Questions', icon: 'assignment' },
   { state: 'export', type: 'link', name: 'Export Results', icon: 'import_export' },
+  { state: 'usage', type: 'link', name: 'API Usage', icon: 'trending_up' },
   { state: 'customer-order', type: 'link', name: 'Place Order', icon: 'paid' }
 
 ];

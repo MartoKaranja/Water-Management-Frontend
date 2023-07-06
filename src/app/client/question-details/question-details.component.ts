@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { QuestionService } from '../services/questions.service';
+import { QuestionService } from 'src/app/services/questions.service';
 import { MatProgressBar } from '@angular/material/progress-bar';
 
 
