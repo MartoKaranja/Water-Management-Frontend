@@ -24,21 +24,8 @@ export const AppRoutes: Routes = [
         loadChildren: () => import('./client/client-dashboard/client-dashboard.module').then(m => m.ClientDashboardModule)
       },
       {
-        path: 'dashboard-old',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'schedule',
-        loadChildren: () => import('./schedule/schedule.module').then(m => m.ScheduleModule)
-      },
-      {
-        path: 'customer-order',
-        loadChildren: () => import('./order-form/order-form.module').then(m => m.OrderModule)
-      },
-      {
-        path: 'questions',
-        loadChildren:
-          () => import('./questions/questions.module').then(m => m.QuestionsModule)
+        path: 'meter-overview',
+        loadChildren: () => import('./admin/meter-overview/meter-overview.module').then(m => m.MeterOverviewModule)
       }
     ],
     canActivate: [AuthGuard],

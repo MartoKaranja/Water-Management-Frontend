@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Edit Meter Details</h2>
+<mat-dialog-content>
+  <!-- meter-form.component.html -->
+<form [formGroup]="meterForm" class="vertical-form">
+  <mat-form-field>
+    <mat-label>Meter Name</mat-label>
+    <input matInput formControlName="meter_name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Current Balance</mat-label>
+    <input matInput type="number" formControlName="current_balance" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Meter Reading</mat-label>
+    <input matInput type="number" formControlName="meter_reading" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Valve State</mat-label>
+    <mat-select formControlName="valve_state">
+      <mat-option value="Online">Online</mat-option>
+      <mat-option value="Unknown">Unknown</mat-option>
+      <mat-option value="Offline">Offline</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>IMEI</mat-label>
+    <input matInput formControlName="imei" />
+  </mat-form-field>
+
+
+</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="updateMeter()" [disabled]="meterForm.invalid">Update Changes</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

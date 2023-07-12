@@ -27,7 +27,7 @@
                   <mat-option *ngFor="let meter of meters" [value]="meter.id">{{ meter.meter_name }}</mat-option>
                 </mat-select>
               </mat-form-field>
-              <small class="text-muted">Can't find the meter? <a href="#">Add new meter</a></small>
+              <small class="text-muted">Can't find the meter? <a href="#" (click)="openCreateMeterDialog(); $event.preventDefault()">Add new meter</a></small>
             </div>
             <div class="col-md-3">
               <label for="landlords" class="col-form-label">Select Existing Landlords</label>

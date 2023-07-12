@@ -27,8 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const authToken = localStorage.getItem('auth_token');
     if (authToken && req.url.indexOf('/login') === -1) { // Check if the auth token is set and the request URL does not contain '/login'
     req = req.clone({
-      setHeaders: { Authorization: `Token ${authToken}` ,
-      'Access-Control-Allow-Origin': 'computeracademichelp.com'}
+      setHeaders: { Authorization: `Token ${authToken}`}
     });
   }
 

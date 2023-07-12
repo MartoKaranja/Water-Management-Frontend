@@ -36,10 +36,10 @@
         <button type="button" class="btn btn-primary w-100"[routerLink]="['/admin-dashboard/add-user']">Add New User</button>
       </div>
       <div class="col-md-3">
-        <button type="button" class="btn btn-success w-100"[routerLink]="['/admin-dashboard/add-user']">Update Meter Records</button>
+        <button type="button" class="btn btn-success w-100" (click)="updateRecords()">Update Meter Records</button>
       </div>
       <div class="col-md-3">
-        <button type="button" class="btn btn-warning w-100" (click)="updateRecords()" >Close/Open Valve</button>
+        <button type="button" class="btn btn-warning w-100"  >Close/Open Valve</button>
       </div>
       <div class="col-md-3">
         <button type="button" class="btn btn-info w-100"[routerLink]="['/admin-dashboard/add-user']">Top Up Balance</button>

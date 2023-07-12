@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { WaterRecords, MeterRecord, Msg, UserRecords } from '../interfaces/questions.interface';
+import { WaterRecords, MeterRecord, Msg, UserRecords, MeterTable, Meter } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -44,6 +44,13 @@ export class WaterService {
 
   }
 
+  updateSingleUser(username: string): Observable<Msg>
+  {
+    const apiUrl =  this.configService.getApiUrl() + `water/update-single-user/${username}`;
+    return this.http.get<Msg>(apiUrl);
+
+  }
+
   fetchAddUsersForm(): Observable<any>
   {
     const apiUrl =  this.configService.getApiUrl() + 'water/fetch-user-form-details';
@@ -66,11 +73,46 @@ export class WaterService {
     return this.http.post(apiUrl, userData);
   }
 
+  createMeterRecord(userData: any) {
+    const apiUrl =  this.configService.getApiUrl() + 'water/add-meter-record';
+    return this.http.post(apiUrl, userData);
+  }
+
   fetchSingleUser(username: string): Observable<UserRecords>
   {
     const apiUrl =  this.configService.getApiUrl() + `water/fetch-single-user/${username}`;
     return this.http.get<UserRecords>(apiUrl);
 
+  }
+
+  getMeters(pageSize?: number, pageNumber?: string): Observable<MeterTable> {
+    let apiUrl = this.configService.getApiUrl() + `water/meter-records`;
+    let params = new HttpParams();
+
+    if (pageSize) {
+      params = params.set('page_size', pageSize.toString());
+    }
+    if (pageNumber) {
+      params = params.set('page', pageNumber.toString());
+    }
+
+    console.log(apiUrl)
+    console.log('Params:', params);
+
+    return this.http.get<MeterTable>(apiUrl, { params });
+  }
+
+  deleteMeterRecord(id: number): Observable<Msg> {
+    const apiUrl =  this.configService.getApiUrl() + 'water/delete-meter-record';
+    return this.http.post<Msg>(apiUrl, {'id' :id});
+  }
+
+  updateMeterRecord(id: number, data: Meter): Observable<Msg> {
+    console.log(data)
+
+
+    const apiUrl =  this.configService.getApiUrl() + 'water/update-meter-record/';
+    return this.http.put<Msg>(`${apiUrl}${id}/`, data);
   }
 
 }

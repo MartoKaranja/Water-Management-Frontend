@@ -1,3 +1,4 @@
+import { MeterDashboardComponent } from "../admin/meter-overview/meter-dashboard/meter-dashboard.component";
 
 export interface Question {
   count: number;
@@ -142,4 +143,24 @@ export interface UserDashboard{
 export interface Landlord {
   tenant_name : string;
   id : number;
+}
+
+
+export interface Meter
+{
+  meter_name : string;
+  id : number;
+  current_balance: number
+  meter_reading : number;
+  valve_state : string;
+  imei : string;
+
+}
+
+export interface MeterTable{
+  count: number;
+  next: string;
+  previous: string;
+  results: Meter[]
+
 }

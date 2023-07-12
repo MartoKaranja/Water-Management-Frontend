@@ -11,9 +11,9 @@ import { WaterDashboardComponent } from './water-dashboard/water-dashboard.compo
 import { MeterRecordsComponent } from './water-dashboard/meter-records/meter-records.component';
 import { UserRecordsComponent } from './water-dashboard/user-records/user-records.component';
 import { AddUserComponent } from './add-user/add-user.component';
-import { NewUserComponent } from './add-user/new-user/new-user.component';
-import { NewLandlordComponent } from './add-user/new-landlord/new-landlord.component';
-import { NewMeterComponent } from './add-user/new-meter/new-meter.component';
+import { NewUserComponent } from '../meter/new-user/new-user.component';
+import { NewLandlordComponent } from '../meter/new-landlord/new-landlord.component';
+import { NewMeterComponent } from '../meter/new-meter/new-meter.component';
 
 
 

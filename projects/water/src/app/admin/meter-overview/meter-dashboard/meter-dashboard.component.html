@@ -1,0 +1,66 @@
+<mat-card>
+  <mat-card-header>
+    <span class='material-icons'>document_scanner</span>
+    <h5 class="tw-underline">Meter Records</h5>
+
+  </mat-card-header>
+
+  <mat-card-content>
+
+      <mat-table [dataSource]="table_source" class="mat-elevation-z8 custom-table">
+        <ng-container matColumnDef="meter_name">
+          <mat-header-cell *matHeaderCellDef>Meter Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.meter_name }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="current_balance">
+          <mat-header-cell *matHeaderCellDef class="centered-cell">Current Balance</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="centered-cell">
+            {{ element.current_balance }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="meter_reading">
+          <mat-header-cell *matHeaderCellDef class="centered-cell">Meter Reading</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="centered-cell">
+            {{ element.meter_reading}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="valve_state">
+          <mat-header-cell *matHeaderCellDef>Valve State</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.valve_state }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="imei">
+          <mat-header-cell *matHeaderCellDef class="centered-cell">IMEI</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="centered-cell">
+            {{ element.imei }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let element" >
+            <button (click)="deleteMeterRecords(element.id)" mat-raised-button color="accent">Delete<span class="material-icons">delete</span></button>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="update">
+          <mat-header-cell *matHeaderCellDef>Update</mat-header-cell>
+          <mat-cell *matCellDef="let element" >
+            <button mat-raised-button color="warn" (click)="openCreateMeterDialog(element)">Edit<span class="material-icons">edit</span></button>
+          </mat-cell>
+        </ng-container>
+
+
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+      </mat-table>
+
+
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+  </mat-card-footer>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+</mat-card>

@@ -3,8 +3,11 @@ import { WaterService } from '../../../services/water.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { NewUserComponent } from './new-user/new-user.component';
-import { NewLandlordComponent } from './new-landlord/new-landlord.component';
+import { NewUserComponent } from '../../meter/new-user/new-user.component';
+import { NewLandlordComponent } from '../../meter/new-landlord/new-landlord.component';
+import { NewMeterComponent } from '../../meter/new-meter/new-meter.component';
+
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -72,6 +75,23 @@ export class AddUserComponent {
 
   openCreateLandlordDialog() {
     const dialogRef = this.dialog.open(NewLandlordComponent, {
+      width: '37%', // Set the desired width here
+      data: { users: this.users  }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true )
+      {
+        this.fetchAddUserFormDetails()
+      }
+      // Handle any actions after the dialog is closed
+      // For example, you can refresh the list of existing users
+    });
+  }
+
+
+  openCreateMeterDialog() {
+    const dialogRef = this.dialog.open(NewMeterComponent, {
       width: '37%', // Set the desired width here
       data: { users: this.users  }
     });

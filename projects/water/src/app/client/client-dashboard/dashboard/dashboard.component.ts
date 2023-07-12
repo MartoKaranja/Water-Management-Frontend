@@ -74,11 +74,13 @@ export class DashboardComponent {
 
   updateRecords()
   {
-    this.waterService.updateMeterReadings().subscribe({
-      next: (database_results: UserRecords) => {
-        console.log(database_results)
-        this.record_tables = database_results
+    this.waterService.updateSingleUser(this.userName).subscribe({
+      next: (msg: Msg) => {
+        console.log(msg)
+        this.msg = msg
         this.progressBarMode = 'determinate';
+
+        this.fetchSingleUserRecords()
 
       },
       error: (error: any) => {
