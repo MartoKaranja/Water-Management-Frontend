@@ -9,11 +9,13 @@ export interface Menu {
 
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
-  { state: 'schedule', type: 'link', name: 'Schedule questions', icon: 'insert_invitation' },
+  { state: 'bulk-generate', type: 'link', name: 'Schedule Content', icon: 'generating_tokens' },
+  { state: 'schedule', type: 'link', name: 'Schedule Questions', icon: 'insert_invitation' },
   { state: 'usage', type: 'link', name: 'API Usage', icon: 'trending_up' },
   { state: 'dashboard-old', name: 'Old Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'questions', type: 'link', name: 'Questions', icon: 'assignment' },
   { state: 'export', type: 'link', name: 'Export Results', icon: 'import_export' },
+  { state: 'generated-answers', type: 'link', name: 'Generated Answers', icon: 'file_present' },
   { state: 'customer-order', type: 'link', name: 'Place Order', icon: 'paid' },
   { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
   { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },

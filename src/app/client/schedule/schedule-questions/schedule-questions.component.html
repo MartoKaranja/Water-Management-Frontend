@@ -49,18 +49,49 @@
 
     <div class = "row" *ngIf = "showCategory">
       <div class="col-md-12 my-2">
-        <form>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="row">
-            <div class="col">
-              <label> No. of questions to process:</label>
-              <input type="number" name="database-questions" [(ngModel)]="database_questions" class="form-control" placeholder="No.of questions e.g. 100" (change)="onInputChange()">
+            <div class="col-md-5">
+              <label>Start from question no:</label>
+              <small>(out of {{ question_max }})</small>
+              <input
+                type="number"
+                formControlName="offset_number"
+                class="form-control"
+                placeholder="e.g. 0"
+                (change) ="onInputChange()"
+              />
             </div>
-            <div class="col">
-              <label>Start from question no: </label><small> (out of  {{question_max}})</small>
-              <input type="number" name="offset_number" [(ngModel)]="offset_number" class="form-control" placeholder="e.g. 0" (change)="onInputChange()">
+
+            <div class="col-md-3">
+              <label>Concurrent Requests</label>
+              <select
+                formControlName="concurrent_requests"
+                class="form-control"
+                (change) ="onInputChange()"
+              >
+                <option [value]="3">3</option>
+                <option [value]="5">5</option>
+                <option [value]="10">10</option>
+                <option [value]="25">25</option>
+                <option [value]="50">50</option>
+                <option [value]="60">60</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label>No. of questions to process:</label>
+              <input
+                type="number"
+                formControlName="database_questions"
+                class="form-control"
+                placeholder="No.of questions e.g. 100"
+                (change) ="onInputChange()"
+              />
             </div>
           </div>
         </form>
+
       </div>
       <mat-divider></mat-divider>
       <div class="col-md-12 my-2">

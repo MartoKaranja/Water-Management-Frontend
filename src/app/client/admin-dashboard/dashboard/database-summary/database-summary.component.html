@@ -25,7 +25,7 @@
         <td class="tw-py-2 tw-px-2"><a [routerLink]="['/questions/database-questions', result[0]]" class="tw-no-underline tw-text-blue-500 hover:tw-text-blue-700">{{result[0]}}</a></td>
         <td class="tw-py-2 tw-px-2 tw-text-center">{{result[1]}}</td>
         <td>
-          <button mat-raised-button color="primary" [routerLink]="['/questions/database-questions', result[0]]" >View DB</button>
+          <button mat-raised-button color="primary" class="small-button" [routerLink]="['/questions/database-questions', result[0]]" ><span class='material-icons'>monitor</span> View DB</button>
         </td>
 
       </tr>

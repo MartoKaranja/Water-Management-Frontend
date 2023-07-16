@@ -90,6 +90,21 @@ export interface Taskdetail {
   processed : string
 }
 
+export interface TaskDashboardDetail
+{
+  no: number
+  task_name: string
+  total_tokens : number
+  questions_queued:number
+  questions_completed :number
+  time_started : string
+  time_completed:string
+  processed : string
+  export : null
+  delete:null
+
+}
+
 export interface TaskUsage{
   count: number;
   next: string;

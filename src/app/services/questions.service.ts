@@ -285,6 +285,11 @@ getTaskUsage(pageSize?: number, pageNumber?: string): Observable<TaskUsage> {
   return this.http.get<TaskUsage>(apiUrl, { params });
 }
 
+deleteTask(id: number): Observable<any> {
+  const url = this.configService.getApiUrl() + `questions/tasks-delete/${id}`;
+  return this.http.delete(url);
+}
+
 
 }
 

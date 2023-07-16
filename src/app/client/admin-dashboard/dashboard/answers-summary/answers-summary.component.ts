@@ -6,6 +6,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatSort } from '@angular/material/sort';
 import { Task, Taskdetail } from 'src/app/interfaces/questions.interface';
 
+
 @Component({
   selector: 'app-answers-summary',
   templateUrl: './answers-summary.component.html',
@@ -61,5 +62,6 @@ export class AnswersSummaryComponent {
     }
     });
   }
+
 
 }

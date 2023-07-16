@@ -47,6 +47,16 @@ export const AppRoutes: Routes = [
         path: 'usage',
         loadChildren:
           () => import('./client/usage/usage.module').then(m => m.UsageModule)
+      },
+      {
+        path: 'generated-answers',
+        loadChildren:
+          () => import('./client/generated-answers/generated-answers.module').then(m => m.GeneratedAnswersModule)
+      },
+      {
+        path: 'bulk-generate',
+        loadChildren:
+          () => import('./client/bulk-generate/bulk-generate.module').then(m => m.BulkGenerateModule)
       }
     ],
     canActivate: [AuthGuard],

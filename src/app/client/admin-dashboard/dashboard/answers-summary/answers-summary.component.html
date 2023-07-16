@@ -2,7 +2,9 @@
   <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
   <mat-card-header>
     <h5 class="tw-underline">Previous CHAT GPT generated answers</h5>
+    <a [routerLink]="['/generated-answers']" mat-raised-button color="primary" class="header-button">Manage Tasks</a>
   </mat-card-header>
+  <hr/>
 
   <mat-card-content>
 
@@ -10,7 +12,7 @@
       <ng-container matColumnDef="questions_queued">
         <mat-header-cell *matHeaderCellDef>Questions Queued</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{ element.questions_queued }}
+          <a [routerLink]="['/questions/generated-answers-history', element.task_name]">{{ element.questions_queued }}</a>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="questions_completed">
@@ -28,7 +30,7 @@
       <ng-container matColumnDef="time_started">
         <mat-header-cell *matHeaderCellDef>Time Started</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{ element.time_started | date:'EE, MMM d, yy h:mm a'}}
+          {{ element.time_started | date:'EE, MMM d h:mm a'}}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="time_completed">
@@ -46,9 +48,10 @@
       <ng-container matColumnDef="no">
         <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
         <mat-cell *matCellDef="let element" >
-          <a [routerLink]="['/questions/generated-answers-history', element.task_name]" mat-raised-button color="primary">Export</a>
+          <a class="small-button" [routerLink]="['/questions/generated-answers-history', element.task_name]" mat-raised-button color="accent"><span class='material-icons'>remove_red_eye</span> View</a>
         </mat-cell>
       </ng-container>
+
 
 
 

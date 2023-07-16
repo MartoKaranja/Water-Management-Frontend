@@ -3,6 +3,7 @@ import { QuestionService } from 'src/app/services/questions.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { query } from '@angular/animations';
 
+
 @Component({
   selector: 'app-database-summary',
   templateUrl: './database-summary.component.html',
@@ -39,9 +40,6 @@ export class DatabaseSummaryComponent {
   public getQuestionService(): QuestionService {
     return this.dataService;
   }
-
-
-
 
 
 }

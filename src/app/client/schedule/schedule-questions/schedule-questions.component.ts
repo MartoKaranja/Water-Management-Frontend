@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { QuestionService } from 'src/app/services/questions.service';
 import { ScheduleSummaryComponent } from '../schedule-summary/schedule-summary.component';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-schedule-questions',
@@ -14,20 +15,27 @@ export class ScheduleQuestionsComponent {
 
 
   selectedOption !: string;
-  showCategory : boolean = false
+  showCategory : boolean = false;
   selectedCategory !: string;
   options :any = [];
   database_tables:any = [];
   database_questions!: number;
-  offset_number !: number;
-  question_max : number = 100
-  offset_width : number = 25
-  progress_width : number = 25
+  offset_number : number = 0;
+  question_max : number = 100;
+  offset_width : number = 25;
+  public concurrent_requests : string = "10";
+  progress_width : number = 25;
   progress_status !: string;
   progress_message !: string;
   task_no !: number;
   content_length : number = 80;
   intervalId !: any;
+
+  form = new FormGroup({
+    offset_number: new FormControl(this.offset_number),
+    concurrent_requests: new FormControl(this.concurrent_requests),
+    database_questions: new FormControl(this.database_questions),
+  });
 
 
   constructor(private dataService: QuestionService) {}
@@ -43,6 +51,8 @@ export class ScheduleQuestionsComponent {
         console.error(error);
       }
     });
+
+
   }
   //---------------------------------------------------
 
@@ -68,7 +78,10 @@ export class ScheduleQuestionsComponent {
 
   onInputChange(){
 
-    if (this.offset_number === undefined)
+    this.offset_number = this.form.value.offset_number ?? 0;
+    this.database_questions = this.form.value.database_questions ?? 0;
+
+    if (this.form.value.offset_number === undefined)
     {
       this.offset_number = 0
       this.offset_width = 0
@@ -95,15 +108,11 @@ export class ScheduleQuestionsComponent {
       else{
         this.progress_width = this.database_questions / this.question_max * 100;
       }
+
+
     }
 
-    /*console.log("start from " + this.offset_number)
-    console.log("No of questions " + this.database_questions)
-    console.log("Total db size " + this.question_max)
-    console.log("Progress width " + this.progress_width)
-    console.log("Offset width " + this.offset_width)*/
-
-
+    this.form.controls['database_questions'].setValue(this.database_questions);
 
   }
 
@@ -115,8 +124,9 @@ export class ScheduleQuestionsComponent {
 
     let data = {
       'table_name': this.selectedOption,
-      'questions': this.database_questions,
-      'offset': this.offset_number,
+      'questions': this.form.value.database_questions,
+      'offset': this.form.value.offset_number,
+      'threads' : this.form.value.concurrent_requests,
       'category' : this.selectedCategory,
       'content_length' : this.content_length
     }

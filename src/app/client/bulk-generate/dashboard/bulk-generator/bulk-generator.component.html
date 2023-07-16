@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+  <mat-card-header>
+    <h5 class="tw-underline">Bulk Generate Content</h5>
+    <a [routerLink]="['/generated-answers']" mat-raised-button color="primary" class="header-button">Manage Tasks</a>
+  </mat-card-header>
+  <hr/>
+
+  <mat-card-content>
+    <div class="row my-2">
+      <div class="col-md-5">
+        <app-control-panel [dataService]="getQuestionService()"></app-control-panel>
+      </div>
+      <div class="col-md-7">
+        <mat-form-field>
+          <mat-label>No of Results</mat-label>
+          <input matInput type="number">
+        </mat-form-field>
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-primary btn-block">
+          <i class="fa fa-star"></i> Button
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+<mat-card-footer>
+
+</mat-card-footer>
+</mat-card>
