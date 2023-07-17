@@ -11,3 +11,9 @@ mat-card-header {
 .header-button {
   margin-left: auto;
 }
+.btn-width {
+  width: 100%;
+}
+.form-width {
+  width: 100%;
+}

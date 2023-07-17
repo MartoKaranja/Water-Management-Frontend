@@ -6,6 +6,7 @@ import { BulkGenerateRoutes } from './bulk-generate.routing';
 import { RouterModule } from '@angular/router';
 import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { BulkGeneratorComponent } from './dashboard/bulk-generator/bulk-generator.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,7 +19,8 @@ import { BulkGeneratorComponent } from './dashboard/bulk-generator/bulk-generato
     CommonModule,
     DemoMaterialModule,
     SharedModuleModule,
-    RouterModule.forChild(BulkGenerateRoutes)
+    RouterModule.forChild(BulkGenerateRoutes),
+    ReactiveFormsModule,
   ]
 })
 export class BulkGenerateModule { }

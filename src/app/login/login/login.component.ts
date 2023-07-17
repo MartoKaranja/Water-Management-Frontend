@@ -13,6 +13,7 @@ import { UsercredentialsService } from 'src/app/services/usercredentials.service
 
 export class LoginComponent {
   loginForm: FormGroup;
+  error !: any;
 
   constructor(private authService: LoginService, private formBuilder: FormBuilder, private router: Router, private usercredentialsService : UsercredentialsService) {
     this.loginForm = this.formBuilder.group({
@@ -47,6 +48,7 @@ export class LoginComponent {
         },
         error: (error: any) => {
           console.error(error);
+          this.error = error
         }
       }
       );
