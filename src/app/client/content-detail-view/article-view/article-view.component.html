@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-8">
+    <mat-card>
+      <mat-card-header *ngIf="article_details">
+        <mat-card-subtitle>Generated Article Details</mat-card-subtitle>
+        <mat-card-title>Generated Article</mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngIf="article_details">
+        <div>
+          <p>{{ article_details.generated_text }}</p>
+        </div>
+      </mat-card-content>
+
+      <mat-card-footer>
+        <mat-progress-bar mode="determinate"></mat-progress-bar>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+  <div class="col-md-4" *ngIf="article_details">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle>Summarized details</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <table class="tw-table-auto tw-bg-white" >
+          <tr>
+            <th>Total Tokens</th><td>{{ article_details.total_tokens }}</td>
+          </tr>
+          <tr>
+            <th>Prompt Tokens</th><td>{{ article_details.prompt_tokens}}</td>
+          </tr>
+          <tr>
+            <th>Completion Tokens</th><td>{{ article_details.completion_tokens}}</td>
+          </tr>
+          <tr>
+            <th>Date Recorded</th><td>{{ article_details.date_recorded  | date:'EEEE, MMMM d, y h:mm a'}}</td>
+          </tr>
+          <tr>
+            <th>Date Updated</th><td>{{ article_details.date_processed  | date:'EEEE, MMMM d, y h:mm a'}}</td>
+        </tr>
+        </table>
+      </mat-card-content>
+
+  </mat-card>
+  <br/>
+
+
+  </div>
+</div>

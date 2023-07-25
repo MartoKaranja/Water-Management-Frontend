@@ -2,6 +2,7 @@
   <mat-card-header>
     <mat-card-subtitle>Generated Answers: {{ answer_titles?.count }} for {{task | date:'EEEE, MMMM d, y h:mm a'}}</mat-card-subtitle>
     <mat-card-title>CHAT GPT Generated Answers</mat-card-title>
+    <a (click) = "downloadFile(table_source.data[0].task_no)" mat-raised-button color="primary" class="header-button"><span class='material-icons'>file_download</span>DownLoad All Questions to CSV</a>
   </mat-card-header>
   <mat-card-content>
 
@@ -40,6 +41,14 @@
 
       </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="view">
+      <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- Add a button to the cell -->
+        <a class="small-button" [routerLink]="['/content/view-answer', element.no]" mat-raised-button color="accent"><span class='material-icons'>remove_red_eye</span>View</a>
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="select">
       <mat-header-cell *matHeaderCellDef>
         <mat-checkbox [checked]="allSelected" (change)="toggleSelectAll()"></mat-checkbox>
@@ -48,6 +57,7 @@
         <mat-checkbox [checked]="element.selected" (change)="toggleSelection(element)"></mat-checkbox>
       </mat-cell>
     </ng-container>
+
 
 
     <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>

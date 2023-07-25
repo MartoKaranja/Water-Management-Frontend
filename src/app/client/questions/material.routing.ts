@@ -5,6 +5,7 @@ import { QuestionDetailsComponent } from '../question-details/question-details.c
 import { GeneratedAnswersComponent } from '../all-questions/generated-answers/generated-answers.component';
 import { DatabaseQuestionsComponent } from './database-questions/database-questions.component';
 import { GeneratedAnswersHistoryComponent } from '../all-questions/generated-answers-history/generated-answers-history.component';
+import { GeneratedArticlesHistoryComponent } from '../all-questions/generated-articles-history/generated-articles-history.component';
 import { QuestionDbDetailsComponent } from '../all-questions/question-db-details/question-db-details.component';
 
 
@@ -32,5 +33,9 @@ export const QuestionRoutes: Routes = [
   {
     path: 'generated-answers-history/:id',
     component: GeneratedAnswersHistoryComponent
+  },
+  {
+    path: 'generated-content-history/:id',
+    component: GeneratedArticlesHistoryComponent
   },
 ];

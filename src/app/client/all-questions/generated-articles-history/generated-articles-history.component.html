@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-subtitle>Generated Articles</mat-card-subtitle>
+    <mat-card-title>CHAT GPT Generated Results</mat-card-title>
+    <a (click) = "downloadFile(table_source.data[0].task_no)" mat-raised-button color="primary" class="header-button"><span class='material-icons'>file_download</span>DownLoad All Questions to CSV</a>
+  </mat-card-header>
+  <mat-card-content>
+
+
+  <mat-table  matTableExporter [dataSource]="table_source" class="mat-elevation-z8 custom-table" #exporter="matTableExporter">
+    <ng-container matColumnDef="generated_text">
+      <mat-header-cell *matHeaderCellDef>Generated Articles</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.generated_text}}
+
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date_processed">
+      <mat-header-cell *matHeaderCellDef>Time Processed</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.date_processed | date:'EE, MMM d, yy h:mm a' }}
+
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="total_tokens">
+      <mat-header-cell *matHeaderCellDef>Tokens Consumed</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="center-cell" >
+        {{ element.total_tokens }}
+
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.processed }}
+
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="view">
+      <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <!-- Add a button to the cell -->
+        <a class="small-button" [routerLink]="['/content/view-article', element.no]" mat-raised-button color="accent"><span class='material-icons'>remove_red_eye</span>View</a>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox [checked]="allSelected" (change)="toggleSelectAll()"></mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-checkbox [checked]="element.selected" (change)="toggleSelection(element)"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+  </mat-table>
+
+
+</mat-card-content>
+<mat-card-actions>
+<div class="button-row">
+  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+
+  <button mat-raised-button color="primary"  (click)="exporter.exportTable('csv')" ><mat-icon>get_app</mat-icon>Export Visible Rows to CSV<mat-icon> insert_chart_outlined</mat-icon></button>
+
+</div>
+
+</mat-card-actions>
+<mat-card-footer>
+
+  <mat-progress-bar mode="determinate"></mat-progress-bar>
+</mat-card-footer>
+</mat-card>
+
+

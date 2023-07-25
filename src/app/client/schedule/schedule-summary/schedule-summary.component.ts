@@ -30,6 +30,7 @@ export class ScheduleSummaryComponent {
   ngOnInit() {
     this.progressBarMode = 'indeterminate';
     this.getTasksHistory();
+    this.progressBarMode = 'determinate';
   }
 
   ngAfterViewInit() {
@@ -53,7 +54,7 @@ export class ScheduleSummaryComponent {
         this.paginator.length = this.totalItems;
         this.paginator.pageIndex = this.paginator.pageIndex; // reset the paginator's pageIndex to zero
         this.paginator.pageSize = pageSize || this.paginator.pageSize; // update the paginator's pageSize
-        this.progressBarMode = 'determinate';
+        //this.progressBarMode = 'determinate';
     },
     error: (error: any) => {
       console.error(error);

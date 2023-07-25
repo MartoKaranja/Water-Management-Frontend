@@ -5,21 +5,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoMaterialModule } from 'src/app/demo-material-module';
 import { ScheduleRoutes } from './schedule.routing';
 import { ScheduleQuestionsComponent } from './schedule-questions/schedule-questions.component';
-import { ScheduleSummaryComponent } from './schedule-summary/schedule-summary.component';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
 
 
 
 @NgModule({
   declarations: [
     ScheduleQuestionsComponent,
-    ScheduleSummaryComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(ScheduleRoutes),
     FormsModule,
     ReactiveFormsModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+    SharedModuleModule
   ]
 })
 export class ScheduleModule { }

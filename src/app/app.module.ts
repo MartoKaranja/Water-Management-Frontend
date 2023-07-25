@@ -32,6 +32,7 @@ import { DataStorage } from './services/data-store';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,6 @@ import { DataStorage } from './services/data-store';
     AppHeaderComponent,
     SpinnerComponent,
     AppSidebarComponent,
-
   ],
   imports: [
     BrowserModule,

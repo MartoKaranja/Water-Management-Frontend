@@ -2,3 +2,12 @@
   font-size: 0.85em;
   padding: 0.3em 0.6em;
 }
+.article-row {
+  /* styles for rows where element.type == 'Article' */
+  background-color: rgb(204 251 241);
+}
+
+.answer-row {
+  /* styles for rows where element.type == 'Answer' */
+  background-color: rgb(238 242 255);
+}

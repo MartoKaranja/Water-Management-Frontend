@@ -23,7 +23,7 @@ export class ScheduleQuestionsComponent {
   offset_number : number = 0;
   question_max : number = 100;
   offset_width : number = 25;
-  public concurrent_requests : string = "10";
+  public concurrent_requests : string = "60";
   progress_width : number = 25;
   progress_status !: string;
   progress_message !: string;
@@ -121,34 +121,45 @@ export class ScheduleQuestionsComponent {
     this.scheduleSummary.progressBarMode = 'indeterminate';
 
     console.log(this.selectedOption)
-
-    let data = {
-      'table_name': this.selectedOption,
-      'questions': this.form.value.database_questions,
-      'offset': this.form.value.offset_number,
-      'threads' : this.form.value.concurrent_requests,
-      'category' : this.selectedCategory,
-      'content_length' : this.content_length
-    }
-
-    this.dataService.scheduleBulkQuestions(data).subscribe ({
-      next: (results : any) => {
-        console.log(results)
-        this.progress_status = results.status;
-        this.progress_message = results.message;
-        this.task_no = results.task_no
-
-        this.intervalId = setInterval(() => {
-          this.checkProgress();
-          this.scheduleSummary.getTasksHistory()
-        }, 10000);
-
-      },
-      error: (error: any) => {
-        console.error(error);
+    if (this.form.value.database_questions != 0)
+    {
+      let data = {
+        'table_name': this.selectedOption,
+        'questions': this.form.value.database_questions,
+        'offset': this.form.value.offset_number,
+        'threads' : this.form.value.concurrent_requests,
+        'category' : this.selectedCategory,
+        'content_length' : this.content_length
       }
 
-    });
+      this.dataService.scheduleBulkQuestions(data).subscribe ({
+        next: (results : any) => {
+          console.log(results)
+          this.progress_status = results.status;
+          this.progress_message = results.message;
+          this.task_no = results.task_no
+
+          this.intervalId = setInterval(() => {
+            this.checkProgress();
+          }, 10000);
+
+        },
+        error: (error: any) => {
+          console.error(error);
+        }
+
+      });
+
+    }
+    else
+    {
+      this.progress_status = "Error";
+      this.progress_message = "Ensure you have entered a valid number of questions";
+      this.scheduleSummary.progressBarMode = 'determinate';
+
+    }
+
+
 
 
   }
@@ -158,6 +169,7 @@ export class ScheduleQuestionsComponent {
     let data = {
       'task_no' : this.task_no
     }
+    this.scheduleSummary.getTasksHistory();
     this.dataService.checkBulkScheduleProgress(data).subscribe ({
       next: (results : any) => {
         this.progress_message = results.message
@@ -167,6 +179,8 @@ export class ScheduleQuestionsComponent {
           clearInterval(this.intervalId);
           this.scheduleSummary.progressBarMode = 'determinate';
         }
+
+
       }
       ,
       error: (error: any) => {

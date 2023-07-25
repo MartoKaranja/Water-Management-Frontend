@@ -1,4 +1,5 @@
 <mat-card>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
   <mat-card-header>
     <h5 class="tw-underline">Previous runs</h5>
   </mat-card-header>
@@ -13,9 +14,9 @@
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="questions_completed">
-          <mat-header-cell *matHeaderCellDef>Questions Completed</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Content Generated</mat-header-cell>
           <mat-cell *matCellDef="let element">
-            {{ element.questions_completed }}
+            {{ element.content_generated }}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="total_tokens">
@@ -43,16 +44,21 @@
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="no">
-          <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
-          <mat-cell *matCellDef="let element" >
-            <a [routerLink]="['/questions/generated-answers-history', element.no]" mat-raised-button color="primary">Export</a>
+          <mat-header-cell *matHeaderCellDef>Export</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element.type === 'Answer'; else contentLink">
+              <a [routerLink]="['/questions/generated-answers-history', element.no]" mat-raised-button color="primary">View</a>
+            </ng-container>
+            <ng-template #contentLink>
+              <a [routerLink]="['/questions/generated-content-history', element.no]" mat-raised-button color="primary">View</a>
+            </ng-template>
           </mat-cell>
         </ng-container>
 
 
 
         <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"  [ngClass]="{'article-row': row.type == 'Article', 'answer-row': row.type == 'Answer'}"></mat-row>
       </mat-table>
 
 
@@ -60,5 +66,4 @@
   <mat-card-footer>
     <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
   </mat-card-footer>
-  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
 </mat-card>

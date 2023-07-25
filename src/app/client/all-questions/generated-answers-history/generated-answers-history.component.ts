@@ -7,6 +7,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ConfigService } from 'src/app/services/configService';
 
 @Component({
   selector: 'app-generated-answers-history',
@@ -24,12 +25,12 @@ export class GeneratedAnswersHistoryComponent {
   @ViewChild(MatProgressBar, {static: true}) progressBar!: MatProgressBar;
   @ViewChild(MatProgressSpinnerModule, {static: true}) progressBarSpinner!: MatProgressSpinnerModule;
 
-  columnsToDisplay = ['title', 'category', 'question', 'generated_text', 'status', 'select'];
+  columnsToDisplay = ['title', 'category', 'question', 'generated_text', 'status', 'view', 'select'];
 
 
   task !:any;
 
-  constructor(private route: ActivatedRoute, private questionService: QuestionService)
+  constructor(private route: ActivatedRoute, private questionService: QuestionService, private configService : ConfigService)
   {
     this.table_source = new MatTableDataSource<GeneratedAnswer>();
   }
@@ -114,6 +115,29 @@ export class GeneratedAnswersHistoryComponent {
 
   ngOnDestroy(): void {
     //this.data.deleteData()
+  }
+
+  downloadFile(task_no: number) {
+    this.progressBar.mode = 'indeterminate';
+
+    const url = this.configService.getApiUrl() + `questions/export/${task_no}/`;
+
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `task_${task_no}.csv`;
+
+    // Listen for the load event on the link element
+    link.addEventListener('load', () => {
+      this.progressBar.mode = 'determinate';
+    });
+
+    // Append the link to the document and click it
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    this.progressBar.mode = 'determinate';
   }
 
 

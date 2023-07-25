@@ -57,6 +57,11 @@ export const AppRoutes: Routes = [
         path: 'bulk-generate',
         loadChildren:
           () => import('./client/bulk-generate/bulk-generate.module').then(m => m.BulkGenerateModule)
+      },
+      {
+        path: 'content',
+        loadChildren:
+          () => import('./client/content-detail-view/content-detail-view.module').then(m => m.ContentDetailViewModule)
       }
     ],
     canActivate: [AuthGuard],

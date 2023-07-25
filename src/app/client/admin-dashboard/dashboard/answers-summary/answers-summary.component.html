@@ -16,9 +16,9 @@
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="questions_completed">
-        <mat-header-cell *matHeaderCellDef>Questions Completed</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Content Generated</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{ element.questions_completed }}
+          {{ element.content_generated}}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="total_tokens">
@@ -48,7 +48,12 @@
       <ng-container matColumnDef="no">
         <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
         <mat-cell *matCellDef="let element" >
-          <a class="small-button" [routerLink]="['/questions/generated-answers-history', element.task_name]" mat-raised-button color="accent"><span class='material-icons'>remove_red_eye</span> View</a>
+          <ng-container *ngIf="element.type === 'Answer'; else contentLink">
+            <a class="small-button" [routerLink]="['/questions/generated-answers-history', element.no]" mat-raised-button color="primary"><span class='material-icons'>remove_red_eye</span> View</a>
+          </ng-container>
+          <ng-template #contentLink>
+            <a class="small-button" [routerLink]="['/questions/generated-content-history', element.no]" mat-raised-button color="primary"><span class='material-icons'>remove_red_eye</span> View</a>
+          </ng-template>
         </mat-cell>
       </ng-container>
 
@@ -56,7 +61,7 @@
 
 
       <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay;" [ngClass]="{'article-row': row.type == 'Article', 'answer-row': row.type == 'Answer'}"></mat-row>
     </mat-table>
 
 

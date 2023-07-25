@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <h4 class="tw-underline">Generated Answers</h4>
+    <h4 class="tw-underline">Generated Content</h4>
   </mat-card-header>
 
   <mat-card-content>
@@ -15,7 +15,7 @@
         <ng-container matColumnDef="questions_completed">
           <mat-header-cell *matHeaderCellDef>Questions Completed</mat-header-cell>
           <mat-cell *matCellDef="let element">
-            {{ element.questions_completed }}
+            {{ element.content_generated }}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="total_tokens">
@@ -45,7 +45,12 @@
         <ng-container matColumnDef="no">
           <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
           <mat-cell *matCellDef="let element" >
-            <a class="small-button" [routerLink]="['/questions/generated-answers-history', element.task_name]" mat-raised-button color="accent"><span class='material-icons'>remove_red_eye</span>View</a>
+            <ng-container *ngIf="element.type === 'Answer'; else contentLink">
+              <a [routerLink]="['/questions/generated-answers-history', element.no]" mat-raised-button color="accent"><span class='material-icons'>remove_red_eye</span> View</a>
+            </ng-container>
+            <ng-template #contentLink>
+              <a [routerLink]="['/questions/generated-content-history', element.no]" mat-raised-button color="accent"><span class='material-icons'>remove_red_eye</span> View</a>
+            </ng-template>
           </mat-cell>
         </ng-container>
         <!-- Add a new ng-container for the export column -->
@@ -67,8 +72,8 @@
 
 
 
-        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+        <mat-header-row *matHeaderRowDef="columnsToDisplay" ></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;" [ngClass]="{'article-row': row.type == 'Article', 'answer-row': row.type == 'Answer'}"></mat-row>
       </mat-table>
 
 

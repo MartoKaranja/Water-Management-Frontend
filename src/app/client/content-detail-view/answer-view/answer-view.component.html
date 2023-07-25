@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-8">
+    <mat-card>
+      <mat-card-header *ngIf="answer_details">
+        <mat-card-subtitle>Generated Answer Details</mat-card-subtitle>
+        <mat-card-title>Question Title: {{answer_details.question.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngIf="answer_details">
+        <button (click)="toggle()" class="btn btn-warning btn-sm tw-my-1">View HTML</button>
+        <br/>
+        <mat-divider></mat-divider>
+        <p  *ngIf="renderHtml" [innerHTML]=" answer_details.question.content"></p>
+        <p *ngIf="!renderHtml">{{ answer_details.question.content }}</p>
+        <mat-divider></mat-divider>
+        <mat-card-title>Generated Answer:</mat-card-title>
+        <div>
+          <p>{{ answer_details.generated_text }}</p>
+        </div>
+
+
+      </mat-card-content>
+
+      <mat-card-footer>
+        <mat-progress-bar mode="determinate"></mat-progress-bar>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+  <div class="col-md-4" *ngIf="answer_details">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle>Summarized details</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <table class="tw-table-auto tw-bg-white" >
+          <tr>
+            <th>Total Tokens</th><td>{{ answer_details.total_tokens }}</td>
+          </tr>
+          <tr>
+            <th>Prompt Tokens</th><td>{{ answer_details.prompt_tokens}}</td>
+          </tr>
+          <tr>
+            <th>Completion Tokens</th><td>{{ answer_details.completion_tokens}}</td>
+          </tr>
+          <tr>
+            <th>Date Recorded</th><td>{{ answer_details.date_recorded  | date:'EEEE, MMMM d, y h:mm a'}}</td>
+          </tr>
+          <tr>
+            <th>Date Updated</th><td>{{ answer_details.date_processed  | date:'EEEE, MMMM d, y h:mm a'}}</td>
+        </tr>
+        </table>
+      </mat-card-content>
+
+  </mat-card>
+  <br/>
+
+
+  </div>
+</div>

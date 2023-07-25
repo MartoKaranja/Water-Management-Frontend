@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Question, Title, Answer, DatabaseQuestion, Task, TaskUsage } from '../interfaces/questions.interface';
+import { Question, Title, Answer, DatabaseQuestion, Task, TaskUsage, Article } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -74,6 +74,17 @@ export class QuestionService {
     const url = this.configService.getApiUrl() + `questions/details/${id}`;
     return this.http.get(url);
   }
+  getGeneratedSingleAnswer(id: string): Observable<any> {
+    const url = this.configService.getApiUrl() + `questions/single-answer-view/${id}`;
+    return this.http.get(url);
+  }
+
+  getGeneratedSingleArticle(id: string): Observable<any> {
+    const url = this.configService.getApiUrl() + `questions/single-article-view/${id}`;
+    return this.http.get(url);
+  }
+
+
   getQuestionDbDetails(id: string, table_name: any): Observable<any> {
     const url = this.configService.getApiUrl() + `questions/db-details/${id}/${table_name}`;
     return this.http.get(url);
@@ -127,6 +138,11 @@ export class QuestionService {
     const url = this.configService.getApiUrl() + `questions/fetch_prompt`;
     return this.http.get(url);
   }
+  getArticlePrompt()
+  {
+    const url = this.configService.getApiUrl() + `questions/fetch_article_prompt`;
+    return this.http.get(url);
+  }
 
   fetchApiKey()
   {
@@ -143,6 +159,12 @@ export class QuestionService {
   updatePrompt(prompt: string)
   {
     const url = this.configService.getApiUrl() + 'questions/update_prompt/';
+    return this.http.post(url, { prompt });
+
+  }
+  updateArticlePrompt(prompt: string)
+  {
+    const url = this.configService.getApiUrl() + 'questions/update_article_prompt/';
     return this.http.post(url, { prompt });
 
   }
@@ -164,6 +186,12 @@ export class QuestionService {
 checkBulkScheduleProgress(data:any)
 {
   const url = this.configService.getApiUrl() + 'questions/bulk_schedule_progress/';
+  return this.http.post(url, { data });
+}
+
+checkBulkContentProgress(data:any)
+{
+  const url = this.configService.getApiUrl() + 'questions/bulk_content_progress/';
   return this.http.post(url, { data });
 }
 
@@ -219,6 +247,32 @@ getGeneratedTimestampAnswers(timestamp: any, pageSize?: number, pageNumber?: str
     );
 }
 
+getTaskGeneratedArticles(task: any, pageSize?: number, pageNumber?: string, ): Observable<Article> {
+  let apiUrl = this.configService.getApiUrl() + `questions/tasks_generated_articles/`;
+  let params = new HttpParams();
+
+  if (pageSize) {
+    params = params.set('page_size', pageSize.toString());
+  }
+  if (pageNumber) {
+    params = params.set('page', pageNumber.toString());
+  }
+
+  console.log(apiUrl)
+  console.log('Params:', params);
+
+  const body = { task: task };
+  console.log(body)
+
+  return this.http.post<Answer>(apiUrl, body, { params })
+    .pipe(
+      map((answer: Answer) => {
+        answer.results = answer.results.map(item => ({ ...item, selected: false }));
+        return answer;
+      })
+    );
+}
+
 getTaskGeneratedAnswers(task: any, pageSize?: number, pageNumber?: string, ): Observable<Answer> {
   let apiUrl = this.configService.getApiUrl() + `questions/tasks_generated_answers/`;
   let params = new HttpParams();
@@ -247,6 +301,12 @@ getTaskGeneratedAnswers(task: any, pageSize?: number, pageNumber?: string, ): Ob
 
 scheduleBulkQuestions(data: any):Observable<any>{
   const url = this.configService.getApiUrl() + 'questions/bulk_schedule/';
+  return this.http.post(url, { data });
+
+}
+
+scheduleBulkContent(data: any):Observable<any>{
+  const url = this.configService.getApiUrl() + 'questions/bulk_content/';
   return this.http.post(url, { data });
 
 }

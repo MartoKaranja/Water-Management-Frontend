@@ -27,3 +27,6 @@ mat-cell{
   text-overflow: ellipsis;
 
 }
+.header-button {
+  margin-left: auto;
+}

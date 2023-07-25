@@ -13,6 +13,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import { DatabaseQuestionsComponent } from './database-questions/database-questions.component';
 import { GeneratedAnswersHistoryComponent } from '../all-questions/generated-answers-history/generated-answers-history.component';
 import { QuestionDbDetailsComponent } from '../all-questions/question-db-details/question-db-details.component';
+import { GeneratedArticlesHistoryComponent } from '../all-questions/generated-articles-history/generated-articles-history.component';
 
 
 
@@ -24,6 +25,7 @@ import { QuestionDbDetailsComponent } from '../all-questions/question-db-details
     DatabaseQuestionsComponent,
     GeneratedAnswersHistoryComponent,
     QuestionDbDetailsComponent,
+    GeneratedArticlesHistoryComponent,
   ],
   imports: [
     CommonModule,

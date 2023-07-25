@@ -1,0 +1,38 @@
+.custom-table mat-header-cell.mat-column-title,
+mat-cell.mat-column-title {
+  flex-grow: 3;
+}
+
+.custom-table mat-header-cell.mat-column-category,
+mat-cell.mat-column-category {
+  flex-grow: 1;
+}
+.custom-table mat-header-cell.mat-column-question,
+mat-cell.mat-column-question {
+  flex-grow: 3;
+}
+
+.custom-table mat-header-cell.mat-column-generated_text,
+mat-cell.mat-column-generated_text {
+  flex-grow: 3;
+}
+
+.custom-table mat-header-cell.mat-column-select, mat-cell.mat-column-select {
+  flex-grow: 0.25;
+}
+
+mat-cell{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+.header-button {
+  margin-left: auto;
+}
+.center-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

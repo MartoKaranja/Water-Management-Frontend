@@ -39,6 +39,7 @@ export interface Titledetail {
 
 export interface GeneratedAnswer {
   no: number;
+  task_no : number;
   question :
   {
     title: string;
@@ -48,6 +49,7 @@ export interface GeneratedAnswer {
   processed : string;
   generated_text : string;
   selected: boolean;
+  view: null;
 }
 
 export interface Answer{
@@ -58,6 +60,21 @@ export interface Answer{
 
 }
 
+export interface Article{
+  count: number;
+  next: string;
+  previous: string;
+  results: GeneratedArticle[]
+
+}
+export interface GeneratedArticle {
+  no: number;
+  task_no : number;
+  processed : string;
+  generated_text : string;
+  selected: boolean;
+  view: null;
+}
 
 export interface DatabaseQuestion{
   count: number;
@@ -84,10 +101,11 @@ export interface Taskdetail {
   task_name: string
   total_tokens : number
   questions_queued:number
-  questions_completed :number
+  content_generated :number
   time_started : string
   time_completed:string
   processed : string
+  type : string
 }
 
 export interface TaskDashboardDetail
@@ -96,7 +114,7 @@ export interface TaskDashboardDetail
   task_name: string
   total_tokens : number
   questions_queued:number
-  questions_completed :number
+  content_generated :number
   time_started : string
   time_completed:string
   processed : string
