@@ -65,4 +65,8 @@ export class MenuItems {
   getMenuitem(): Menu[] {
     return MENUITEMS;
   }
+  // Add a new addMenuItem method
+  addMenuItem(menuItem: Menu) {
+    MENUITEMS.unshift(menuItem);
+  }
 }

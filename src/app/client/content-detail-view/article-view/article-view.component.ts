@@ -40,5 +40,9 @@ export class ArticleViewComponent {
     {console.log("Error...param was none")}
   }
 
+  toggle() {
+    this.renderHtml = !this.renderHtml;
+  }
+
 
 }

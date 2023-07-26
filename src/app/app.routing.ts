@@ -63,6 +63,12 @@ export const AppRoutes: Routes = [
         loadChildren:
           () => import('./client/content-detail-view/content-detail-view.module').then(m => m.ContentDetailViewModule)
       }
+      ,
+      {
+        path: 'admin',
+        loadChildren:
+          () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
+      }
     ],
     canActivate: [AuthGuard],
   },

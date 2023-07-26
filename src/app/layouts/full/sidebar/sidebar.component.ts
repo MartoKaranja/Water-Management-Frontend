@@ -33,7 +33,20 @@ export class AppSidebarComponent implements OnDestroy {
 
     this.menuItems = environment.production ?  new ProdMenuItems() : new MenuItems();
     this.username = this.UsercredentialsService.username;
-    console.log("Username: "+this.username)
+
+    if (this.UsercredentialsService.userType === 'admin') {
+      // Add a menu item for admin users
+      this.menuItems.addMenuItem({
+        // Set the properties of the menu item as needed
+        state: 'admin',
+        name: 'Admin Mgt',
+        type: 'link',
+        icon: 'fact_check'
+      });
+
+    }
+
+
   }
 
 

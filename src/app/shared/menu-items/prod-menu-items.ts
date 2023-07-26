@@ -24,4 +24,8 @@ export class ProdMenuItems {
   getMenuitem(): Menu[] {
     return PRODMENUITEMS;
   }
+  // Add a new addMenuItem method
+  addMenuItem(menuItem: Menu) {
+    PRODMENUITEMS.unshift(menuItem);
+  }
 }

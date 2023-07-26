@@ -50,6 +50,7 @@ export class UsageComponent {
 
         const input_usage = 0.0015 / 1000;
         const output_usage = 0.002 / 1000;
+
         this.task.results.forEach((result) => {
           result.input_cost = result.prompt_tokens * input_usage;
           result.output_cost = result.prompt_tokens * output_usage;

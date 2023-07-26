@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Question, Title, Answer, DatabaseQuestion, Task, TaskUsage, Article } from '../interfaces/questions.interface';
+import { Question, Title, Answer, DatabaseQuestion, Task, TaskUsage, Article, UserList } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -16,11 +16,13 @@ export class QuestionService {
   getQuestions(): Observable<Question> {
     const apiUrl =  this.configService.getApiUrl() + 'questions/';
     return this.http.get<Question>(apiUrl);
-  }/*
-  getQuestionTitlebyId(id: number): Observable<string> {
-    const apiUrl = this.configService.getApiUrl() + `questions/${id}/title`;
-    return this.http.get<string>(apiUrl);
-  }*/
+  }
+
+  getUsers(pageSize?: number, pageNumber?: string): Observable<UserList> {
+    const apiUrl =  this.configService.getApiUrl() + 'questions/users';
+    return this.http.get<UserList>(apiUrl);
+  }
+
   getQuestionTitles(pageSize?: number, pageNumber?: string): Observable<Title> {
     let apiUrl = this.configService.getApiUrl() + `questions/titles`;
     let params = new HttpParams();

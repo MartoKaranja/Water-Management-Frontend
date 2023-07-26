@@ -36,6 +36,9 @@ export class LoginComponent {
           localStorage.setItem('auth_token', token);
           this.usercredentialsService.username = username
 
+          // Store the user type in local storage
+          localStorage.setItem('userType', response.userType);
+
           // Redirect to the dashboard'
 
           this.router.navigateByUrl('/dashboard')

@@ -146,3 +146,24 @@ export interface TaskTokens {
   output_cost ?: number;
   total_cost ?: number;
 }
+
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  is_staff: boolean;
+  is_active: boolean;
+  date_joined: Date;
+  last_login: Date;
+}
+
+export interface UserList
+{
+  count: number;
+  next: string;
+  previous: string;
+  results: User[]
+
+}
