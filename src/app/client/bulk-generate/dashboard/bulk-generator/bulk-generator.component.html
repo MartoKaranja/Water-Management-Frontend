@@ -18,14 +18,15 @@
         </div>
         <div class="col-md-6">
           <mat-form-field class="form-width">
-            <mat-label>Concurrent Requests</mat-label>
+            <mat-label>Open Ai's API Rate Limits</mat-label>
             <mat-select formControlName="concurrent_requests">
-              <mat-option [value]="3">3 Threads</mat-option>
-              <mat-option [value]="5">5 Threads</mat-option>
-              <mat-option [value]="10">10 Threads</mat-option>
-              <mat-option [value]="25">25 Threads</mat-option>
-              <mat-option [value]="50">50 Threads</mat-option>
-              <mat-option [value]="60">60 Threads</mat-option>
+              <mat-option [value]="60">60 requests/min</mat-option>
+              <mat-option [value]="100">100 requests/min</mat-option>
+              <mat-option [value]="500">500 requests/min</mat-option>
+              <mat-option [value]="1000">1000 requests/min</mat-option>
+              <mat-option [value]="3000">3000 requests/min</mat-option>
+              <mat-option [value]="3500">3500 requests/min</mat-option>
+              <mat-option [value]="6000">6000 requests/min</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Filter data between two dates:</h2>
+
+<mat-dialog-content>
+  <p class="tw-text-gray-500 dark:tw-text-gray-400 tw-text-sm">Get historical records between two dates ranges</p>
+  <form [formGroup]="dateForm">
+    <div>
+      <mat-form-field class="full-width">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date" formControlName="start_date">
+          <input formControlName="end_date" matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker>
+          <mat-date-range-picker-actions>
+            <button mat-button matDateRangePickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+          </mat-date-range-picker-actions>
+        </mat-date-range-picker>
+      </mat-form-field>
+    </div>
+
+    <!-- Add your mat-select fields here -->
+    <div>
+      <mat-form-field class="full-width">
+        <mat-label>Filter by User:</mat-label>
+        <mat-select id="users" name="users" formControlName="users" multiple>
+          <mat-option *ngFor="let user of users" [value]="user.username">{{ user.username }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="full-width">
+        <mat-label>Filter By Meter</mat-label>
+        <mat-select id = "meters" name="meters" formControlName="meters" multiple>
+          <mat-option *ngFor="let meter of meters" [value]="meter.meter_name">{{ meter.meter_name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onCancel()" class="tw-text-white tw-bg-red-700 hover:tw-bg-red-800 focus:tw-outline-none focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-700 dark:focus:tw-ring-red-900">Cancel</button>
+  <button (click)="onConfirm()" class="tw-m-1 tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Confirm</button>
+</mat-dialog-actions>

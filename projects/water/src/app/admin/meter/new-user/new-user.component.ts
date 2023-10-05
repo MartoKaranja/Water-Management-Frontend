@@ -27,12 +27,27 @@ export class NewUserComponent {
       email: ['', [Validators.required, Validators.email]],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
+      phone_number : ['', Validators.required]
     });
   }
 
   createUser() {
     // Perform the necessary actions to create the Django user
     // You can use an API service or make an HTTP request here
+    /*
+
+    const formData = {
+      "username": this.form.value.username,
+      "email": this.form.value.email,
+      "first_name": this.form.value.first_name,
+      "last_name": this.form.value.last_name,
+      "password": this.form.value.password,
+      "profile": {
+          "phone_number": this.form.value.phone_number
+      }
+        }
+
+      */
 
     const formData = this.form.value;
 

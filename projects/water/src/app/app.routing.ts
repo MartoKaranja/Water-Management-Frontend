@@ -26,6 +26,18 @@ export const AppRoutes: Routes = [
       {
         path: 'meter-overview',
         loadChildren: () => import('./admin/meter-overview/meter-overview.module').then(m => m.MeterOverviewModule)
+      },
+      {
+        path: 'user-management',
+        loadChildren: () => import('./admin/user-management/user-management.module').then(m => m.UserManagementModule)
+      },
+      {
+        path: 'record-management',
+        loadChildren: () => import('./admin/record-management/record-management.module').then(m => m.RecordManagementModule)
+      },
+      {
+        path: 'admin-settings',
+        loadChildren: () => import('./admin/admin-settings/admin-settings.module').then(m => m.AdminSettingsModule)
       }
     ],
     canActivate: [AuthGuard],

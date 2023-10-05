@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { WaterService } from '../../../../services/water.service';
-import { UserRecords, Msg} from '../../../../interfaces/questions.interface';
+import { UserRecords, Msg, UserRecordsList} from '../../../../interfaces/questions.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -11,11 +11,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserRecordsComponent {
 
   @Input() waterService !: WaterService;
+  @Output() results_fetched = new EventEmitter();
   progressBarMode = 'indeterminate';
 
 
 
-  public record_tables !: UserRecords;
+  public record_tables !: UserRecordsList;
   public msg !: Msg;
 
 
@@ -29,7 +30,7 @@ export class UserRecordsComponent {
 
   fetchUserRecords() {
     this.waterService.fetchActiveUsers().subscribe({
-      next: (database_results: UserRecords) => {
+      next: (database_results: UserRecordsList) => {
         console.log(database_results)
         this.record_tables = database_results
         this.progressBarMode = 'determinate';
@@ -44,16 +45,29 @@ export class UserRecordsComponent {
 
   updateRecords()
   {
+    this.progressBarMode = 'indeterminate';
     this.waterService.updateMeterReadings().subscribe({
-      next: (database_results: UserRecords) => {
-        console.log(database_results)
-        this.record_tables = database_results
-        this.progressBarMode = 'determinate';
+      next: (results: Msg) => {
+          console.log(results)
+          this.msg = results
+          this.progressBarMode = 'determinate';
 
-      },
-      error: (error: any) => {
-        console.error(error);
-      }
+          this.results_fetched.emit()
+
+          this.snackBar.open(this.msg.errMsg, 'Close', {
+            duration: 10000,
+          });
+
+
+
+        },
+        error: (error: any) => {
+          console.error(error);
+          this.progressBarMode = 'determinate';
+          this.snackBar.open("An error has occured. Unable to fetch results.", 'Close', {
+            duration: 10000,
+          });
+        }
     });
 
   }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WaterService } from '../../../services/water.service';
-import { UserRecords, Msg } from '../../../interfaces/questions.interface';
+import { UserRecords, Msg, UserRecordsList } from '../../../interfaces/questions.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -11,12 +11,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DashboardComponent {
 
-  userName !: string;
-
+  userName : string = '';
+  displayedColumns: string[] = ['username', 'current_balance', 'meter_reading', 'valve_state', 'landlord', 'edit_user_details'];
   progressBarMode = 'indeterminate';
-
-  public record_tables !: UserRecords;
+  public record_tables !: UserRecordsList;
   public msg !: Msg;
+  coordinates !: any;
+
+  user_info !: UserRecords;
 
   constructor(private route: ActivatedRoute, private waterService: WaterService) {}
 
@@ -24,69 +26,27 @@ export class DashboardComponent {
     this.route.params.subscribe(params => {
       this.userName = params['user_name'];
     });
-
-    if (this.userName)
-    {
-      this.fetchSingleUserRecords()
-
-    }
-    else
-    {
-      this.fetchUserRecords();
-    }
-
-
   }
 
+
+
+  public getWaterService(): WaterService {
+    return this.waterService;
+  }
+
+  public receiveData(data: UserRecordsList) {
+    //console.log("Receiving call from parent" + data )
+    this.record_tables = data;
+  }
 
   fetchSingleUserRecords()
   {
-
-    this.waterService.fetchSingleUser(this.userName).subscribe({
-      next: (database_results: UserRecords) => {
-        console.log(database_results)
-        this.record_tables = database_results
-        this.progressBarMode = 'determinate';
-
-      },
-      error: (error: any) => {
-        console.error(error);
-      }
-    });
-
+    //to be implemented ...moved from child component or link to it
   }
 
-
-  fetchUserRecords() {
-    this.waterService.fetchActiveUsers().subscribe({
-      next: (database_results: UserRecords) => {
-        console.log(database_results)
-        this.record_tables = database_results
-        this.progressBarMode = 'determinate';
-
-      },
-      error: (error: any) => {
-        console.error(error);
-      }
-    });
-  }
-
-
-  updateRecords()
-  {
-    this.waterService.updateSingleUser(this.userName).subscribe({
-      next: (msg: Msg) => {
-        console.log(msg)
-        this.msg = msg
-        this.progressBarMode = 'determinate';
-
-        this.fetchSingleUserRecords()
-
-      },
-      error: (error: any) => {
-        console.error(error);
-      }
-    });
+  receiveCoordinatesData(data: any) {
+    console.log("Receiving call from parent" + data )
+    this.coordinates = data;
   }
 
 }

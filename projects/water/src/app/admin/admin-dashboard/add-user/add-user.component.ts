@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewUserComponent } from '../../meter/new-user/new-user.component';
 import { NewLandlordComponent } from '../../meter/new-landlord/new-landlord.component';
 import { NewMeterComponent } from '../../meter/new-meter/new-meter.component';
+import { FormDetails } from '../../../interfaces/questions.interface';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class AddUserComponent {
 
   fetchAddUserFormDetails() {
     this.waterService.fetchAddUsersForm().subscribe({
-      next: (database_results: any) => {
+      next: (database_results: FormDetails) => {
         console.log(database_results)
         this.users = database_results.users;
         this.meters = database_results.meters;

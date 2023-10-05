@@ -1,0 +1,76 @@
+<mat-card>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+  <mat-card-header>
+    <span class='material-icons tw-px-2'>payments</span>
+    <h5>Payment Details</h5>
+
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-6">
+        <table class="tw-w-full tw-border-collapse tw-rounded-lg tw-shadow-md tw-mt-5">
+          <tr class="tw-bg-indigo-600">
+            <th colspan="2" class="tw-py-3 tw-px-6 tw-text-white tw-font-semibold tw-text-xl">
+              {{user_details.user.username}} Latest Payment Summary
+            </th>
+          </tr>
+          <tr>
+            <th class="tw-py-3 tw-px-6 tw-text-left tw-font-semibold">User Token Balance</th>
+            <td class="tw-py-3 tw-px-6">{{user_details.user_profile.token_balance}}</td>
+          </tr>
+          <tr class="tw-bg-gray-100">
+            <th class="tw-py-3 tw-px-6 tw-text-left tw-font-semibold">Pending Token Update
+            </th>
+            <td class="tw-py-3 tw-px-6">{{user_details.meter.current_balance - user_details.user_profile.token_balance }}
+              <p><small class="text-muted">To be updated in 6 hours at 29-08-2023 at 10:40 PM</small> </p>
+            </td>
+          </tr>
+          <tr>
+            <th class="tw-py-3 tw-px-6 tw-text-left tw-font-semibold">Meter Token Balance</th>
+            <td class="tw-py-3 tw-px-6">{{user_details.meter.current_balance}}</td>
+          </tr>
+        </table>
+        <div class="row tw-p-2 tw-m-2">
+          <div class="col-md-12">
+            <p><small class="text-muted">If you have received M-Pesa message click here to update the status of the transaction</small> </p>
+          </div>
+          <div class="col-md-6">
+            <input #transactionId class="form-control" placeholder="Transaction Id" >
+          </div>
+          <div class="col-md-6">
+            <button mat-raised-button color="warn" (click)="checkMpesaTransaction(transactionId.value)">Check Status of Transaction</button>
+          </div>
+        </div>
+        <div *ngIf="mpesa_result" class ="tw-p-4 tw-m-2 tw-bg-gray-100 tw-rounded-md">
+          <p  class="tw-text-base tw-text-red-600">
+          <strong class=" tw-text-blue-600">Status:</strong> {{progress_message}}
+        </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <form [formGroup]="form" class="vertical-form" (ngSubmit)="processPayment()">
+          <mat-form-field>
+            <input matInput placeholder="Amount" type="number" formControlName="amount">
+            <mat-error *ngIf="form.get('amount')?.hasError('required')">Amount is required</mat-error>
+          </mat-form-field>
+          <section class="example-section">
+            <mat-checkbox (change)="onCheckboxChange()" formControlName="checkBox">Pay using a different phone number</mat-checkbox>
+          </section>
+          <mat-form-field>
+            <input matInput placeholder="Phone Number" type="tel" formControlName="phoneNumber" (input)="onPhoneChange()">
+            <mat-error *ngIf="form.get('phoneNumber')?.hasError('required')">Phone number is required</mat-error>
+          </mat-form-field>
+          <p *ngIf="form.controls.amount.value !== ''" class="tw-text-center tw-p-4 tw-bg-blue-100 tw-rounded-md" >
+            <span class="tw-text-base  tw-mt-4 tw-text-gray-600  tw-font-semibold">Payment amount KES: {{form.controls.amount.value}}/=</span>
+            <span *ngIf="mpesa_result" class="tw-text-base tw-text-center tw-mt-4 tw-text-blue-600 tw-font-semibold"> Token amount to be purchased: {{mpesa_result.tokens}}</span>
+          </p>
+          <button type="submit" class="btn btn-success w-100">Top Up Your Account</button>
+        </form>
+
+      </div>
+    </div>
+
+  </mat-card-content>
+  <mat-progress-bar></mat-progress-bar>
+</mat-card>

@@ -2,25 +2,35 @@
 <mat-dialog-content>
   <form [formGroup]="form" (ngSubmit)="createUser()" class="vertical-form">
     <mat-form-field>
+      <mat-label>Username</mat-label>
       <input matInput placeholder="Username" formControlName="username">
       <mat-error *ngIf="form.get('username')?.hasError('required')">Username is required</mat-error>
     </mat-form-field>
     <mat-form-field>
+      <mat-label>Password</mat-label>
       <input matInput placeholder="Password" type="password" formControlName="password">
       <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
     </mat-form-field>
     <mat-form-field>
+      <mat-label>Email</mat-label>
       <input matInput placeholder="Email" formControlName="email">
       <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
       <mat-error *ngIf="form.get('email')?.hasError('email')">Invalid email format</mat-error>
     </mat-form-field>
     <mat-form-field>
+      <mat-label>First Name</mat-label>
       <input matInput placeholder="First Name" formControlName="first_name">
       <mat-error *ngIf="form.get('first_name')?.hasError('required')">First Name is required</mat-error>
     </mat-form-field>
     <mat-form-field>
+      <mat-label>Last Name</mat-label>
       <input matInput placeholder="Last Name" formControlName="last_name">
       <mat-error *ngIf="form.get('last_name')?.hasError('required')">Last Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>User's Phone Number</mat-label>
+      <input matInput placeholder="User's Phone Number" formControlName="phone_number" type="tel">
+      <mat-error *ngIf="form.get('last_name')?.hasError('required')">Phone Number is required</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>

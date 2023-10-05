@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <span class="material-icons">edit_note</span>
+    <h5>Edit User Details</h5>
+
+  </mat-card-header>
+  <mat-card-content>
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="updateUser()" class="vertical-form">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('email')">Invalid email format</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Password" type="password" formControlName="password">
+        <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" formControlName="first_name">
+        <mat-error *ngIf="form.get('first_name')?.hasError('required')">First Name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" formControlName="last_name">
+        <mat-error *ngIf="form.get('last_name')?.hasError('required')">Last Name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>User's Phone Number</mat-label>
+        <input matInput placeholder="User's Phone Number" formControlName="phone_number" type="tel">
+        <mat-error *ngIf="form.get('last_name')?.hasError('required')">Phone Number is required</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="accent"> Update User Details</button>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-progress-bar></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,66 @@
+
+<mat-card>
+  <mat-card-header>
+    <span class='material-icons tw-px-2'>group_add</span>
+    <h5 ><span *ngIf="user_name">{{ userName }}</span> Ac details</h5>
+
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="table-container" *ngIf="record_tables">
+      <table class="tw-w-full tw-border-collapse tw-rounded-lg tw-shadow-md tw-mt-5">
+        <tr class="tw-bg-indigo-600">
+          <th colspan="2" class="tw-py-3 tw-px-6 tw-text-white tw-font-semibold tw-text-xl">
+            {{record_tables.results[0].user.username}} User Details
+          </th>
+        </tr>
+        <tr>
+          <th class="tw-py-3 tw-px-6 tw-text-left tw-font-semibold">Current Balance</th>
+          <td class="tw-py-3 tw-px-6">{{record_tables.results[0].meter.current_balance}}</td>
+        </tr>
+        <tr class="tw-bg-gray-100">
+          <th class="tw-py-3 tw-px-6 tw-text-left tw-font-semibold">Meter Reading
+          </th>
+          <td class="tw-py-3 tw-px-6">{{record_tables.results[0].meter.meter_reading}}
+            <p><small class="text-muted">To be updated in 6 hours at 29-08-2023 at 10:40 PM</small> </p>
+          </td>
+        </tr>
+        <tr>
+          <th class="tw-py-3 tw-px-6 tw-text-left tw-font-semibold">Valve status</th>
+          <td class="tw-py-3 tw-px-6">{{record_tables.results[0].meter.valve_state}}</td>
+        </tr>
+        <tr class="tw-bg-gray-100">
+          <th class="tw-py-3 tw-px-6 tw-text-left tw-font-semibold">LandLord
+          </th>
+          <td class="tw-py-3 tw-px-6">{{record_tables.results[0].landlord.tenant_name}}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><a mat-raised-button class="mat-small" color="accent" [routerLink]="['/user-management', record_tables.results[0].user.id]">Update Details</a></td>
+        </tr>
+
+      </table>
+    </div>
+
+    <div class="row tw-py-2">
+      <div class="col-md-6">
+        <a type="button" class="btn btn-primary w-100" [routerLink]="['/user-management']" >Update User Details</a>
+
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-success w-100" (click)="updateRecords()">Update Meter Records</button>
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-warning w-100"  >Close/Open Valve</button>
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-info w-100" [routerLink]="['/admin-dashboard/add-user']">Top Up Balance</button>
+      </div>
+
+
+    </div>
+  </mat-card-content>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+</mat-card>
+
+

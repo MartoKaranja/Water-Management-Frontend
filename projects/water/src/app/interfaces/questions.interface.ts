@@ -104,9 +104,28 @@ export interface Water{
   record_id : string;
 }
 
+export interface MeterHistoryRecords{
+  count: number;
+  next: string;
+  previous: string;
+  results: MeterHistory[]
+}
+
+export interface MeterHistory{
+  id: number;
+  meter_name : string;
+  reading_time : number;
+  user_name: string;
+  water_reading : number;
+
+}
+
 export interface MeterRecord{
   errMsg: string;
   pageInfo: PageInfo;
+  count: number;
+  next: string;
+  previous: string;
   values: Meter[]
 }
 
@@ -133,6 +152,15 @@ export interface UserRecords {
   user : UserDashboard;
   meter : Meter;
   landlord : Landlord;
+  user_profile : UserProfile;
+}
+
+export interface UserRecordsList{
+  count: number;
+  next: string;
+  previous: string;
+  results: UserRecords[]
+
 }
 
 export interface UserDashboard{
@@ -143,6 +171,12 @@ export interface UserDashboard{
 export interface Landlord {
   tenant_name : string;
   id : number;
+}
+
+export interface UserProfile{
+  phone_number : string;
+  cash_balance : number;
+  token_balance : number;
 }
 
 
@@ -163,4 +197,74 @@ export interface MeterTable{
   previous: string;
   results: Meter[]
 
+}
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  is_staff: boolean;
+  is_active: boolean;
+  date_joined: Date;
+  last_login: Date;
+}
+
+export interface UserList
+{
+  count: number;
+  next: string;
+  previous: string;
+  results: User[]
+
+}
+
+export interface MpesaResult{
+ response : MpesaResultDetails;
+ tokens : number;
+ msg ?: string;
+}
+
+export interface MpesaResultDetails{
+  resultDesc ?: string;
+  resultCode ?: number;
+  responseDescription ?: string;
+  responseCode ?: number;
+  conversation_id ?: string;
+  merchantRequestID : string;
+  checkoutRequestID : string;
+  customerMessage : string;
+}
+ export interface FormDetails{
+  users : FormUser[];
+  meters : FormMeters[];
+  landlords : FormLandlord[];
+ }
+
+ export interface FormUser{
+  userId : number;
+  userName : string;
+ }
+ export interface FormMeters{
+  userId : number;
+  meterName : string;
+ }
+ export interface FormLandlord{
+  userId : number;
+  landlordName : string;
+
+ }
+ export interface ConsumptionRecords{
+  count: number;
+  next: string;
+  previous: string;
+  results: Consumption[]
+}
+
+export interface Consumption{
+  id: number
+  user_name : string;
+  reading_time : number;
+  consumption : number;
+  meter_reading : number;
 }

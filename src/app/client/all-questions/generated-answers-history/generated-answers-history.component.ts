@@ -38,13 +38,15 @@ export class GeneratedAnswersHistoryComponent {
   ngOnInit() {
     this.task= this.route.snapshot.paramMap.get("id");
     this.progressBar.mode = 'indeterminate'
-    if (!isNaN(this.task))
+    if (isNaN(Number(this.task)))
     {
-      this.fetchTask()
+      this.fetchData()
+      console.log("Fetching timestamp answers")
     }
     else
     {
-      this.fetchData()
+      this.fetchTask()
+      console.log("Fetching tasks")
     }
 
   }
@@ -55,8 +57,19 @@ export class GeneratedAnswersHistoryComponent {
     this.table_source.sort = this.sort;
     this.paginator.page.subscribe(() => {
       this.progressBar.mode = 'indeterminate';
-      console.log(this.paginator.pageSize, (this.paginator.pageIndex).toString())
-      this.fetchData(this.paginator.pageSize, (this.paginator.pageIndex).toString());
+      console.log(this.paginator.pageSize, (this.paginator.pageIndex).toString());
+      if (isNaN(Number(this.task)))
+      {
+
+        this.fetchData(this.paginator.pageSize, (this.paginator.pageIndex).toString())
+        console.log("Fetching timestamp answers")
+      }
+      else
+      {
+        this.fetchTask(this.paginator.pageSize, (this.paginator.pageIndex).toString())
+        console.log("Fetching tasks via task no")
+      }
+
     });
   }
 

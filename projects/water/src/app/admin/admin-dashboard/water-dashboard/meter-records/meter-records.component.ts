@@ -23,7 +23,7 @@ export class MeterRecordsComponent {
   {
     this.waterService.getMetersSummary().subscribe({
       next: (database_results: MeterRecord) => {
-        console.log(database_results)
+        console.log("meters summary" + database_results)
         this.meter_records= database_results
         this.meterProgress = 'determinate';
 

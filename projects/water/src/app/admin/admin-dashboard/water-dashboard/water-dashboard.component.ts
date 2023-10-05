@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { WaterService } from '../../../services/water.service';
-import { WaterRecords, Msg } from '../../../interfaces/questions.interface';
+import { WaterRecords, Msg, Consumption } from '../../../interfaces/questions.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConsumptionRecordsComponent } from '../consumption-records/consumption-records.component';
 
 @Component({
   selector: 'app-water-dashboard',
@@ -10,8 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class WaterDashboardComponent {
 
-  progressBarMode = 'indeterminate';
-
+  progressBarMode = 'determinate';
+  meter_data !: Consumption[];
+  @ViewChild(ConsumptionRecordsComponent) childComponent!: ConsumptionRecordsComponent;
 
   public msg !: Msg;
   public record_tables !: WaterRecords;
@@ -22,21 +24,7 @@ export class WaterDashboardComponent {
   {}
 
   ngOnInit() {
-    this.fetchWaterRecords();
-  }
 
-  fetchWaterRecords() {
-    this.waterService.getWaterRecordsSummary().subscribe({
-      next: (database_results: WaterRecords) => {
-        console.log(database_results)
-        this.record_tables = database_results
-        this.progressBarMode = 'determinate';
-
-      },
-      error: (error: any) => {
-        console.error(error);
-      }
-    });
   }
 
 
@@ -53,7 +41,7 @@ export class WaterDashboardComponent {
           duration: 10000,
         });
 
-        this.fetchWaterRecords();
+        //this.fetchWaterRecords();
 
       },
       error: (error: any) => {
@@ -67,6 +55,17 @@ export class WaterDashboardComponent {
 
   public getWaterService(): WaterService {
     return this.waterService;
+  }
+
+  receiveData(data: Consumption[]) {
+    console.log("Receiving call from parent" + data )
+    this.meter_data = data;
+  }
+
+  fetchConsumptionRecords(){
+    console.log("Calling child component")
+    this.childComponent.getConsumptionRecords()
+
   }
 
 }

@@ -177,6 +177,7 @@ export class ScheduleQuestionsComponent {
         if (results.status === "Completed")
         {
           clearInterval(this.intervalId);
+
           this.scheduleSummary.progressBarMode = 'determinate';
         }
 

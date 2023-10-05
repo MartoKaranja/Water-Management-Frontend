@@ -1,0 +1,1 @@
+ng build --project=material --configuration=production --output-path=dist-build
