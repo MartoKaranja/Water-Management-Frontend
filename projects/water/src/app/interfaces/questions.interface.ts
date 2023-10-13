@@ -268,3 +268,22 @@ export interface Consumption{
   consumption : number;
   meter_reading : number;
 }
+
+export interface PaymentRecords{
+  count: number;
+  next: string;
+  previous: string;
+  results: Payment[]
+}
+
+export interface Payment{
+  user_id: number
+  username : string;
+  payment_type : string;
+  payment_reference : string;
+  token_amount : number;
+  time_started : number;
+  time_completed : number;
+  payment_status : string;
+  tokens_assigned : number;
+}

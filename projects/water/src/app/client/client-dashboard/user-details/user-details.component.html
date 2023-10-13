@@ -1,8 +1,19 @@
 
 <mat-card>
   <mat-card-header>
-    <span class='material-icons tw-px-2'>group_add</span>
-    <h5 ><span *ngIf="user_name">{{ userName }}</span> Ac details</h5>
+    <div class="container">
+      <div>
+        <h5 style = "font-size: 1.2em;"><span class='material-icons' style = "font-size: 1.5em;">group_add</span><span *ngIf="user_name">{{ userName }}</span> Ac details</h5>
+      </div>
+      <div class="fill"></div>
+      <div>
+        <button type="button" class="tw-w-full tw-text-white tw-bg-yellow-600 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-2 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800" (click)="onButtonClick()">
+          <span class='material-icons same-size'>account_balance_wallet</span>
+          <span class='same-size'>Top Up Ac Balance</span>
+        </button>
+
+      </div>
+    </div>
 
   </mat-card-header>
 
@@ -36,28 +47,22 @@
           </td>
         </tr>
         <tr>
-          <td colspan="2"><a mat-raised-button class="mat-small" color="accent" [routerLink]="['/user-management', record_tables.results[0].user.id]">Update Details</a></td>
+
+          <td colspan="2"  class="tw-py-3 tw-px-6">
+            <div class="row tw-py-2">
+              <div class="col-md-6">
+                <button class="tw-w-full tw-text-white tw-bg-green-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800" [routerLink]="['/user-management', record_tables.results[0].user.id]">Edit User Details</button>
+              </div>
+              <div class="col-md-6">
+                <button class="tw-w-full tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800" >Manage Valve</button>
+              </div>
+              </div>
+
+
+          </td>
         </tr>
 
       </table>
-    </div>
-
-    <div class="row tw-py-2">
-      <div class="col-md-6">
-        <a type="button" class="btn btn-primary w-100" [routerLink]="['/user-management']" >Update User Details</a>
-
-      </div>
-      <div class="col-md-6">
-        <button type="button" class="btn btn-success w-100" (click)="updateRecords()">Update Meter Records</button>
-      </div>
-      <div class="col-md-6">
-        <button type="button" class="btn btn-warning w-100"  >Close/Open Valve</button>
-      </div>
-      <div class="col-md-6">
-        <button type="button" class="btn btn-info w-100" [routerLink]="['/admin-dashboard/add-user']">Top Up Balance</button>
-      </div>
-
-
     </div>
   </mat-card-content>
   <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { WaterRecords, MeterRecord, Msg, UserRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords } from '../interfaces/questions.interface';
+import { WaterRecords, MeterRecord, Msg, UserRecords, PaymentRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -214,5 +214,34 @@ export class WaterService {
     const apiUrl =  this.configService.getApiUrl() + 'water/check-mpesa-transaction/';
     return this.http.post<any>(apiUrl, data);
   }
+
+  getConsumptionTotal(data: any): Observable<any> {
+    console.log(data)
+    let apiUrl =  this.configService.getApiUrl() + 'water/consumption-total/';
+    return this.http.post<any>(apiUrl, data);
+  }
+
+
+
+  getPaymentRecords(pageSize?: number, pageNumber?: string, query_string?: string): Observable<PaymentRecords> {
+    let apiUrl =  this.configService.getApiUrl() + 'water/payment-history/';
+    if (query_string)
+    {
+      apiUrl += query_string;
+    }
+    if (pageSize && pageNumber) {
+      if (query_string)
+      {
+        apiUrl += `&page_size=${pageSize}&page_number=${pageNumber}`;
+      }
+      else
+      {
+        apiUrl += `?page_size=${pageSize}&page_number=${pageNumber}`;
+      }
+
+    }
+    return this.http.get<PaymentRecords>(apiUrl);
+  }
+
 
 }

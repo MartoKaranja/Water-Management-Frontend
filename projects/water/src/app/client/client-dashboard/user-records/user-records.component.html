@@ -1,5 +1,45 @@
 
-    <mat-card>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-card>
+          <mat-card-header>
+            <h5 class="tw-text-1xl tw-font-bold tw-text-gray-800"><span class="material-icons">search</span>Search by Date</h5>
+          </mat-card-header>
+          <mat-card-content style ="justify-content:center; display:grid;">
+
+            <mat-card class="demo-inline-calendar-card">
+            <mat-calendar  [selected]="selectedRangeValue" (selectedChange)="selectedChange($event)"></mat-calendar>
+            </mat-card>
+            <p *ngIf="selectedRangeValue">Fetch results from  {{selectedRangeValue?.start | date:'EEEE, MMMM d, y h:mm a'}} to {{selectedRangeValue?.end | date:'EEEE, MMMM d, y h:mm a'}}</p>
+            <button class="tw-w-full tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-my-2 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800" (click)="fetchResults()">Fetch Results & Calculate Consumption</button>
+
+            <table class="tw-table-auto tw-border tw-shadow-lg tw-bg-white" *ngIf="consumption_sums">
+              <thead class="tw-bg-green-300 dark:tw-bg-gray-700">
+                <tr>
+                  <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-center">Client Name</th>
+                  <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-right">Consumption</th>
+                  <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-right">Invoice</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of consumption_sums | keyvalue" class="tw-border">
+                  <ng-container *ngFor="let obj of item.value | keyvalue">
+                    <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-center">{{ obj.key }}</td>
+                    <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-right">{{ obj.value  | number : '1.2-2' }} Units</td>
+                    <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-right">
+                      <button  class="tw-m-1 tw-text-white tw-bg-green-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-2 tw-py-1 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">View Invoice</button>
+                    </td>
+                  </ng-container>
+
+                </tr>
+
+              </tbody>
+              </table>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-md-8">
+        <mat-card>
       <mat-card-header>
         <div class="container">
           <div>
@@ -50,5 +90,9 @@
       </mat-card-footer>
       <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
     </mat-card>
+      </div>
+
+    </div>
+
 
 

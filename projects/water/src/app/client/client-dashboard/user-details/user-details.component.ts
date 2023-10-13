@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserDetailsComponent {
   @Input() user_name !: string;
   @Output() user_details = new EventEmitter<UserRecordsList>();
+  @Output() buttonClick = new EventEmitter();
 
   displayedColumns: string[] = ['username', 'current_balance', 'meter_reading', 'valve_state', 'landlord', 'edit_user_details'];
   progressBarMode = 'indeterminate';
@@ -67,6 +68,12 @@ export class UserDetailsComponent {
   sendData() {
     console.log("Calling parent component" + this.record_tables.results[0])
     this.user_details.emit(this.record_tables);
+  }
+
+
+
+  onButtonClick(): void {
+    this.buttonClick.emit();
   }
 
 }

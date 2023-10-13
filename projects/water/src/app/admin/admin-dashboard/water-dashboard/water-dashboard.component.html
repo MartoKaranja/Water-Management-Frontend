@@ -2,30 +2,8 @@
   <div class="col-md-5">
     <app-user-records [waterService]="getWaterService()" (results_fetched)="fetchConsumptionRecords()"></app-user-records>
     <hr>
-    <mat-card>
-      <mat-card-header>
-        <span class='material-icons'>bar_chart</span>
-        <h5>Water Records Summary</h5>
-      </mat-card-header>
-
-      <mat-card-content>
-        <div class="row tw-py-2">
-          <div class="col-md-6">
-            <button type="button" class="btn btn-primary w-100" (click)="updateRecords()">Update Records</button>
-          </div>
-          <div class="col-md-6">
-            <button type="button" class="btn btn-warning w-100" [routerLink]="['/record-management']">View All Records</button>
-          </div>
-
-
-        </div>
-
-
-
-      </mat-card-content>
-      <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
-    </mat-card>
-
+    <!--payment-reports-summary-->
+    <app-payment-reports-summary></app-payment-reports-summary>
   </div>
   <div class="col-md-7"  >
     <app-meter-records [waterService]="getWaterService()"></app-meter-records>

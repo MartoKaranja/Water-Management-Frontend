@@ -10,6 +10,8 @@ import { UserRecordsComponent } from './user-records/user-records.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { GraphsModule } from '../../admin/graphs/graphs.module';
+import { PaymentModule } from '../../admin/payment/payment.module';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -26,7 +28,10 @@ import { GraphsModule } from '../../admin/graphs/graphs.module';
     RouterModule.forChild(ClientDashboardRoutes),
     DemoMaterialModule,
     ReactiveFormsModule,
-    GraphsModule
-  ]
+    GraphsModule,
+    PaymentModule
+  ],
+  providers : [DatePipe]
+
 })
 export class ClientDashboardModule { }

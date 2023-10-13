@@ -13,6 +13,7 @@ import { NewLandlordComponent } from '../meter/new-landlord/new-landlord.compone
 import { NewMeterComponent } from '../meter/new-meter/new-meter.component';
 import { ConsumptionRecordsComponent } from './consumption-records/consumption-records.component';
 import { GraphsModule } from '../graphs/graphs.module';
+import { PaymentModule } from '../payment/payment.module';
 
 
 
@@ -32,7 +33,8 @@ import { GraphsModule } from '../graphs/graphs.module';
     DemoMaterialModule,
     GraphsModule,
     RouterModule.forChild(AdminDashboardRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaymentModule
   ]
 })
 export class AdminDashboardModule { }

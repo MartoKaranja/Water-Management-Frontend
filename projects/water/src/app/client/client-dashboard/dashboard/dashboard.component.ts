@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WaterService } from '../../../services/water.service';
 import { UserRecords, Msg, UserRecordsList } from '../../../interfaces/questions.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PaymentModuleComponent } from '../../payment-module/payment-module.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,10 @@ export class DashboardComponent {
   public record_tables !: UserRecordsList;
   public msg !: Msg;
   coordinates !: any;
+
+  @ViewChild('PaymentModuleComponent') paymentComponent: any;
+
+  view_payment_component : Boolean = false;
 
   user_info !: UserRecords;
 
@@ -48,5 +53,16 @@ export class DashboardComponent {
     console.log("Receiving call from parent" + data )
     this.coordinates = data;
   }
+
+  scrollToParent(): void {
+    this.view_payment_component = true;
+  }
+
+  scrollToPaymentModule(): void {
+    this.view_payment_component = true;
+    this.paymentComponent.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  }
+
+
 
 }

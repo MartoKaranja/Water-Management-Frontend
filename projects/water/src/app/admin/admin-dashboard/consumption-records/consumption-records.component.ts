@@ -55,7 +55,7 @@ export class ConsumptionRecordsComponent {
 
         this.data = consumptionRecords
         this.totalItems = this.data.count;
-        this.totalItems = this.data.count;
+
         this.table_source.data = this.data.results;
 
         this.paginator.length = this.totalItems;

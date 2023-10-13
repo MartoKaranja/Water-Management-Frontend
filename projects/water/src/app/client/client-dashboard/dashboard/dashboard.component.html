@@ -1,16 +1,28 @@
-<app-payment-module  *ngIf="record_tables" [user_details]="record_tables.results[0]"  (updateMeterDetails)="fetchSingleUserRecords()"></app-payment-module>
-<hr>
-<div class="row">
-  <div class="col-md-4" *ngIf="userName">
-    <app-user-details  [user_name] = "userName" (user_details)="receiveData($event)"></app-user-details>
+<div class="row" *ngIf="record_tables&&view_payment_component">
+  <div class="col-md-4">
+    <app-payment-module  [user_details]="record_tables.results[0]"  (updateMeterDetails)="fetchSingleUserRecords()" (dataFetched)="scrollToPaymentModule()"></app-payment-module>
+  </div>
+  <div class="col-md-8">
+    <app-user-payment-reports-summary [user_name] = "userName"></app-user-payment-reports-summary>
+  </div>
+
+</div>
+<hr *ngIf="record_tables&&view_payment_component">
+
+<div class="row" *ngIf="userName">
+  <div class="col-md-4" >
+    <app-user-details  [user_name] = "userName" (user_details)="receiveData($event)" (buttonClick)="scrollToParent()"></app-user-details>
   </div>
   <div class="col-md-8">
     <app-user-consumption-graphs *ngIf="coordinates" [coordinates] = "coordinates"></app-user-consumption-graphs>
 
+
   </div>
 
 </div>
+<hr *ngIf="userName">
+<app-user-records  *ngIf="userName" [user_name] = "userName" [waterService]="getWaterService()" (coordinates)="receiveCoordinatesData($event)"></app-user-records>
 
 <app-users *ngIf="userName === undefined"></app-users>
 <hr>
-<app-user-records  *ngIf="userName" [user_name] = "userName" [waterService]="getWaterService()" (coordinates)="receiveCoordinatesData($event)"></app-user-records>
+

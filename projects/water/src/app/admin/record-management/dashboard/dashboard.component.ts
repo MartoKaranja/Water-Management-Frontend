@@ -24,10 +24,15 @@ export class DashboardComponent {
   @ViewChild(MatSort) sort!: MatSort;
   progressBarMode = 'determinate';
   totalItems = 0;
+  consumption_sums !: any[];
+  coordinates !: any;
+  public msg !: Msg;
 
   results !: any;
   data !: ConsumptionRecords;
   query_string :string =  '';
+
+  date_filters !: any;
 
   table_source !: MatTableDataSource<Consumption>;
 
@@ -54,6 +59,12 @@ export class DashboardComponent {
       this.progressBarMode = 'indeterminate';
       console.log(this.paginator.pageSize, (this.paginator.pageIndex + 1).toString())
       this.getMeterRecords(this.paginator.pageSize, (this.paginator.pageIndex + 1).toString(), this.query_string);
+
+      let x = this.data.results.map(record => record.reading_time);
+      let y = this.data.results.map(record => record.consumption);
+      let y1= this.data.results.map(record => record.meter_reading);
+
+      this.coordinates = {x,y, y1};
     });
   }
 
@@ -109,6 +120,10 @@ showDialog() {
   dialogRef.afterClosed().subscribe(dialog_result => {
     console.log('The dialog was closed');
     // You can do something with the result here if needed
+    if (dialog_result == undefined)
+    {
+      return;
+    }
 
     let start_date = this.datePipe.transform(dialog_result.start_date, 'yyyy-MM-dd');
     let end_date = this.datePipe.transform(dialog_result.end_date, 'yyyy-MM-dd');
@@ -202,18 +217,137 @@ showDialog() {
   dialogRef.afterClosed().subscribe(dialog_result => {
     console.log('The dialog was closed');
     // You can do something with the result here if needed
+    if (dialog_result == undefined)
+    {
+      return;
+    }
+    this.progressBarMode = 'determinate';
 
     let start_date = this.datePipe.transform(dialog_result.start_date, 'yyyy-MM-dd');
     let end_date = this.datePipe.transform(dialog_result.end_date, 'yyyy-MM-dd');
     let filter_user = dialog_result.users;
 
 
-    console.log(start_date);
-    console.log(end_date);
-    console.log(filter_user);
+    this.date_filters = {
+      'start_date' : start_date,
+      'end_date' : end_date
+    }
+
+
+
+    // make call to the server to request data
+
+    this.dataService.getConsumptionTotal({start_date, end_date, filter_user}).subscribe({
+      next:(results : any) => {
+
+        this.consumption_sums = results
+        console.log(this.consumption_sums)
+
+        this.progressBarMode = 'determinate';
+      },
+      error: (error: any) => {
+        console.error(error);
+
+      }
+      });
+
 
 
   });
+}
+
+visualizeConsumption(user_name : string)
+{
+  this.progressBarMode = 'indeterminate'
+  let old_query = '';
+  if (this.query_string !== '')
+    {
+      old_query = this.query_string;
+      this.query_string = '';
+    }
+
+    if (this.date_filters['start_date'] !== null)
+    {
+      this.query_string +=  `?reading_time_after=${this.date_filters['start_date']}&reading_time_before=${this.date_filters['end_date']}`;
+
+    }
+    if (user_name !== '')
+    {
+      if (this.query_string !== '')
+      {
+        this.query_string +=  `&meter__user_records__user__username=${user_name}`
+      }
+      else
+      {
+        this.query_string +=   `?meter__user_records__user__username=${user_name}`
+      }
+
+    }
+
+  if (this.query_string !== '')
+    {
+      this.dataService.getConsumptionRecordsSummary(1000, '1', this.query_string).subscribe({
+      next:(waterRecords : ConsumptionRecords) => {
+
+        this.data = waterRecords
+        this.totalItems = this.data.count;
+        this.totalItems = this.data.count;
+        this.table_source.data = this.data.results;
+
+        this.paginator.length = this.totalItems;
+        this.paginator.pageIndex = this.paginator.pageIndex; // reset the paginator's pageIndex to zero
+        this.paginator.pageSize = 1000 || this.paginator.pageSize; // update the paginator's pageSize
+
+        let x = this.data.results.map(record => record.reading_time);
+        let y = this.data.results.map(record => record.consumption);
+        let y1= this.data.results.map(record => record.meter_reading);
+
+        this.coordinates = {x,y, y1};
+        this.progressBarMode = 'determinate';
+
+      },
+      error: (error: any) => {
+        console.error(error);
+
+      }
+      });
+
+    }
+    else
+    {
+      this.query_string = old_query;
+    }
+
+
+
+}
+
+updateRecords()
+{
+  this.progressBarMode = 'indeterminate';
+  this.dataService.updateMeterReadings().subscribe({
+    next: (results: Msg) => {
+        console.log(results)
+        this.msg = results
+        this.progressBarMode = 'determinate';
+
+
+        this.snackBar.open(this.msg.errMsg, 'Close', {
+          duration: 10000,
+        });
+
+
+
+      },
+      error: (error: any) => {
+        console.error(error);
+        this.progressBarMode = 'determinate';
+        this.snackBar.open("An error has occured. Unable to fetch results.", 'Close', {
+          duration: 10000,
+        });
+      }
+  });
+
 }
 
 }

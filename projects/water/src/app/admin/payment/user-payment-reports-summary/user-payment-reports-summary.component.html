@@ -1,0 +1,71 @@
+<mat-card>
+  <mat-card-header>
+    <span class='material-icons tw-px-2'>payments</span>
+    <h5>Payment Records Summary</h5>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-table [dataSource]="table_source" class="mat-elevation-z8" matSort>
+      <!-- Meter Name Column -->
+
+      <!-- Reading Time Column -->
+      <ng-container matColumnDef="payment_type">
+        <mat-header-cell *matHeaderCellDef> Payment Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.payment_type}} </mat-cell>
+      </ng-container>
+
+      <!-- Consumption Column -->
+      <ng-container matColumnDef="payment_amount">
+        <mat-header-cell *matHeaderCellDef> Payment Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.payment_amount}} </mat-cell>
+      </ng-container>
+
+      <!-- Meter Reading Column -->
+      <ng-container matColumnDef="payment_status">
+        <mat-header-cell *matHeaderCellDef> Payment Status </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.payment_status}} </mat-cell>
+      </ng-container>
+
+      <!-- Token Amount Column -->
+      <ng-container matColumnDef="token_amount">
+        <mat-header-cell *matHeaderCellDef> Token Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.token_amount}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Time started Column -->
+      <ng-container matColumnDef="time_started">
+        <mat-header-cell *matHeaderCellDef> Time started</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.time_started  | date:'MMM EEEEEE d, y h:mm a'}} </mat-cell>
+      </ng-container>
+
+      <!-- Time Completed Column -->
+      <ng-container matColumnDef="time_completed">
+        <mat-header-cell *matHeaderCellDef> Time Completed</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.time_completed  | date:'EE, y h:mm a'}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Tokens Assigned Column -->
+      <ng-container matColumnDef="tokens_assigned">
+        <mat-header-cell *matHeaderCellDef>Tokens Assigned</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.tokens_assigned}} </mat-cell>
+      </ng-container>
+
+
+
+
+
+      <!-- Define the columns for the table -->
+      <mat-header-row *matHeaderRowDef="[ 'payment_type', 'payment_amount', 'payment_status', 'token_amount', 'time_started', 'time_completed','tokens_assigned']" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: [ 'payment_type', 'payment_amount', 'payment_status', 'token_amount', 'time_started', 'time_completed', 'tokens_assigned']"></mat-row>
+    </mat-table>
+
+
+
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+  </mat-card-footer>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+</mat-card>

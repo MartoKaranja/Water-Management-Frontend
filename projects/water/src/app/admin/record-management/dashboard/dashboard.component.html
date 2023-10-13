@@ -1,12 +1,14 @@
 <mat-card>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
   <mat-card-header>
     <div class="container">
       <div>
 
-        <h5 class="tw-text-3xl tw-font-bold tw-text-gray-800"><span class='material-icons'>history_edu</span>Historical User Consumption Records</h5>
+        <h5 class="tw-text-3xl tw-font-bold tw-text-gray-800"><span class='material-icons'>history_edu</span>Consumption Records</h5>
       </div>
       <div class="fill"></div>
       <div>
+        <button type="button" class="tw-m-1 tw-text-white tw-bg-purple-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800" (click)="updateRecords()">Update Consumption Records</button>
         <button  (click)="openDialog()" class="tw-m-1 tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Filter Records</button>
         <button   (click)="openConsumptionFilterDialog()" class="tw-m-1 tw-text-white tw-bg-green-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Calculate Consumption</button>
 
@@ -16,6 +18,42 @@
   </mat-card-header>
 
   <mat-card-content>
+    <div  class="row" *ngIf="consumption_sums">
+      <div class="col-md-5">
+        <table class="tw-table-auto tw-border tw-shadow-lg tw-bg-white">
+          <thead class="tw-bg-green-300 dark:tw-bg-gray-700">
+            <tr>
+              <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-center">Client Name</th>
+              <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-right">Consumption</th>
+              <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-right">Visualize</th>
+              <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-right">Invoice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of consumption_sums | keyvalue" class="tw-border">
+              <ng-container *ngFor="let obj of item.value | keyvalue">
+                <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-center">{{ obj.key }}</td>
+                <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-right">{{ obj.value  | number : '1.2-2' }} Units</td>
+                <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-right">
+                  <button   (click)="visualizeConsumption( obj.key)" class="tw-m-1 tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-2 tw-py-1 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">View</button>
+                </td>
+                <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-right">
+                  <button   (click)="openConsumptionFilterDialog()" class="tw-m-1 tw-text-white tw-bg-green-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-2 tw-py-1 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Generate</button>
+                </td>
+              </ng-container>
+
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-7">
+        <app-user-consumption-graphs *ngIf="coordinates" [coordinates] = "coordinates"></app-user-consumption-graphs>
+      </div>
+
+    </div>
+    <hr *ngIf="consumption_sums">
+
     <mat-table [dataSource]="table_source" class="mat-elevation-z8" matSort>
       <!-- Meter Name Column -->
       <ng-container matColumnDef="user_name" >
@@ -59,7 +97,7 @@
   <mat-card-footer>
     <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
   </mat-card-footer>
-  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+
 </mat-card>
 <hr>
 <app-consumption-graphs *ngIf="table_source" [records] = "table_source.data"></app-consumption-graphs>
