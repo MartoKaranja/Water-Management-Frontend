@@ -36,6 +36,10 @@ export const AppRoutes: Routes = [
         loadChildren: () => import('./admin/record-management/record-management.module').then(m => m.RecordManagementModule)
       },
       {
+        path: 'payment-management',
+        loadChildren: () => import('./admin/payment-reports/payment-reports.module').then(m => m.PaymentReportsModule)
+      },
+      {
         path: 'admin-settings',
         loadChildren: () => import('./admin/admin-settings/admin-settings.module').then(m => m.AdminSettingsModule)
       }

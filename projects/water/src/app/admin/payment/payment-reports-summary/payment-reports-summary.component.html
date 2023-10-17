@@ -5,7 +5,7 @@
   </mat-card-header>
 
   <mat-card-content>
-    <mat-table [dataSource]="table_source" class="mat-elevation-z8" matSort>
+    <mat-table [dataSource]="table_source" class="mat-elevation-z8" matSort *ngIf="table_source.data.length; else noData">
       <!-- Meter Name Column -->
       <ng-container matColumnDef="username" >
         <mat-header-cell *matHeaderCellDef mat-sort-header> Client Name </mat-header-cell>
@@ -35,6 +35,10 @@
       <mat-header-row *matHeaderRowDef="[ 'username', 'payment_type', 'payment_amount', 'payment_status']" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
       <mat-row *matRowDef="let row; columns: [ 'username', 'payment_type', 'payment_amount', 'payment_status']"></mat-row>
     </mat-table>
+
+    <ng-template #noData>
+      <div class="alert alert-secondary" role="alert">No results to display.</div>
+    </ng-template>
 
 
 

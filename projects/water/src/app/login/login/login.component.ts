@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from 'projects/water/src/app/services/login.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -34,7 +34,12 @@ export class LoginComponent {
           // Store the token in session storage
           //sessionStorage.setItem('auth_token', token);
           localStorage.setItem('auth_token', token);
-          this.usercredentialsService.username = username
+          this.usercredentialsService.username = username;
+
+          console.log(response.userType);
+
+          //store user type
+          localStorage.setItem('userType', response.userType);
 
           // Redirect to the dashboard'
 

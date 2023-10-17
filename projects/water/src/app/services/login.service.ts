@@ -25,5 +25,13 @@ export class LoginService {
 
   logout() {
     // implement logout functionality
+    const token = localStorage.getItem('auth_token');
+    const headers = { 'Authorization': `Token ${token}` };
+
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('username');
+
+    return this.http.get<any>(this.configService.getApiUrl()+ 'logout/', { headers })
   }
+
 }

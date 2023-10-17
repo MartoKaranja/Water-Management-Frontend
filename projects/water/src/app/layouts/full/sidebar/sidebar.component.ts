@@ -5,7 +5,7 @@ import { ProdMenuItems } from '../../../shared/menu-items/prod-menu-items';
 import { environment } from 'src/environments/environment';
 import { UsercredentialsService } from 'src/app/services/usercredentials.service';
 import { Router } from '@angular/router';
-
+import { LoginService } from 'projects/water/src/app/services/login.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,7 +25,8 @@ export class AppSidebarComponent implements OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private UsercredentialsService : UsercredentialsService,
-    private router: Router
+    private router: Router,
+    private auth : LoginService
   ) {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -42,8 +43,26 @@ export class AppSidebarComponent implements OnDestroy {
   }
 
   signout(){
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('username');
+
+    this.auth.logout()
+      .subscribe({
+        next: (response) => {
+          console.log(response)
+          // Redirect to the dashboard'
+
+          this.router.navigateByUrl('/auth')
+            .then(() => {
+              console.log('Navigation successful');
+            })
+            .catch((err) => {
+              console.error('Navigation failed:', err);
+            });
+        },
+        error: (error: any) => {
+          console.error(error);
+        }
+      }
+      );
     this.router.navigate(['/auth/login'])
   }
 }

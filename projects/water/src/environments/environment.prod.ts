@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl : 'https://admin.computeracademichelp.com/'
+  apiUrl : 'https://admin.pimamajisystem.com/'
 };
