@@ -79,5 +79,32 @@ export class MpesaSettingsComponent {
     });
 }
 
+saveMpesaDetails() {
+  // Perform the necessary actions to create the Django user
+  // You can use an API service or make an HTTP request here
+  if (this.form.valid) {
+    const formData = this.form.value;
+    this.server_conn.createMpesaDetails(formData).subscribe({
+      next: (response: any) => {
+          // Handle the success response from the server
+          // You can display a success message or perform any other necessary actions
+          this.snackBar.open("Mpesa details saved successfully!", 'Close', {
+              duration: 10000,
+          });
+          this.fetchMpesaAPIDetails();
+      },
+      error: (error: any) => {
+          // Handle the error response from the server
+          // You can display an error message or perform any other necessary actions
+          console.log(error)
+      }
+  });
+  }
+  else
+  {
+    console.log("Form needs to be filled")
+  }
+}
+
 
 }

@@ -8,17 +8,17 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    console.log("Auth guard executing..")
+    //console.log("Auth guard executing..")
     const authToken = localStorage.getItem('auth_token');
 
 if (authToken !== null){
-  console.log("Auth guard allowing access..")
+  //console.log("Auth guard allowing access..")
 
       return true;
     } else
     {
       this.router.navigate(['/auth/login']);
-      console.log("Navigating to login page")
+      //console.log("Navigating to login page")
       return false;
     }
 
@@ -34,16 +34,16 @@ export class LoginGuard implements CanActivate {
   constructor( private router: Router) {}
 
   canActivate(): boolean {
-    console.log("Login guard executing..")
+    //console.log("Login guard executing..")
 
     const authToken = localStorage.getItem('auth_token');
 
     if (authToken === null) {
-      console.log("Allowing access to login page");
+      //console.log("Allowing access to login page");
       return true;
     } else {
       this.router.navigate(['/admin-dashboard']);
-      console.log("Navigating to dashboard");
+      //console.log("Navigating to dashboard");
       return false;
     }
 

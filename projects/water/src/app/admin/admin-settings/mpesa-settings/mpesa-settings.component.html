@@ -1,11 +1,12 @@
 <mat-card>
   <mat-card-header>
     <span class="material-icons">account_balance_wallet</span>
-    <h5>Edit Mpesa API Details</h5>
+    <h5 *ngIf="!detail_id">Save Mpesa API Details</h5>
+    <h5 *ngIf="detail_id">Edit Mpesa API Details</h5>
 
   </mat-card-header>
   <mat-card-content>
-    <form *ngIf="form" [formGroup]="form" (ngSubmit)="updateMpesaDetails()" class="vertical-form">
+    <form *ngIf="form" [formGroup]="form"  class="vertical-form">
       <mat-form-field>
         <mat-label>Till no</mat-label>
         <input matInput placeholder="Till No:954754" formControlName="tillno">
@@ -36,7 +37,8 @@
         <input matInput placeholder="Account/ Phone No" formControlName="account_no">
         <mat-error *ngIf="form.get('account_no')?.hasError('required')">Account No is required</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary"> Update Mpesa Details</button>
+      <button mat-raised-button color="primary" *ngIf="detail_id" (click)="updateMpesaDetails()"> Update Mpesa Details</button>
+      <button mat-raised-button color="primary" *ngIf="!detail_id" (click)="saveMpesaDetails()"> Save Mpesa Details</button>
     </form>
   </mat-card-content>
   <mat-card-footer>

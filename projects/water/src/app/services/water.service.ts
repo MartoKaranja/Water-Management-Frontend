@@ -182,6 +182,11 @@ export class WaterService {
     return this.http.patch<any>(`${apiUrl}${id}/`, data);
   }
 
+  createMpesaDetails(data: any): Observable<any> {
+    const apiUrl =  this.configService.getApiUrl() + 'water/create-mpesa-api-details/';
+    return this.http.post(apiUrl, data);
+  }
+
   updateUserAccount(id: number, data: any): Observable<Msg> {
     const apiUrl = this.configService.getApiUrl() + 'water/update-user-account/';
     return this.http.patch<Msg>(`${apiUrl}${id}/`, data);

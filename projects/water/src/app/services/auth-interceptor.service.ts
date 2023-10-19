@@ -15,12 +15,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log("Interceptor code executing")
+    //console.log("Interceptor code executing")
 
 
     // Add the authentication token to the request headers
     const authToken = localStorage.getItem('auth_token');
-    console.log('Interceptor reading auth token from storage ' + authToken)
+    //console.log('Interceptor reading auth token from storage ' + authToken)
     if (authToken && req.url.indexOf('/login') === -1) { // Check if the auth token is set and the request URL does not contain '/login'
     req = req.clone({
       setHeaders: { Authorization: `Token ${authToken}` }
@@ -42,7 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
           const authToken = localStorage.getItem('auth_token');
 
           if (authToken) {
-            console.log('Interceptor encountered error 401. Auth token is:' + authToken);
+            //console.log('Interceptor encountered error 401. Auth token is:' + authToken);
 
             // Make an HTTP DELETE request to the Django endpoint that deletes the token
             let url = `${this.configService.getApiUrl()}water/delete-token`;
@@ -58,7 +58,7 @@ export class AuthInterceptor implements HttpInterceptor {
               }
             });
           } else {
-            console.log('No auth token found in local storage.');
+            //console.log('No auth token found in local storage.');
           }
 
 
