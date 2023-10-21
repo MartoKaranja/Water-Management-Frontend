@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DemoMaterialModule } from '../../demo-material-module';
 import { PaymentReportsSummaryComponent } from './payment-reports-summary/payment-reports-summary.component';
 import { UserPaymentReportsSummaryComponent } from './user-payment-reports-summary/user-payment-reports-summary.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FilterPaymentReportsComponent } from './filter-payment-reports/filter-payment-reports.component';
 
 
 
@@ -12,7 +13,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   declarations: [
     PaymentReportsSummaryComponent,
     UserPaymentReportsSummaryComponent,
-    DashboardComponent
+    DashboardComponent,
+    FilterPaymentReportsComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   exports: [
     PaymentReportsSummaryComponent,
     UserPaymentReportsSummaryComponent
-  ]
+  ],
+  providers:
+  [DatePipe]
 })
 export class PaymentModule { }

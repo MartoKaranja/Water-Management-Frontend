@@ -43,13 +43,29 @@ export class LoginComponent {
 
           // Redirect to the dashboard'
 
-          this.router.navigateByUrl('/admin-dashboard')
+          if (response.userType === 'landlord')
+          {
+            this.router.navigateByUrl('/admin-dashboard')
             .then(() => {
               console.log('Navigation successful');
             })
             .catch((err) => {
               console.error('Navigation failed:', err);
             });
+
+          }
+          else
+          {
+            this.router.navigateByUrl('/client-dashboard')
+            .then(() => {
+              console.log('Navigation successful');
+            })
+            .catch((err) => {
+              console.error('Navigation failed:', err);
+            });
+          }
+
+
         },
         error: (error: any) => {
           console.error(error);

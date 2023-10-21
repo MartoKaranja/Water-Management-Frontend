@@ -6,13 +6,15 @@ import { AdminSettingsRoutes } from './admin-settings.routing';
 import { RouterModule } from '@angular/router';
 import { MpesaSettingsComponent } from './mpesa-settings/mpesa-settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserDetailsUpdateComponent } from './user-details-update/user-details-update.component';
 
 
 
 @NgModule({
   declarations: [
     MpesaSettingsComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserDetailsUpdateComponent
   ],
   imports: [
     CommonModule,

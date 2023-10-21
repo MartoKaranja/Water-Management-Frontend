@@ -58,6 +58,11 @@ export class WaterService {
     return this.http.get<MeterRecord>(apiUrl);
   }
 
+  updateUserDetails(): Observable<Msg> {
+    const apiUrl =  this.configService.getApiUrl() + 'water/update-user-details';
+    return this.http.get<Msg>(apiUrl);
+  }
+
   updateRecords(): Observable<Msg>
   {
     const apiUrl =  this.configService.getApiUrl() + 'water/update-records';

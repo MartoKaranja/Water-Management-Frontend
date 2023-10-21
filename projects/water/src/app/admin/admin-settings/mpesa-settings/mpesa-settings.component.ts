@@ -13,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MpesaSettingsComponent {
   @Input() user_id !: number;
-  @Input() server_conn !: WaterService;
   form !: FormGroup;
   showSuccessMessage = false;
   response: any;
@@ -22,7 +21,8 @@ export class MpesaSettingsComponent {
   constructor(
     private fb: FormBuilder,
     private snackBar : MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private server_conn : WaterService
   ) { }
 
   ngOnInit(){

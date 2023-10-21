@@ -1,8 +1,39 @@
 <div class="row">
-  <div class="col-md-4">
-    <app-mpesa-settings [server_conn]="getWaterService()"></app-mpesa-settings>
+  <div class="col-md-5">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>payment</mat-icon>
+            M-PESA API
+          </mat-panel-title>
+          <mat-panel-description>
+            Manage Settings
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <!--- MPESA FORM component-->
+          <app-mpesa-settings></app-mpesa-settings>
+        </ng-template>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>manage_accounts</mat-icon>
+            User Account
+          </mat-panel-title>
+          <mat-panel-description>
+            Update User Ac Details
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <!--- User Details Management component-->
+        <app-user-details-update></app-user-details-update>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
   </div>
-  <div class="col-md-8">
+  <div class="col-md-7">
     <mat-card>
       <mat-card-header>
         <h4>User Details</h4>

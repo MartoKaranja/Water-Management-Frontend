@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { PaymentRoutes } from './payment.routing';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -13,6 +14,9 @@ import { PaymentRoutes } from './payment.routing';
   imports: [
     CommonModule,
     RouterModule.forChild(PaymentRoutes),
-  ]
+  ],
+  providers:
+  [DatePipe]
+
 })
 export class PaymentReportsModule { }
