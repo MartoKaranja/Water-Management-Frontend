@@ -2,8 +2,10 @@ import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
 import { ProdMenuItems } from '../../../shared/menu-items/prod-menu-items';
+import { ProdUserMenuItems } from '../../../shared/menu-items/prod-user-menu-items';
+import { UserMenuItems } from '../../../shared/menu-items/user-menu-items';
 import { environment } from 'src/environments/environment';
-import { UsercredentialsService } from 'src/app/services/usercredentials.service';
+import { UsercredentialsService } from 'projects/water/src/app/services/usercredentials.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'projects/water/src/app/services/login.service';
 
@@ -18,8 +20,10 @@ export class AppSidebarComponent implements OnDestroy {
   private _mobileQueryListener: () => void;
 
   public menuItems : MenuItems;
+  public userMenuItems : UserMenuItems;
 
   username : string;
+  userType : string;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -33,8 +37,23 @@ export class AppSidebarComponent implements OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
 
     this.menuItems = environment.production ?  new ProdMenuItems() : new MenuItems();
+    this.userMenuItems = environment.production ?  new ProdUserMenuItems() : new UserMenuItems();
     this.username = this.UsercredentialsService.username;
+    this.userType = this.UsercredentialsService.userType
     console.log("Username: "+this.username)
+
+    /*if (this.UsercredentialsService.userType === 'regular') {
+      let home_url = 'client-dashboard/' + this.username;
+      // Add a menu item for admin users
+      this.userMenuItems.addMenuItem({
+        // Set the properties of the menu item as needed
+        state: home_url,
+        name: 'Dashboard',
+        type: 'link',
+        icon: 'water_drop'
+      });
+
+    }*/
   }
 
 

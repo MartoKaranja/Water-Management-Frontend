@@ -6,6 +6,7 @@ import { PaymentReportsSummaryComponent } from './payment-reports-summary/paymen
 import { UserPaymentReportsSummaryComponent } from './user-payment-reports-summary/user-payment-reports-summary.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilterPaymentReportsComponent } from './filter-payment-reports/filter-payment-reports.component';
+import { UserPaymentReportsComponent } from './user-payment-reports/user-payment-reports.component';
 
 
 
@@ -14,7 +15,8 @@ import { FilterPaymentReportsComponent } from './filter-payment-reports/filter-p
     PaymentReportsSummaryComponent,
     UserPaymentReportsSummaryComponent,
     DashboardComponent,
-    FilterPaymentReportsComponent
+    FilterPaymentReportsComponent,
+    UserPaymentReportsComponent
   ],
   imports: [
     CommonModule,

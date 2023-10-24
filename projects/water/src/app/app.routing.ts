@@ -42,7 +42,16 @@ export const AppRoutes: Routes = [
       {
         path: 'admin-settings',
         loadChildren: () => import('./admin/admin-settings/admin-settings.module').then(m => m.AdminSettingsModule)
+      },
+      {
+        path: 'client-payment',
+        loadChildren: () => import('./client/payment-management/payment-management.module').then(m => m.PaymentManagementModule)
+      },
+      {
+        path: 'user-consumption-reports',
+        loadChildren: () => import('./client/consumption-reports/consumption-reports.module').then(m => m.ConsumptionReportsModule)
       }
+
     ],
     canActivate: [AuthGuard],
   },

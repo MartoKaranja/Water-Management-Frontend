@@ -35,7 +35,7 @@
             <div class="col-md-9 form-group">
               <mat-form-field appearance="fill" class="w-100">
                 <mat-select id="landlords" name="landlords" formControlName="landlord">
-                  <mat-option *ngFor="let landlord of landlords" [value]="landlord.id">{{ landlord.tenant_name }}</mat-option>
+                  <mat-option *ngFor="let landlord of landlords" [value]="landlord.id">{{ landlord.landlord_name }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <small class="text-muted">Can't find the landlord? <a href="#" (click)="openCreateLandlordDialog(); $event.preventDefault()">Add new landlord</a></small>

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { WaterService } from '../../../services/water.service';
 import { UserRecords, Msg, UserRecordsList } from '../../../interfaces/questions.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PaymentModuleComponent } from '../../payment-module/payment-module.component';
+import { PaymentModuleComponent } from '../../shared/payment-module/payment-module.component';
 
 @Component({
   selector: 'app-dashboard',

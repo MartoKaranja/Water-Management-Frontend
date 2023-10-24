@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-md-4">
+    <mat-card>
+      <mat-card-header>
+        <h5 class="tw-text-1xl tw-font-bold tw-text-gray-800"><span class="material-icons">search</span>Search by Date</h5>
+      </mat-card-header>
+      <mat-card-content>
+
+        <mat-card class="demo-inline-calendar-card">
+        <mat-calendar  [selected]="selectedRangeValue" (selectedChange)="selectedChange($event)"></mat-calendar>
+        </mat-card>
+        <p *ngIf="selectedRangeValue">Fetch results from  {{selectedRangeValue?.start | date:'EEEE, MMMM d, y h:mm a'}} to {{selectedRangeValue?.end | date:'EEEE, MMMM d, y h:mm a'}}</p>
+        <button class="tw-w-full tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-my-2 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800" (click)="fetchResults()">Fetch Results & Calculate Consumption</button>
+
+        <table class="tw-table-auto tw-border tw-shadow-lg tw-bg-white" *ngIf="consumption_sums">
+          <thead class="tw-bg-green-300 dark:tw-bg-gray-700">
+            <tr>
+              <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-center">Client Name</th>
+              <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-right">Consumption</th>
+              <th class="tw-px-4 tw-py-2 tw-bg-blue-400 tw-text-white-600 tw-text-sm tw-font-bold tw-border tw-border-gray-400 tw-align-middle tw-text-right">Invoice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of consumption_sums | keyvalue" class="tw-border">
+              <ng-container *ngFor="let obj of item.value | keyvalue">
+                <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-center">{{ obj.key }}</td>
+                <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-right">{{ obj.value  | number : '1.2-2' }} Units</td>
+                <td class="tw-px-2 tw-py-1 tw-border-bottom tw-border-gray-400 tw-align-middle tw-text-right">
+                  <button  class="tw-m-1 tw-text-white tw-bg-green-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-2 tw-py-1 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">View Invoice</button>
+                </td>
+              </ng-container>
+
+            </tr>
+
+          </tbody>
+          </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-8">
+    <mat-card>
+  <mat-card-header>
+    <div class="container">
+      <div>
+
+        <h5 class="tw-text-1xl tw-font-bold tw-text-gray-800"><span class='material-icons'>history_edu</span>Consumption Records</h5>
+      </div>
+    </div>
+
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-table [dataSource]="table_source" class="mat-elevation-z8" matSort>
+      <!-- Reading Time Column -->
+      <ng-container matColumnDef="reading_time">
+        <mat-header-cell *matHeaderCellDef> Reading Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.reading_time | date:'EEEE, MMMM d, y h:mm a'}} </mat-cell>
+      </ng-container>
+
+      <!-- Consumption Column -->
+      <ng-container matColumnDef="consumption">
+        <mat-header-cell *matHeaderCellDef> Consumption </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.consumption}} </mat-cell>
+      </ng-container>
+
+      <!-- Meter Reading Column -->
+      <ng-container matColumnDef="meter_reading">
+        <mat-header-cell *matHeaderCellDef> Meter Reading </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.meter_reading}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Define the columns for the table -->
+      <mat-header-row *matHeaderRowDef="[ 'reading_time', 'consumption', 'meter_reading']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: [ 'reading_time', 'consumption', 'meter_reading']"></mat-row>
+    </mat-table>
+
+    <ng-template #noData>
+      <div class="alert alert-secondary" role="alert">No records fetched</div>
+    </ng-template>
+
+
+
+
+
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+  </mat-card-footer>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+</mat-card>
+  </div>
+
+</div>
+
+
+

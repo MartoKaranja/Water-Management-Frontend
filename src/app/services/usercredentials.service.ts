@@ -10,7 +10,7 @@ export class UsercredentialsService {
   constructor() {}
 
   get username(): string {
-    return 'Welcome ' + localStorage.getItem("username")
+    return localStorage.getItem("username") ?? '';
   }
 
   set username(username: string) {

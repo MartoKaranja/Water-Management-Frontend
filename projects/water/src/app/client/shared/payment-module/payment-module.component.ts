@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserRecords, MpesaResult } from '../../interfaces/questions.interface';
-import { WaterService } from '../../services/water.service';
+import { UserRecords, MpesaResult } from '../../../interfaces/questions.interface';
+import { WaterService } from '../../../services/water.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

@@ -3,7 +3,7 @@ import { WaterService } from '../../../services/water.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { UserList, User } from 'src/app/interfaces/questions.interface';
+import { UserList, User } from 'projects/water/src/app/interfaces/questions.interface'
 
 @Component({
   selector: 'app-users',
@@ -12,7 +12,7 @@ import { UserList, User } from 'src/app/interfaces/questions.interface';
 })
 export class UsersComponent {
   @Input() dataService !: WaterService;
-  displayedColumns: string[] = ['username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active', 'date_joined', 'last_login', 'view', 'delete'];
+  displayedColumns: string[] = ['username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active', 'date_joined', 'last_login','is_landlord', 'view', 'delete'];
   table_source !: MatTableDataSource<User>;
   user_list !: UserList;
   totalItems = 0;

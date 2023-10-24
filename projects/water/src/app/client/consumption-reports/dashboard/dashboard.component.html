@@ -1,0 +1,3 @@
+<app-user-consumption-reports [user_name] = "user_name" [waterService]="getWaterService()" (coordinates)="receiveCoordinatesData($event)"></app-user-consumption-reports>
+<hr>
+<app-user-consumption-graphs *ngIf="coordinates" [coordinates] = "coordinates"></app-user-consumption-graphs>

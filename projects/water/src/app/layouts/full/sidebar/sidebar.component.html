@@ -8,7 +8,7 @@
     <!-- ============================================================== -->
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
-    <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class="">{{ username }}<i class="ti-angle-down font-12 m-l-5"></i></a></div>
+    <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class="">Welcome {{ username }}<i class="ti-angle-down font-12 m-l-5"></i></a></div>
     <mat-menu #sdprofile="matMenu" class="mymegamenu">
         <button mat-menu-item>
             <mat-icon>settings</mat-icon> Settings </button>
@@ -22,7 +22,31 @@
 
 </div>
 <mat-nav-list appAccordion>
-    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
+  <ng-container *ngIf="userType==='landlord'">
+    <mat-list-item  appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
+        <a style="text-decoration: none;" appAccordionToggle [routerLink]="['/', menuitem.state]" [routerLinkActiveOptions]="{ exact: true }"  *ngIf="menuitem.type === 'link'">
+            <mat-icon>{{ menuitem.icon }}</mat-icon>
+            <span>{{ menuitem.name }}</span>
+            <span fxFlex></span>
+            <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+        </a>
+
+
+    </mat-list-item>
+  </ng-container>
+
+    <ng-container *ngIf="userType==='regular'">
+      <!--Add user dashboard url-->
+      <mat-list-item  appAccordionLink  routerLinkActive="selected">
+        <a style="text-decoration: none;" appAccordionToggle [routerLink]="['/client-dashboard', username]">
+            <mat-icon>water_drop</mat-icon>
+            <span>Dashboard</span>
+            <span fxFlex></span>
+        </a>
+
+
+    </mat-list-item>
+      <mat-list-item  appAccordionLink *ngFor="let menuitem of userMenuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
         <a style="text-decoration: none;" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
             <mat-icon>{{ menuitem.icon }}</mat-icon>
             <span>{{ menuitem.name }}</span>
@@ -32,5 +56,8 @@
 
 
     </mat-list-item>
+
+    </ng-container>
+
 
 </mat-nav-list>

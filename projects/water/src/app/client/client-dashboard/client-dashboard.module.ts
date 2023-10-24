@@ -4,21 +4,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { ClientDashboardRoutes } from './client-dashboard.routing';
 import { DemoMaterialModule } from '../../demo-material-module';
-import { PaymentModuleComponent } from '../payment-module/payment-module.component';
+import { PaymentModuleComponent } from '../shared/payment-module/payment-module.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserRecordsComponent } from './user-records/user-records.component';
 import { UsersComponent } from './users/users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { GraphsModule } from '../../admin/graphs/graphs.module';
-import { PaymentModule } from '../../admin/payment/payment.module';
+import { SharedModule } from '../shared/shared.module';
 import { DatePipe } from '@angular/common';
+import { PaymentModule } from '../../admin/payment/payment.module';
 
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    PaymentModuleComponent,
     UserRecordsComponent,
     UsersComponent,
     UserDetailsComponent
@@ -29,7 +29,8 @@ import { DatePipe } from '@angular/common';
     DemoMaterialModule,
     ReactiveFormsModule,
     GraphsModule,
-    PaymentModule
+    PaymentModule,
+    SharedModule
   ],
   providers : [DatePipe]
 

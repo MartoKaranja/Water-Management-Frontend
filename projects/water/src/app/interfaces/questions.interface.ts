@@ -206,6 +206,7 @@ export interface User {
   last_name: string;
   is_staff: boolean;
   is_active: boolean;
+  is_landlord : boolean;
   date_joined: Date;
   last_login: Date;
 }

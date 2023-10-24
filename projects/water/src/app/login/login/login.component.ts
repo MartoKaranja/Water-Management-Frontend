@@ -3,7 +3,7 @@ import { LoginService } from 'projects/water/src/app/services/login.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsercredentialsService } from 'src/app/services/usercredentials.service';
+import { UsercredentialsService } from 'projects/water/src/app/services/usercredentials.service'
 
 @Component({
   selector: 'app-login',
@@ -39,7 +39,7 @@ export class LoginComponent {
           console.log(response.userType);
 
           //store user type
-          localStorage.setItem('userType', response.userType);
+          this.usercredentialsService.userType = response.userType;
 
           // Redirect to the dashboard'
 
@@ -56,7 +56,8 @@ export class LoginComponent {
           }
           else
           {
-            this.router.navigateByUrl('/client-dashboard')
+            let user_url = '/client-dashboard' +'/' + username
+            this.router.navigateByUrl(user_url)
             .then(() => {
               console.log('Navigation successful');
             })
