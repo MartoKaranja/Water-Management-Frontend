@@ -1,1 +1,7 @@
-<p>dashboard works!</p>
+<div class="row">
+  <div class="col-md-4" *ngIf="payment_id">
+    <app-mpesa-payment-details [payment_id] = "payment_id"></app-mpesa-payment-details>
+</div>
+<div class="col-md-{{ payment_id ? '8' : '12' }}">
+  <app-user-payment-reports [user_name] = "user_name" (idEmitter)="handlePaymentId($event)"></app-user-payment-reports>
+</div>

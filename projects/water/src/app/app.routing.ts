@@ -50,6 +50,10 @@ export const AppRoutes: Routes = [
       {
         path: 'user-consumption-reports',
         loadChildren: () => import('./client/consumption-reports/consumption-reports.module').then(m => m.ConsumptionReportsModule)
+      },
+      {
+        path: 'user-payment-reports',
+        loadChildren: () => import('./client/payment-reports/payment-reports.module').then(m => m.PaymentReportsModule)
       }
 
     ],

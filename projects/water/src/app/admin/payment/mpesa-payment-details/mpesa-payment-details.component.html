@@ -1,0 +1,76 @@
+<mat-card>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+  <mat-card-header>
+    <h5>Mpesa Transaction Details</h5>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="tw-w-full tw-border-collapse tw-rounded-lg tw-shadow-md tw-mt-5" *ngIf="data">
+      <tbody>
+        <tr class="tw-bg-gray-100">
+          <th>Payment Amount</th>
+          <td>{{ data.payment_amount }}</td>
+        </tr>
+        <tr>
+          <th>Merchant Request ID</th>
+          <td>{{ data.merchantRequestID }}</td>
+
+        </tr>
+        <tr class="tw-bg-gray-100">
+          <th>Checkout Request ID</th>
+          <td>{{ data.checkoutRequestID }}</td>
+        </tr>
+        <tr >
+          <th>Conversation ID</th>
+          <td>{{ data.conversation_id }}</td>
+        </tr>
+        <tr class="tw-bg-gray-100">
+          <th>Transaction ID</th>
+          <td>{{ data.transaction_id }}</td>
+        </tr>
+        <tr>
+          <th>Response Code</th>
+          <td>{{ data.responseCode }}</td>
+        </tr>
+        <tr class="tw-bg-gray-100">
+          <th>Response Description</th>
+          <td>{{ data.responseDescription }}</td>
+        </tr>
+        <tr>
+          <th>Customer Message</th>
+          <td>{{ data.customerMessage }}</td>
+        </tr>
+        <tr class="tw-bg-gray-100">
+          <th>Result Code</th>
+          <td>{{ data.resultCode }}</td>
+        </tr>
+         <tr>
+          <th>Result Description</th>
+          <td>{{ data.resultDesc }}</td>
+         </tr>
+         <tr class="tw-bg-gray-100">
+          <th>Mpesa Receipt Number</th>
+          <td>{{ data.mpesaReceiptNumber }}</td>
+         </tr>
+         <tr>
+          <th>Phone Number</th>
+          <td>{{ data.phoneNumber }}</td>
+         </tr>
+         <tr class="tw-bg-gray-100">
+          <th>Recorded Transaction Date</th>
+          <td>{{ data.recordedTransactionDate }}</td>
+         </tr>
+         <tr>
+          <th>Time Started</th>
+          <td>{{ data.time_started | date:'medium' }}</td>
+         </tr>
+         <tr class="tw-bg-gray-100">
+          <th>Time Completed</th>
+          <td>{{ data.time_completed | date:'medium' }}</td>
+         </tr>
+      </tbody>
+    </table>
+
+  </mat-card-content>
+</mat-card>
+
+

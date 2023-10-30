@@ -23,7 +23,14 @@
       <!-- Meter Reading Column -->
       <ng-container matColumnDef="payment_status">
         <mat-header-cell *matHeaderCellDef> Payment Status </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.payment_status}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+          <div style="display: flex; flex-direction: column;">
+            <div>{{element.payment_status}}</div>
+            <div *ngIf="element.payment_status === 'In Progress'" style="width: 100%;">
+              <button class="tw-bg-blue-500 hover:tw-bg-red-700 tw-text-white tw-py-0 tw-px-0 tw-rounded-full" style="width: 100%;"> Check Status </button>
+            </div>
+          </div>
+        </mat-cell>
       </ng-container>
 
       <!-- Token Amount Column -->
@@ -52,13 +59,21 @@
         <mat-cell *matCellDef="let element"> {{element.tokens_assigned}} </mat-cell>
       </ng-container>
 
+      <!-- Button Column -->
+      <ng-container matColumnDef="button">
+        <mat-header-cell *matHeaderCellDef> View Details </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button class="tw-bg-green-700 hover:tw-bg-green-600 tw-text-white tw-py-2 tw-px-1 tw-rounded" (click)="viewMpesaPaymentDetails(element.id)"> View </button>
+        </mat-cell>
+      </ng-container>
+
 
 
 
 
       <!-- Define the columns for the table -->
-      <mat-header-row *matHeaderRowDef="[ 'payment_type', 'payment_amount', 'payment_status', 'token_amount', 'time_started', 'time_completed','tokens_assigned']" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: [ 'payment_type', 'payment_amount', 'payment_status', 'token_amount', 'time_started', 'time_completed', 'tokens_assigned']"></mat-row>
+      <mat-header-row *matHeaderRowDef="[ 'payment_type', 'payment_amount', 'payment_status', 'token_amount', 'time_started', 'time_completed','tokens_assigned', 'button']" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: [ 'payment_type', 'payment_amount', 'payment_status', 'token_amount', 'time_started', 'time_completed', 'tokens_assigned', 'button']"></mat-row>
     </mat-table>
     <ng-template #noData>
       <div class="alert alert-secondary" role="alert">No records exist yet</div>

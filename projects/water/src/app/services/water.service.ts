@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { WaterRecords, MeterRecord, Msg, UserRecords, PaymentRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords } from '../interfaces/questions.interface';
+import { WaterRecords, MeterRecord, Msg, UserRecords, PaymentRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords, MpesaPaymentDetails } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -89,6 +89,13 @@ export class WaterService {
   {
     const apiUrl =  this.configService.getApiUrl() + 'water/fetch-consumption-records';
     return this.http.get<Msg>(apiUrl);
+
+  }
+
+  get_mpesa_payment_details(user_id : number): Observable<MpesaPaymentDetails>
+  {
+    const apiUrl =  this.configService.getApiUrl() + `water/view-mpesa-payment-details/${user_id}`;
+    return this.http.get<MpesaPaymentDetails>(apiUrl);
 
   }
 

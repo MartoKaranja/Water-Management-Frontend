@@ -7,6 +7,7 @@ import { UserPaymentReportsSummaryComponent } from './user-payment-reports-summa
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FilterPaymentReportsComponent } from './filter-payment-reports/filter-payment-reports.component';
 import { UserPaymentReportsComponent } from './user-payment-reports/user-payment-reports.component';
+import { MpesaPaymentDetailsComponent } from './mpesa-payment-details/mpesa-payment-details.component';
 
 
 
@@ -16,7 +17,8 @@ import { UserPaymentReportsComponent } from './user-payment-reports/user-payment
     UserPaymentReportsSummaryComponent,
     DashboardComponent,
     FilterPaymentReportsComponent,
-    UserPaymentReportsComponent
+    UserPaymentReportsComponent,
+    MpesaPaymentDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,9 @@ import { UserPaymentReportsComponent } from './user-payment-reports/user-payment
   ],
   exports: [
     PaymentReportsSummaryComponent,
-    UserPaymentReportsSummaryComponent
+    UserPaymentReportsSummaryComponent,
+    UserPaymentReportsComponent,
+    MpesaPaymentDetailsComponent
   ],
   providers:
   [DatePipe]

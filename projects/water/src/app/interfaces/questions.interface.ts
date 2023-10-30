@@ -278,6 +278,7 @@ export interface PaymentRecords{
 }
 
 export interface Payment{
+  id : number;
   user_id: number
   username : string;
   payment_type : string;
@@ -287,4 +288,23 @@ export interface Payment{
   time_completed : number;
   payment_status : string;
   tokens_assigned : number;
+}
+
+export interface MpesaPaymentDetails {
+  id: number;
+  payment_amount: number;
+  merchantRequestID: string;
+  checkoutRequestID: string;
+  conversation_id: string;
+  transaction_id: string;
+  responseCode: string;
+  responseDescription: string;
+  customerMessage: string;
+  resultCode: string;
+  resultDesc: string;
+  mpesaReceiptNumber: string;
+  phoneNumber: string;
+  recordedTransactionDate: string;
+  time_started: Date;
+  time_completed: Date;
 }

@@ -4,6 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { WaterService } from '../../../services/water.service';
 import { PaymentRecords, Payment } from '../../../interfaces/questions.interface';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 
 
 @Component({
@@ -25,7 +27,7 @@ export class UserPaymentReportsSummaryComponent {
 
   @Output() dataFetched = new EventEmitter();
 
-  constructor(private waterService : WaterService)
+  constructor(private waterService : WaterService, private router : Router)
   {
     this.table_source = new MatTableDataSource<Payment>();
   }
@@ -71,6 +73,17 @@ export class UserPaymentReportsSummaryComponent {
 
     this.dataFetched.emit()
 
+  }
+
+  viewMpesaPaymentDetails(id : number)
+  {
+    console.log(id)
+
+    const navigationExtras: NavigationExtras = {
+      state: { 'payment_id': id},
+    };
+
+    this.router.navigate(['/user-payment-reports'], navigationExtras);
   }
 
 }

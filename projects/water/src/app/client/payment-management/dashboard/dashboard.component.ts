@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { UserRecordsList } from '../../../interfaces/questions.interface';
 import { WaterService } from '../../../services/water.service';
-import { UsercredentialsService } from 'projects/water_sys/src/app/services/usercredentials.service';
+import { UsercredentialsService } from 'projects/water/src/app/services/usercredentials.service';
+//import { PaymentModuleComponent } from '../../shared/payment-module/payment-module.component';
 import { PaymentModuleComponent } from '../../shared/payment-module/payment-module.component';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,8 +18,9 @@ export class DashboardComponent {
 
   ngOnInit() {
 
-      this.fetchSingleUserRecords()
       this.user_name = this.auth_service.username
+      this.fetchSingleUserRecords()
+
 
   }
 
