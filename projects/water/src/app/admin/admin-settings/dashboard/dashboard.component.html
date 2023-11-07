@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-6">
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -32,11 +32,24 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <mat-icon>manage_accounts</mat-icon>
+            <mat-icon>add_circle_outline</mat-icon>
             Add Tokens
           </mat-panel-title>
           <mat-panel-description>
             Add tokens to Meter
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <!--- Tokens Management component-->
+        <app-token-update></app-token-update>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>manage_accounts</mat-icon>
+            Reporting time
+          </mat-panel-title>
+          <mat-panel-description>
+            Change Meter Reporting time
           </mat-panel-description>
         </mat-expansion-panel-header>
         <!--- User Details Management component-->
@@ -46,7 +59,7 @@
 
 
   </div>
-  <div class="col-md-7">
+  <div class="col-md-6">
     <mat-card>
       <mat-card-header>
         <h4>User Details</h4>

@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-header>
+    <span class='material-icons'>document_scanner</span>
+    <h5 class="tw-underline">Meter Records</h5>
+
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <mat-table [dataSource]="table_source" class="mat-elevation-z8 custom-table">
+      <ng-container matColumnDef="meter_name">
+        <mat-header-cell *matHeaderCellDef>Meter Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.meter_name }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="current_balance">
+        <mat-header-cell *matHeaderCellDef class="centered-cell">Current Balance</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centered-cell">
+          {{ element.current_balance }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="input">
+        <mat-header-cell *matHeaderCellDef>Input</mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index">
+          <input class="form-control" [(ngModel)]="element.inputValue" type="number" placeholder="Enter value">
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="update">
+        <mat-header-cell *matHeaderCellDef>Add Tokens</mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index">
+          <button mat-raised-button color="primary" (click)="logInputValue(element.inputValue, element.id)">Add<span class="material-icons">bloodtype</span></button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fetch">
+        <mat-header-cell *matHeaderCellDef>Meter Status</mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index">
+          <button mat-raised-button color="accent" (click)="logInputValue(element.inputValue, element.id)">Status<span class="material-icons">bloodtype</span></button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    </mat-table>
+
+
+
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+  </mat-card-footer>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+</mat-card>

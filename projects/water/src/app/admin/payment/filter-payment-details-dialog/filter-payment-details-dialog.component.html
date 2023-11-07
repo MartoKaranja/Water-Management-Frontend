@@ -1,0 +1,14 @@
+<h2 mat-dialog-title><span class="material-icons">search</span>Calculate Total Consumption</h2>
+
+
+<mat-dialog-content>
+  <mat-card class="demo-inline-calendar-card">
+    <mat-calendar  [selected]="selectedRangeValue" (selectedChange)="selectedChange($event)"></mat-calendar>
+    </mat-card>
+    <p *ngIf="selectedRangeValue">Fetch results from  {{selectedRangeValue?.start | date:'EEEE, MMMM d, y h:mm a'}} to {{selectedRangeValue?.end | date:'EEEE, MMMM d, y h:mm a'}}</p>
+    <button class="tw-w-full tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-my-2 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Filter Payment Records</button>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onCancel()" class="tw-text-white tw-bg-red-700 hover:tw-bg-red-800 focus:tw-outline-none focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-700 dark:focus:tw-ring-red-900">Cancel</button>
+  <button (click)="onConfirm()" class="tw-m-1 tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Calculate Consumption</button>
+</mat-dialog-actions>

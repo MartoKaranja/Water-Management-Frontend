@@ -1,27 +1,20 @@
 
 <div class="row">
-  <div class="col-md-4">
-    <mat-card>
-      <mat-card-header>
-        <h5 class="tw-text-1xl tw-font-bold tw-text-gray-800"><span class="material-icons">search</span>Search by Date</h5>
-      </mat-card-header>
-      <mat-card-content>
-
-        <mat-card class="demo-inline-calendar-card">
-        <mat-calendar  [selected]="selectedRangeValue" (selectedChange)="selectedChange($event)"></mat-calendar>
-        </mat-card>
-        <p *ngIf="selectedRangeValue">Fetch results from  {{selectedRangeValue?.start | date:'EEEE, MMMM d, y h:mm a'}} to {{selectedRangeValue?.end | date:'EEEE, MMMM d, y h:mm a'}}</p>
-        <button class="tw-w-full tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-my-2 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Filter Payment Records</button>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div class="col-md-8">
+  <div class="col-md-4" *ngIf="payment_id">
+    <app-mpesa-payment-details [payment_id] = "payment_id"></app-mpesa-payment-details>
+</div>
+<div class="col-md-{{ payment_id ? '8' : '12' }}">
     <mat-card>
   <mat-card-header>
     <div class="container">
       <div>
 
         <h5 class="tw-text-1xl tw-font-bold tw-text-gray-800"><span class='material-icons'>history_edu</span>Payment Records</h5>
+      </div>
+      <div class="fill"></div>
+      <div>
+        <button  (click)="openDialog()" class="tw-m-1 tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Filter Records</button>
+
       </div>
     </div>
 
@@ -30,10 +23,6 @@
   <mat-card-content>
     <mat-table [dataSource]="table_source" class="mat-elevation-z8" matSort *ngIf="table_source.data.length; else noData">
       <!-- Meter Name Column -->
-      <ng-container matColumnDef="username" >
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Client Name </mat-header-cell>
-        <mat-cell *matCellDef="let result"> <a [routerLink]="['/client-dashboard', result.user_name]" class="tw-no-underline tw-text-blue-500 hover:tw-text-blue-700">{{result.username}}</a> </mat-cell>
-      </ng-container>
 
       <!-- Reading Time Column -->
       <ng-container matColumnDef="payment_type">
@@ -50,13 +39,57 @@
       <!-- Meter Reading Column -->
       <ng-container matColumnDef="payment_status">
         <mat-header-cell *matHeaderCellDef> Payment Status </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.payment_status}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+          <div style="display: flex; flex-direction: column;">
+            <div>{{element.payment_status}}</div>
+            <div *ngIf="element.payment_status === 'In Progress'" style="width: 100%;">
+              <button class="tw-bg-blue-500 hover:tw-bg-red-700 tw-text-white tw-py-0 tw-px-1 tw-rounded-full" style="width: 100%;"> Check Status </button>
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Token Amount Column -->
+      <ng-container matColumnDef="token_amount">
+        <mat-header-cell *matHeaderCellDef> Token Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.token_amount}} </mat-cell>
       </ng-container>
 
 
+      <!-- Time started Column -->
+      <ng-container matColumnDef="time_started">
+        <mat-header-cell *matHeaderCellDef> Time started</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.time_started  | date:'MMM EEEEEE d, y h:mm a'}} </mat-cell>
+      </ng-container>
+
+      <!-- Time Completed Column -->
+      <ng-container matColumnDef="time_completed">
+        <mat-header-cell *matHeaderCellDef> Time Completed</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.time_completed  | date:'EE, y h:mm a'}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Tokens Assigned Column -->
+      <ng-container matColumnDef="tokens_assigned">
+        <mat-header-cell *matHeaderCellDef>Tokens Assigned</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.tokens_assigned}} </mat-cell>
+      </ng-container>
+
+      <!-- Button Column -->
+      <ng-container matColumnDef="button">
+        <mat-header-cell *matHeaderCellDef> View </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button class="tw-bg-green-700 hover:tw-bg-green-600 tw-text-white tw-py-2 tw-px-1 tw-rounded" (click)="viewMpesaPaymentDetails(element.id)"> View Details </button>
+        </mat-cell>
+      </ng-container>
+
+
+
+
+
       <!-- Define the columns for the table -->
-      <mat-header-row *matHeaderRowDef="[ 'username', 'payment_type', 'payment_amount', 'payment_status']" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: [ 'username', 'payment_type', 'payment_amount', 'payment_status']"></mat-row>
+      <mat-header-row *matHeaderRowDef="[ 'payment_type', 'payment_amount', 'payment_status', 'token_amount', 'time_started', 'time_completed','tokens_assigned', 'button']" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: [ 'payment_type', 'payment_amount', 'payment_status', 'token_amount', 'time_started', 'time_completed', 'tokens_assigned', 'button']"></mat-row>
     </mat-table>
 
     <ng-template #noData>
