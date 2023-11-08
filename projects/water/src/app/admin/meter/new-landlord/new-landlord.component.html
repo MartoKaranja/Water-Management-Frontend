@@ -2,8 +2,8 @@
 <mat-dialog-content>
   <form [formGroup]="form" (ngSubmit)="createUser()" class="vertical-form">
     <mat-form-field>
-      <input matInput placeholder="Tenant Name" formControlName="tenant_name">
-      <mat-error *ngIf="form.get('tenant_name')?.hasError('required')">Tenant Name is required</mat-error>
+      <input matInput placeholder="Landlord Name" formControlName="landlord_name">
+      <mat-error *ngIf="form.get('landlord_name')?.hasError('required')">Landlord Name is required</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="w-100">
       <mat-select id="user_id" name="user_id" formControlName="user_id">

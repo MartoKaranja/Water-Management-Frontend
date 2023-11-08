@@ -29,7 +29,7 @@ export class NewLandlordComponent {
 
     this.users = data.users;
     this.form = this.fb.group({
-      tenant_name: ['', Validators.required],
+      landlord_name: ['', Validators.required],
       user_id: [this.users],
     });
   }
