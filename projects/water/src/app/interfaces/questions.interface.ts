@@ -308,3 +308,49 @@ export interface MpesaPaymentDetails {
   time_started: Date;
   time_completed: Date;
 }
+
+
+export interface TaskTransaction{
+  id : number;
+  value_id : number;
+  description : string;
+  transaction_type : string;
+  transaction_progress : string;
+  time_started : string;
+  time_completed : string;
+  user_id : number;
+
+}
+
+export interface TaskTransactionList {
+  count: number;
+  next: string;
+  previous: string;
+  results: TaskTransaction[];
+}
+
+export interface RechargeProgressResults
+{
+  errcode : number;
+  errmsg : string;
+  state : number;
+}
+
+export interface MeterQueryResults
+{
+  errcode : number;
+  errmsg : string;
+  state : number;
+  'Cumulative flow' : string;
+  Balance : string;
+  'Signal strength' : string;
+  'Signal to noise ratio' : string;
+  'Valve status' : string;
+  'Battery undervoltage' : string;
+  'Reverse flow' : string;
+  'Valve failure alarm' : string;
+  'Strong magnetic interference alarm' : string;
+  'Backup battery switch alarm' : string;
+  'Hall Metering fault alarm' : string;
+
+}

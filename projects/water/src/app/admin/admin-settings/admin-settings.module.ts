@@ -9,6 +9,8 @@ import { MpesaSettingsComponent } from './mpesa-settings/mpesa-settings.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserDetailsUpdateComponent } from './user-details-update/user-details-update.component';
 import { TokenUpdateComponent } from './token-update/token-update.component';
+import { TasksSummaryComponent } from './tasks-summary/tasks-summary.component';
+import { TasksResultsDialogComponent } from './tasks-results-dialog/tasks-results-dialog.component';
 
 
 
@@ -17,7 +19,9 @@ import { TokenUpdateComponent } from './token-update/token-update.component';
     MpesaSettingsComponent,
     DashboardComponent,
     UserDetailsUpdateComponent,
-    TokenUpdateComponent
+    TokenUpdateComponent,
+    TasksSummaryComponent,
+    TasksResultsDialogComponent
   ],
   imports: [
     CommonModule,

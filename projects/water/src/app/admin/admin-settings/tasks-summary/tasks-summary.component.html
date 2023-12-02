@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-header>
+    <h4><span class="material-icons">
+      add_task
+      </span> Tasks Summary</h4>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="table_source" class="mat-elevation-z8 custom-table" *ngIf="table_source.data.length; else noData">
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Task description</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.description }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="transaction_type">
+        <mat-header-cell *matHeaderCellDef class="centered-cell">Task Type
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="centered-cell">
+          {{ element.transaction_type }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="transaction_progress">
+        <mat-header-cell *matHeaderCellDef>Task Progress</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.transaction_progress }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>View Result</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-raised-button color="accent" (click)="openDialog(element)">View<span class="material-icons">visibility</span></button>
+        </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+
+
+    <ng-template #noData>
+      <div class="alert alert-secondary" role="alert">No records exist yet</div>
+    </ng-template>
+
+  </mat-card-content>
+  <mat-card-footer>
+
+  </mat-card-footer>
+</mat-card>

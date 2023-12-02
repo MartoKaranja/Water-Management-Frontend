@@ -40,7 +40,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <!--- Tokens Management component-->
-        <app-token-update></app-token-update>
+        <app-token-update (eventEmitted)="refreshTasksSummary()" ></app-token-update>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -59,15 +59,8 @@
 
 
   </div>
-  <div class="col-md-6">
-    <mat-card>
-      <mat-card-header>
-        <h4>User Details</h4>
-      </mat-card-header>
-      <mat-card-content>
-        User Details breakdown # to do: make a child of the edit user component
-      </mat-card-content>
-    </mat-card>
+  <div class="col-md-6" id="tasks-summary">
+    <app-tasks-summary></app-tasks-summary>
 
   </div>
 </div>

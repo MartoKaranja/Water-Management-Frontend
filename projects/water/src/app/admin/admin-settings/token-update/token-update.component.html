@@ -21,7 +21,7 @@
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="input">
-        <mat-header-cell *matHeaderCellDef>Input</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Token Amount</mat-header-cell>
         <mat-cell *matCellDef="let element; let i = index">
           <input class="form-control" [(ngModel)]="element.inputValue" type="number" placeholder="Enter value">
         </mat-cell>
@@ -29,13 +29,20 @@
       <ng-container matColumnDef="update">
         <mat-header-cell *matHeaderCellDef>Add Tokens</mat-header-cell>
         <mat-cell *matCellDef="let element; let i = index">
-          <button mat-raised-button color="primary" (click)="logInputValue(element.inputValue, element.id)">Add<span class="material-icons">bloodtype</span></button>
+          <button mat-raised-button color="primary" (click)="rechargeMeterToken(element.inputValue, element.id); element.inputValue=''"><span class="material-icons">add_circle</span> Add</button>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="fetch">
-        <mat-header-cell *matHeaderCellDef>Meter Status</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Check Status</mat-header-cell>
         <mat-cell *matCellDef="let element; let i = index">
-          <button mat-raised-button color="accent" (click)="logInputValue(element.inputValue, element.id)">Status<span class="material-icons">bloodtype</span></button>
+          <button mat-raised-button color="accent" (click)="checkMeterStatus(element.id)">Status<span class="material-icons">search</span></button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="valve">
+        <mat-header-cell *matHeaderCellDef>Valve On/Off</mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index">
+          <button *ngIf="element.valve_state==1" mat-raised-button color="warn" (click)="switchValve(element.id)">Off<span class="material-icons">power_settings_new</span></button>
+          <button *ngIf="element.valve_state!=1" mat-raised-button color="basic" (click)="switchValve(element.id)">On<span class="material-icons">power_settings_new</span></button>
         </mat-cell>
       </ng-container>
 

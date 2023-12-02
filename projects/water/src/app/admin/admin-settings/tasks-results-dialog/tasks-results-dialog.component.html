@@ -1,0 +1,120 @@
+<h2 mat-dialog-title><span class="material-icons">troubleshoot</span>Tasks Results Progress</h2>
+
+
+<mat-dialog-content>
+  <mat-card>
+    <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+    <mat-card-content>
+      <table class="tw-divide-y tw-divide-gray-200">
+        <thead class="tw-bg-blue-50">
+        <tbody class="tw-bg-white tw-divide-y tw-divide-gray-200">
+          <tr>
+            <td colspan ="2">
+              <table class="tw-min-w-full ">
+                <tr class="tw-bg-blue-50">
+                  <th class="tw-px-1 tw-py-1">Starting time:</th>
+                  <td class="tw-px-1 tw-py-1">{{data.time_started | date:'EEEE, MM d, y h:mm a'}}</td>
+                  <th class="tw-px-1 tw-py-1">Ending time:</th>
+                  <td class="tw-px-1 tw-py-1">{{data.time_completed | date:'EE h:mm a'}}</td>
+
+                </tr>
+              </table>
+
+            </td>
+
+          </tr>
+          <tr>
+            <th class="tw-px-2 tw-py-2 ">Description</th>
+            <td class="tw-px-2 tw-py-2 ">{{data.description}}</td>
+          </tr>
+          <tr>
+            <th class="tw-px-2 tw-py-2 ">Type</th>
+            <td class="tw-px-2 tw-py-2 ">{{data.transaction_type}}</td>
+          </tr>
+          <tr>
+            <th class="tw-px-2 tw-py-2">Progress</th>
+            <td class="tw-px-2 tw-py-2">{{data.transaction_progress}}</td>
+          </tr>
+
+          <tr>
+            <th class="tw-px-1 tw-py-1">Result</th>
+            <td class="tw-px-1 tw-py-1"><p><span *ngIf="recharge_data else pleaseWait">{{recharge_data.recharge_state}}</span><ng-template #pleaseWait><span *ngIf="!status_data">Please wait...</span></ng-template></p></td>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <table *ngIf="status_data" class="tw-divide-y tw-divide-gray-200">
+        <thead class="tw-bg-blue-50">
+          <tr>
+            <th class="tw-px-1 tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">Meter Property</th>
+            <th class="tw-px-1 tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">Value</th>
+          </tr>
+        </thead>
+        <tbody class="tw-bg-white tw-divide-y tw-divide-gray-200">
+          <tr *ngIf="status_data.errcode">
+            <td class="tw-px-6 tw-py-4 ">errcode</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data.errcode}}</td>
+          </tr>
+          <tr *ngIf="status_data.errmsg">
+            <td class="tw-px-6 tw-py-4 ">errmsg</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data.errmsg}}</td>
+          </tr>
+          <tr *ngIf="status_data.state">
+            <td class="tw-px-6 tw-py-4 ">state</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data.state}}</td>
+          </tr>
+          <tr *ngIf="status_data['Cumulative flow']">
+            <td class="tw-px-6 tw-py-4 ">Cumulative flow</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Cumulative flow']}}</td>
+          </tr>
+          <tr *ngIf="status_data.Balance">
+            <td class="tw-px-6 tw-py-4 ">Balance</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data.Balance}}</td>
+          </tr>
+          <tr *ngIf="status_data['Signal strength']">
+            <td class="tw-px-6 tw-py-4 ">Signal strength</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Signal strength']}}</td>
+          </tr>
+          <tr *ngIf="status_data['Signal to noise ratio']">
+            <td class="tw-px-6 tw-py-4 ">Signal to noise ratio</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Signal to noise ratio']}}</td>
+          </tr>
+          <tr *ngIf="status_data['Valve status']">
+            <td class="tw-px-6 tw-py-4 ">Valve status</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Valve status']}}</td>
+          </tr>
+          <tr *ngIf="status_data['Battery undervoltage']">
+            <td class="tw-px-6 tw-py-4 ">Battery undervoltage</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Battery undervoltage']}}</td>
+          </tr>
+          <tr *ngIf="status_data['Reverse flow']">
+            <td class="tw-px-6 tw-py-4 ">Reverse flow</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Reverse flow']}}</td>
+          </tr>
+          <tr *ngIf="status_data['Valve failure alarm']">
+            <td class="tw-px-6 tw-py-4 ">Valve failure alarm</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Valve failure alarm']}}</td>
+          </tr>
+          <tr *ngIf="status_data['Strong magnetic interference alarm']">
+            <td class="tw-px-6 tw-py-4 ">Strong magnetic interference alarm</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Strong magnetic interference alarm']}}</td>
+          </tr>
+          <tr *ngIf="status_data['Backup battery switch alarm']">
+            <td class="tw-px-6 tw-py-4 ">Backup battery switch alarm</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Backup battery switch alarm']}}</td>
+          </tr>
+          <tr *ngIf="status_data['Hall Metering fault alarm']">
+            <td class="tw-px-6 tw-py-4 ">Hall Metering fault alarm</td>
+            <td class="tw-px-6 tw-py-4 ">{{status_data['Hall Metering fault alarm']}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </mat-card-content>
+    </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onConfirm()" class="tw-m-1 tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Close</button>
+</mat-dialog-actions>

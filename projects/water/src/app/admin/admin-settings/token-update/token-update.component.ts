@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { WaterService } from '../../../services/water.service';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -15,11 +15,12 @@ import { Meter, MeterTable, Msg } from '../../../interfaces/questions.interface'
   styleUrls: ['./token-update.component.css']
 })
 export class TokenUpdateComponent {
+  @Output() eventEmitted = new EventEmitter();
 
   table_source !: MatTableDataSource<Meter>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  columnsToDisplay = [ 'meter_name', 'current_balance', 'input',  'update', 'fetch' ];
+  columnsToDisplay = [ 'meter_name', 'current_balance', 'input',  'update', 'fetch', 'valve' ];
   data !: MeterTable;
   totalItems = 0;
   progressBarMode = 'determinate';
@@ -68,12 +69,80 @@ export class TokenUpdateComponent {
 
   }
 
-  logInputValue(token_amount: number, id : number) {
+  rechargeMeterToken(token_amount: number, id : number) {
     if (token_amount !== undefined) {
+      this.progressBarMode ="indeterminate"
       console.log(token_amount, id);
+      let token_data = {
+        'token_amount': token_amount,
+        'id' : id
+      }
+      this.dataService.rechargeMeterTokens(token_data).subscribe({
+        next: (msg: Msg) => {
+          this.msg = msg;
+          this.snackBar.open(this.msg.errMsg, 'Close', {
+            duration: 10000,
+          });
+
+          this.eventEmitted.emit();
+          this.progressBarMode = 'determinate';
+        },
+        error: (error: any) => {
+          console.log(error)
+        }
+      });
     } else {
       console.log('Token amount is undefined', id);
     }
+  }
+
+  checkMeterStatus(id: number)
+  {
+    this.progressBarMode ="indeterminate"
+    this.dataService.checkMeterStatus(id).subscribe({
+      next:(msg: Msg) => {
+
+        this.msg = msg;
+        this.snackBar.open(this.msg.errMsg, 'Close', {
+          duration: 10000,
+        });
+        // snackbar
+        //emit to parent
+        this.eventEmitted.emit()
+        this.progressBarMode = 'determinate';
+      },
+      error: (error: any) => {
+        console.error(error);
+
+      }
+      });
+
+  }
+
+  switchValve(id:number)
+  {
+    this.progressBarMode ="indeterminate"
+    let data = {
+      'meter_id' : id
+    }
+    this.dataService.switchValve(data).subscribe({
+      next:(msg: Msg) => {
+
+        this.msg = msg;
+        this.snackBar.open(this.msg.errMsg, 'Close', {
+          duration: 10000,
+        });
+        // snackbar
+        //emit to parent
+        this.eventEmitted.emit()
+        this.progressBarMode = 'determinate';
+      },
+      error: (error: any) => {
+        console.error(error);
+
+      }
+      });
+
   }
 
 

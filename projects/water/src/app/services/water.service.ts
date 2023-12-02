@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { WaterRecords, MeterRecord, Msg, UserRecords, PaymentRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords, MpesaPaymentDetails } from '../interfaces/questions.interface';
+import { WaterRecords, MeterRecord, Msg, UserRecords, PaymentRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords, MpesaPaymentDetails, TaskTransactionList, RechargeProgressResults, MeterQueryResults } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -56,6 +56,22 @@ export class WaterService {
   getMetersSummary(): Observable<MeterRecord> {
     const apiUrl =  this.configService.getApiUrl() + 'water/water-user-records';
     return this.http.get<MeterRecord>(apiUrl);
+  }
+
+  checkTaskTransactions(pageSize?: number, pageNumber?: number): Observable<TaskTransactionList> {
+
+    const apiUrl =  this.configService.getApiUrl() + 'water/transactions-summary';
+    let params = new HttpParams();
+
+    if (pageSize) {
+      params = params.set('page_size', pageSize.toString());
+    }
+    if (pageNumber) {
+      params = params.set('page_number', pageNumber.toString());
+    }
+
+
+    return this.http.get<TaskTransactionList>(apiUrl, { params });
   }
 
   updateUserDetails(): Observable<Msg> {
@@ -260,5 +276,36 @@ export class WaterService {
     return this.http.get<PaymentRecords>(apiUrl);
   }
 
+  checkMeterStatus(meter_no: number): Observable<Msg>
+  {
+    const apiUrl =  this.configService.getApiUrl() + `water/check-meter-status/${meter_no}`;
+    return this.http.get<Msg>(apiUrl);
+
+  }
+
+  rechargeMeterTokens(data: any): Observable<Msg> {
+    const apiUrl =  this.configService.getApiUrl() + 'water/recharge-meter-tokens';
+    return this.http.post<Msg>(apiUrl, data);
+  }
+
+  rechargeMeterProgress(data: any): Observable<RechargeProgressResults> {
+    const apiUrl =  this.configService.getApiUrl() + 'water/recharge-meter-progress';
+    return this.http.post<RechargeProgressResults>(apiUrl, data);
+  }
+
+  checkMeterQueryStatus(data: any): Observable<MeterQueryResults> {
+    const apiUrl =  this.configService.getApiUrl() + 'water/check-meter-query-status';
+    return this.http.post<MeterQueryResults>(apiUrl, data);
+  }
+
+  switchValve(data: any): Observable<Msg> {
+    const apiUrl =  this.configService.getApiUrl() + 'water/switch-valve';
+    return this.http.post<Msg>(apiUrl, data);
+  }
+
+  switchValveProgress(data: any): Observable<RechargeProgressResults> {
+    const apiUrl =  this.configService.getApiUrl() + 'water/switch-valve-progress';
+    return this.http.post<RechargeProgressResults>(apiUrl, data);
+  }
 
 }
