@@ -188,6 +188,21 @@ export interface Meter
   meter_reading : number;
   valve_state : string;
   imei : string;
+  phone_number : string;
+
+}
+
+export interface Client
+{
+  username : string;
+  Meter : Meter;
+}
+
+export interface ClientList{
+  count: number;
+  next: string;
+  previous: string;
+  results: Client[]
 
 }
 

@@ -7,9 +7,8 @@ export interface Menu {
   icon: string;
 }
 
-const MENUITEMS = [
-  { state: 'admin-dashboard', name: 'Dashboard', type: 'link', icon: 'water_drop'},
-  { state: 'all-landlords', name:  'All Landlords', type: 'link', icon: 'dashboard_customize'},
+const LANDLORDMENUITEMS = [
+  { state: 'landlord', name:  'Landlord Dashboard', type: 'link', icon: 'dashboard'},
   { state: 'client-dashboard', name: 'Client Dashboard', type: 'link', icon: 'water_damage'},
   { state: 'meter-overview', name: 'Meter Overview', type: 'link', icon: 'av_timer'},
   { state: 'user-management', name: 'User Management', type: 'link', icon: 'group_add'},
@@ -19,8 +18,13 @@ const MENUITEMS = [
 ];
 
 @Injectable()
-export class MenuItems {
+export class LandlordMenuItems {
   getMenuitem(): Menu[] {
-    return MENUITEMS;
+    return LANDLORDMENUITEMS;
+  }
+
+  // Add a new addMenuItem method
+  addMenuItem(menuItem: Menu) {
+    LANDLORDMENUITEMS.unshift(menuItem);
   }
 }

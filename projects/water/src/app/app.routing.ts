@@ -54,6 +54,16 @@ export const AppRoutes: Routes = [
       {
         path: 'user-payment-reports',
         loadChildren: () => import('./client/payment-reports/payment-reports.module').then(m => m.PaymentReportsModule)
+      },
+      {
+        path: 'landlord',
+        loadChildren:
+          () => import('./landlord/landlord-dashboard/landlord-dashboard.module').then(m => m.LandlordDashboardModule)
+      },
+      {
+        path: 'all-landlords',
+        loadChildren:
+          () => import('./landlord/landlords/landlords.module').then(m => m.LandlordsModule)
       }
 
     ],

@@ -1,0 +1,20 @@
+<app-widgets></app-widgets>
+<div class="row">
+  <div class="col-md-7">
+    <app-payment-summary></app-payment-summary>
+  </div>
+  <div class="col-md-5">
+    <app-landlord-clients></app-landlord-clients>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-5">
+    <app-records-summary (dataEvent)="receiveData($event)"></app-records-summary>
+  </div>
+  <div class="col-md-7">
+    <app-consumption-graphs *ngIf="meter_data" [records] = "meter_data"></app-consumption-graphs>
+  </div>
+
+
+</div>

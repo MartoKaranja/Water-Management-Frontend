@@ -1,0 +1,77 @@
+<mat-card>
+  <mat-card-header>
+    <div class="container">
+      <div>
+
+        <h5 class="tw-text-1xl tw-font-bold tw-text-gray-800"><span class='material-icons tw-mx-1'>people_outline</span>Client Summary</h5>
+      </div>
+    </div>
+
+  </mat-card-header>
+
+  <mat-card-content>
+<mat-table [dataSource]="client_details" class="mat-elevation-z8" matSort *ngIf="client_details.data.length; else noData">
+
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="username">
+    <mat-header-cell *matHeaderCellDef> Client User Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="phone_number">
+    <mat-header-cell *matHeaderCellDef> Phone Number </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.phone_number}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="current_balance">
+    <mat-header-cell *matHeaderCellDef> Current Balance </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.current_balance}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="meter_reading">
+    <mat-header-cell *matHeaderCellDef> Meter Reading </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.meter_reading}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="valve_state">
+    <mat-header-cell *matHeaderCellDef> Valve State </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <ng-container *ngIf="element.valve_state === '1'; else offline">
+          <span>Online </span>
+          <mat-icon style="color: green;">power_settings_new</mat-icon>
+        </ng-container>
+        <ng-template #offline>
+          <span>Offline </span>
+          <mat-icon style="color: red;">power_settings_new</mat-icon>
+        </ng-template>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="imei">
+    <mat-header-cell *matHeaderCellDef> IMEI </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.imei}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<ng-template #noData>
+      <div class="alert alert-secondary" role="alert">No records exist yet</div>
+    </ng-template>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+
+  </mat-card-content>
+  <mat-card-footer>
+
+  </mat-card-footer>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+</mat-card>
+

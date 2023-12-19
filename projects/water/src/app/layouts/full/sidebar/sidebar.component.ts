@@ -3,6 +3,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
 import { ProdMenuItems } from '../../../shared/menu-items/prod-menu-items';
 import { ProdUserMenuItems } from '../../../shared/menu-items/prod-user-menu-items';
+import { LandlordMenuItems } from '../../../shared/menu-items/landlord-menu-items';
+import { ProdLandlordMenuItems } from '../../../shared/menu-items/prod-landlord-menu-items';
 import { UserMenuItems } from '../../../shared/menu-items/user-menu-items';
 import { environment } from 'src/environments/environment';
 import { UsercredentialsService } from 'projects/water/src/app/services/usercredentials.service';
@@ -21,6 +23,7 @@ export class AppSidebarComponent implements OnDestroy {
 
   public menuItems : MenuItems;
   public userMenuItems : UserMenuItems;
+  public landlordMenuItems : LandlordMenuItems;
 
   username : string;
   userType : string;
@@ -38,6 +41,7 @@ export class AppSidebarComponent implements OnDestroy {
 
     this.menuItems = environment.production ?  new ProdMenuItems() : new MenuItems();
     this.userMenuItems = environment.production ?  new ProdUserMenuItems() : new UserMenuItems();
+    this.landlordMenuItems = environment.production ?  new ProdLandlordMenuItems() : new LandlordMenuItems();
     this.username = this.UsercredentialsService.username;
     this.userType = this.UsercredentialsService.userType
     console.log("Username: "+this.username)

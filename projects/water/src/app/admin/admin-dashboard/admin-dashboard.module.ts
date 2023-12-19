@@ -14,6 +14,7 @@ import { NewMeterComponent } from '../meter/new-meter/new-meter.component';
 import { ConsumptionRecordsComponent } from './consumption-records/consumption-records.component';
 import { GraphsModule } from '../graphs/graphs.module';
 import { PaymentModule } from '../payment/payment.module';
+import { AdminWidgetsComponent } from './admin-widgets/admin-widgets.component';
 
 
 
@@ -26,7 +27,8 @@ import { PaymentModule } from '../payment/payment.module';
     NewUserComponent,
     NewLandlordComponent,
     NewMeterComponent,
-    ConsumptionRecordsComponent
+    ConsumptionRecordsComponent,
+    AdminWidgetsComponent
   ],
   imports: [
     CommonModule,

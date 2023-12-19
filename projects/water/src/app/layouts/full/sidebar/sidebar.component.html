@@ -23,6 +23,18 @@
 </div>
 <mat-nav-list appAccordion>
   <ng-container *ngIf="userType==='landlord'">
+    <mat-list-item  appAccordionLink *ngFor="let menuitem of landlordMenuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
+        <a style="text-decoration: none;" appAccordionToggle [routerLink]="['/', menuitem.state]" [routerLinkActiveOptions]="{ exact: true }"  *ngIf="menuitem.type === 'link'">
+            <mat-icon>{{ menuitem.icon }}</mat-icon>
+            <span>{{ menuitem.name }}</span>
+            <span fxFlex></span>
+            <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+        </a>
+
+
+    </mat-list-item>
+  </ng-container>
+  <ng-container *ngIf="userType==='admin'">
     <mat-list-item  appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
         <a style="text-decoration: none;" appAccordionToggle [routerLink]="['/', menuitem.state]" [routerLinkActiveOptions]="{ exact: true }"  *ngIf="menuitem.type === 'link'">
             <mat-icon>{{ menuitem.icon }}</mat-icon>

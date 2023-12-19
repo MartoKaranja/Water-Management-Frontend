@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { WaterRecords, MeterRecord, Msg, UserRecords, PaymentRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords, MpesaPaymentDetails, TaskTransactionList, RechargeProgressResults, MeterQueryResults } from '../interfaces/questions.interface';
+import { WaterRecords, MeterRecord, Msg, UserRecords, PaymentRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords, MpesaPaymentDetails, TaskTransactionList, RechargeProgressResults, MeterQueryResults, ClientList } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -53,6 +53,26 @@ export class WaterService {
     return this.http.get<ConsumptionRecords>(apiUrl);
   }
 
+  getLandlordConsumptionRecordsSummary(pageSize?: number, pageNumber?: string, query_string?: string): Observable<ConsumptionRecords> {
+    let apiUrl =  this.configService.getApiUrl() + 'water/landlord-consumption-history-records/';
+    if (query_string)
+    {
+      apiUrl += query_string;
+    }
+    if (pageSize && pageNumber) {
+      if (query_string)
+      {
+        apiUrl += `&page_size=${pageSize}&page_number=${pageNumber}`;
+      }
+      else
+      {
+        apiUrl += `?page_size=${pageSize}&page_number=${pageNumber}`;
+      }
+
+    }
+    return this.http.get<ConsumptionRecords>(apiUrl);
+  }
+
   getMetersSummary(): Observable<MeterRecord> {
     const apiUrl =  this.configService.getApiUrl() + 'water/water-user-records';
     return this.http.get<MeterRecord>(apiUrl);
@@ -72,6 +92,23 @@ export class WaterService {
 
 
     return this.http.get<TaskTransactionList>(apiUrl, { params });
+  }
+
+
+  getLandlordClients(pageSize?: number, pageNumber?: number): Observable<ClientList> {
+
+    const apiUrl =  this.configService.getApiUrl() + 'water/landlord-clients';
+    let params = new HttpParams();
+
+    if (pageSize) {
+      params = params.set('page_size', pageSize.toString());
+    }
+    if (pageNumber) {
+      params = params.set('page_number', pageNumber.toString());
+    }
+
+
+    return this.http.get<ClientList>(apiUrl, { params });
   }
 
   updateUserDetails(): Observable<Msg> {
@@ -276,6 +313,27 @@ export class WaterService {
     return this.http.get<PaymentRecords>(apiUrl);
   }
 
+  getLandlordPaymentRecords(pageSize?: number, pageNumber?: string, query_string?: string): Observable<PaymentRecords> {
+    let apiUrl =  this.configService.getApiUrl() + 'water/landlord-payment-history/';
+    if (query_string)
+    {
+      apiUrl += query_string;
+    }
+    if (pageSize && pageNumber) {
+      if (query_string)
+      {
+        apiUrl += `&page_size=${pageSize}&page_number=${pageNumber}`;
+      }
+      else
+      {
+        apiUrl += `?page_size=${pageSize}&page_number=${pageNumber}`;
+      }
+
+    }
+    return this.http.get<PaymentRecords>(apiUrl);
+  }
+
+
   checkMeterStatus(meter_no: number): Observable<Msg>
   {
     const apiUrl =  this.configService.getApiUrl() + `water/check-meter-status/${meter_no}`;
@@ -306,6 +364,13 @@ export class WaterService {
   switchValveProgress(data: any): Observable<RechargeProgressResults> {
     const apiUrl =  this.configService.getApiUrl() + 'water/switch-valve-progress';
     return this.http.post<RechargeProgressResults>(apiUrl, data);
+  }
+
+  fetchWidgetData(): Observable<any>
+  {
+    const apiUrl =  this.configService.getApiUrl() + 'water/admin-widgets';
+    return this.http.get<any>(apiUrl);
+
   }
 
 }
