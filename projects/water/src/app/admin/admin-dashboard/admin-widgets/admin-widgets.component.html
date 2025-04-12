@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="results">
 
   <div class="col-sm-4">
     <mat-card class="tw-bg-gradient-to-l tw-from-purple-300 tw-to-blue-700 tw-text-white tw-shadow-lg tw-flex tw-flex-col tw-items-start tw-justify-between">
@@ -6,7 +6,7 @@
         <mat-card-title-group class="tw-flex tw-justify-between tw-w-full">
           <div>
             <mat-card-title class="tw-text-2xl tw-font-bold">Daily Average Consumption</mat-card-title>
-            <mat-card-subtitle class="tw-text-lg tw-font-light">Small title</mat-card-subtitle>
+            <mat-card-subtitle class="tw-text-lg tw-font-light">Average consumption per day</mat-card-subtitle>
           </div>
           <div class="tw-flex tw-items-right">
             <span class='material-icons tw-text-4xl'>troubleshoot</span>
@@ -14,15 +14,17 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
+              <a mat-menu-item href="#" target="_blank" rel="noopener">
+                More
+              </a>
+
             </mat-menu>
           </div>
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content class="dashboard-card-content tw-mt-4">
-        <p class="card-amount tw-text-4xl tw-font-bold tw-text-green-200">Amount $5</p>
-        <p class="card-subtitle tw-text-xl tw-font-light tw-text-green-300">Sub title content</p>
+        <p class="card-amount tw-text-4xl tw-font-bold tw-text-green-200">{{ results.average_consumption | number:'1.1-2'}} Units/Day</p>
+        <!--<p class="card-subtitle tw-text-xl tw-font-light tw-text-green-300">Sub title content</p>-->
       </mat-card-content>
     </mat-card>
   </div>
@@ -32,7 +34,7 @@
         <mat-card-title-group class="tw-flex tw-w-full">
           <div>
             <mat-card-title class="tw-text-2xl tw-font-bold">Monthly Revenue</mat-card-title>
-            <mat-card-subtitle class="tw-text-lg tw-font-light">Small title</mat-card-subtitle>
+            <mat-card-subtitle class="tw-text-lg tw-font-light">Total revenue collected for current month</mat-card-subtitle>
           </div>
           <div class="tw-flex tw-items-right">
             <span class='material-icons tw-text-4xl'>account_balance_wallet</span>
@@ -40,15 +42,17 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
+              
+              <a mat-menu-item href="#" target="_blank" rel="noopener">
+                More
+              </a>
             </mat-menu>
           </div>
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content class="dashboard-card-content tw-mt-4">
-        <p class="card-amount tw-text-4xl tw-font-bold tw-text-green-200">Amount $5</p>
-        <p class="card-subtitle tw-text-xl tw-font-light tw-text-green-300">Sub title content</p>
+        <p class="card-amount tw-text-4xl tw-font-bold tw-text-green-200">Amount {{ results.total_payment | currency:'KES ':'symbol':'1.2-2' }}/=</p>
+
       </mat-card-content>
     </mat-card>
 
@@ -59,7 +63,7 @@
         <mat-card-title-group class="tw-flex tw-justify-between tw-w-full">
           <div>
             <mat-card-title class="tw-text-2xl tw-font-bold">Monthly Consumption</mat-card-title>
-            <mat-card-subtitle class="tw-text-lg tw-font-light">Small title</mat-card-subtitle>
+            <mat-card-subtitle class="tw-text-lg tw-font-light">Total consumption used for current month</mat-card-subtitle>
           </div>
           <div>
             <span class='material-icons tw-text-4xl tw-mr-4'>network_check</span>
@@ -67,15 +71,17 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
+              
+              <a mat-menu-item href="#" target="_blank" rel="noopener">
+                More
+              </a>
             </mat-menu>
           </div>
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content class="dashboard-card-content tw-mt-4">
-        <p class="card-amount tw-text-4xl tw-font-bold tw-text-blue-500">Amount $5</p>
-        <p class="card-subtitle tw-text-xl tw-font-light tw-text-white">Sub title content</p>
+        <p class="card-amount tw-text-4xl tw-font-bold"> ~{{ results.monthly_consumption | number:'1.1-2' }} Units</p>
+        <!--<p class="card-subtitle tw-text-xl tw-font-light tw-text-white">Sub title content</p>-->
       </mat-card-content>
     </mat-card>
 

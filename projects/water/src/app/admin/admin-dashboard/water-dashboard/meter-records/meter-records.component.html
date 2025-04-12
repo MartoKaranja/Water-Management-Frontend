@@ -23,12 +23,12 @@
         <td class="tw-py-2 tw-px-2 tw-text-center">{{result.balance}}</td>
         <td class="tw-py-2 tw-px-2">
           <div style="display: flex; align-items: center; justify-content: center;">
-            <ng-container *ngIf="result.valveStatus === 1; else offline">
-              <span>Online </span>
+            <ng-container *ngIf="result.valveStatus === 1; else closed">
+              <span>Open </span>
               <mat-icon style="color: green;">power_settings_new</mat-icon>
             </ng-container>
-            <ng-template #offline>
-              <span>Offline </span>
+            <ng-template #closed>
+              <span>Closed </span>
               <mat-icon style="color: red;">power_settings_new</mat-icon>
             </ng-template>
           </div>

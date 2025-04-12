@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { WaterRecords, MeterRecord, Msg, UserRecords, PaymentRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords, MpesaPaymentDetails, TaskTransactionList, RechargeProgressResults, MeterQueryResults, ClientList } from '../interfaces/questions.interface';
+import { WaterRecords, MeterRecord, Msg, UserRecords, PaymentRecords, MeterTable, Meter, UserRecordsList, UserList, MpesaResult, FormDetails, ConsumptionRecords, MpesaPaymentDetails, TaskTransactionList, RechargeProgressResults, MeterQueryResults, ClientList, MonthlyRecords, MonthlyRecordsList, Invoice, InvoiceList, UserSummaryList, LandlordRecordsList } from '../interfaces/questions.interface';
 import { ConfigService } from './configService';
 
 @Injectable({
@@ -127,6 +127,20 @@ export class WaterService {
   {
     const apiUrl =  this.configService.getApiUrl() + 'water/dashboard-users';
     return this.http.get<UserRecordsList>(apiUrl);
+
+  }
+
+  fetchUsersConsumptionSummary(): Observable<UserRecordsList>
+  {
+    const apiUrl =  this.configService.getApiUrl() + 'water/users-consumption-summary';
+    return this.http.get<UserRecordsList>(apiUrl);
+
+  }
+
+  fetchLandlordRecords(): Observable<LandlordRecordsList>
+  {
+    const apiUrl =  this.configService.getApiUrl() + 'water/landlord-records';
+    return this.http.get<LandlordRecordsList>(apiUrl);
 
   }
 
@@ -370,6 +384,51 @@ export class WaterService {
   {
     const apiUrl =  this.configService.getApiUrl() + 'water/admin-widgets';
     return this.http.get<any>(apiUrl);
+
+  }
+
+  getMonthlyRecords(pageSize?: number, pageNumber?: string, meter_number ?: string): Observable<MonthlyRecordsList> {
+    let apiUrl = ''
+
+    if (meter_number)
+      {
+        apiUrl +=  this.configService.getApiUrl() + `water/monthly_readings/${meter_number}/`;
+      }
+    else
+    {
+      apiUrl +=  this.configService.getApiUrl() + `water/monthly_readings/`;
+    }
+    
+    if (pageSize && pageNumber) {
+      apiUrl += `?page_size=${pageSize}&page_number=${pageNumber}`;
+    }
+    return this.http.get<MonthlyRecordsList>(apiUrl);
+  }
+
+
+  getInvoiceHistory(pageSize?: number, pageNumber?: string, query_string?: string): Observable<InvoiceList> {
+    let apiUrl =  this.configService.getApiUrl() + 'water/invoices/';
+    if (query_string)
+    {
+      apiUrl += query_string;
+    }
+    if (pageSize && pageNumber) {
+      if (query_string)
+      {
+        apiUrl += `&page_size=${pageSize}&page_number=${pageNumber}`;
+      }
+      else
+      {
+        apiUrl += `?page_size=${pageSize}&page_number=${pageNumber}`;
+      }
+
+    }
+    return this.http.get<InvoiceList>(apiUrl);
+  }
+
+  getUserList(): Observable <UserSummaryList>{
+    let apiUrl =  this.configService.getApiUrl() + 'water/users-list/';
+    return this.http.get<UserSummaryList>(apiUrl);
 
   }
 

@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  received_landlord_id: number | null = null;
+
+
+  fetchLandlordClients(user_id : number)
+  {
+    this.received_landlord_id = user_id;
+
+  }
+
 }

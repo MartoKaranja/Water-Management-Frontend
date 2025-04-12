@@ -8,12 +8,12 @@ export interface Menu {
 }
 
 const LANDLORDMENUITEMS = [
-  { state: 'landlord', name:  'Landlord Dashboard', type: 'link', icon: 'dashboard'},
+  { state: 'landlord', name:  'Dashboard', type: 'link', icon: 'dashboard'},
   { state: 'client-dashboard', name: 'Client Dashboard', type: 'link', icon: 'water_damage'},
   { state: 'meter-overview', name: 'Meter Overview', type: 'link', icon: 'av_timer'},
-  { state: 'user-management', name: 'User Management', type: 'link', icon: 'group_add'},
-  { state: 'record-management', name: 'Records Mangement', type: 'link', icon: 'manage_history'},
-  { state: 'payment-management', name: 'Payment Mangement', type: 'link', icon: 'payment'},
+  { state: 'record-management', name: 'Consumption Records', type: 'link', icon: 'manage_history'},
+  { state: 'invoice-management', name: 'Invoice Management', type: 'link', icon: 'ballot'},
+  { state: 'payment-management', name: 'Payment Management', type: 'link', icon: 'payment'},
   { state: 'admin-settings', name: 'Admin Settings', type: 'link', icon: 'manage_accounts'},
 ];
 

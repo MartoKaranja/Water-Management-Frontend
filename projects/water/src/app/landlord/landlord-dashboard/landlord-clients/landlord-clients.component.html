@@ -28,8 +28,8 @@
   </ng-container>
 
   <ng-container matColumnDef="current_balance">
-    <mat-header-cell *matHeaderCellDef> Current Balance </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.current_balance}} </mat-cell>
+    <mat-header-cell *matHeaderCellDef class="align_center"> Token Balance </mat-header-cell>
+    <mat-cell *matCellDef="let element" class="align_center"> {{element.current_balance}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="meter_reading">

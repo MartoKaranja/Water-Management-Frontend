@@ -9,3 +9,7 @@
 .fill {
   flex: 1;
 }
+.material-icons, span {
+  display: inline-flex;
+  vertical-align: middle;
+}

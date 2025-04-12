@@ -1,0 +1,64 @@
+
+<mat-card>
+    <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+      <mat-card-header>
+          <h2 class="tw-flex items-center tw-text-xl">
+              <span class="tw-mr-2">
+                <i class="material-icons">supervisor_account</i>
+              </span>
+              Landlords
+            </h2>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-card-content>
+          <mat-table [dataSource]="table_source"  class="mat-elevation-z8"  [ngStyle]="{ display: table_source.data?.length ? 'block' : 'none' }">
+  
+              <!-- Landlord -->
+              <ng-container matColumnDef="landlord_name">
+                <mat-header-cell *matHeaderCellDef class="row-left"> Landlord Name</mat-header-cell>
+                <mat-cell *matCellDef="let element" class="row-left"> {{element.landlord_name}} </mat-cell>
+              </ng-container>
+          
+              <!-- Clients Number -->
+              <ng-container matColumnDef="total_clients">
+              <mat-header-cell *matHeaderCellDef class="row-center"> Total Clients </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="row-center"> {{element.num_clients}} </mat-cell>
+              </ng-container>
+
+  
+              <!-- Manage Users -->
+              <ng-container matColumnDef="manage">
+              <mat-header-cell *matHeaderCellDef >Manage Users</mat-header-cell>
+              <mat-cell *matCellDef="let element" >
+                <button mat-raised-button  color="warn" (click)="manageUsers(element.user_id)">Manage</button>
+              </mat-cell>
+              </ng-container>
+  
+              <!-- Add Users -->
+              <ng-container matColumnDef="add">
+              <mat-header-cell *matHeaderCellDef>Add Users</mat-header-cell>
+              <mat-cell *matCellDef="let element" > <button mat-raised-button color="primary" (click)="addUsers()">Add</button> 
+                
+              </mat-cell>
+              </ng-container>
+          
+              
+              <mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+      
+          <ng-template #noData>
+          <div class="alert alert-secondary" role="alert">No records fetched</div>
+          </ng-template>
+      
+      
+      
+      
+      
+      </mat-card-content>
+      <mat-card-footer>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+      </mat-card-footer>
+      </mat-card-content>
+  </mat-card>
+  

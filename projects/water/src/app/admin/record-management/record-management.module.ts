@@ -9,6 +9,12 @@ import { DateFilterDialogComponent } from './dashboard/date-filter-dialog/date-f
 import { PlotResultsComponent } from './dashboard/plot-results/plot-results.component';
 import { GraphsModule } from '../graphs/graphs.module';
 import { ConsumptionFilterDialogComponent } from './dashboard/consumption-filter-dialog/consumption-filter-dialog.component';
+import { CurrentMonthSummaryComponent } from './current-month-summary/current-month-summary.component';
+import { MonthlyViewComponent } from './monthly-view/monthly-view.component';
+import { AnnualViewComponent } from './annual-view/annual-view.component';
+import { UserConsumptionSummaryComponent } from './user-consumption-summary/user-consumption-summary.component';
+import { InvoiceModule } from '../../shared_modules/invoice/invoice.module';
+
 
 
 
@@ -17,7 +23,11 @@ import { ConsumptionFilterDialogComponent } from './dashboard/consumption-filter
     DashboardComponent,
     DateFilterDialogComponent,
     PlotResultsComponent,
-    ConsumptionFilterDialogComponent
+    ConsumptionFilterDialogComponent,
+    CurrentMonthSummaryComponent,
+    MonthlyViewComponent,
+    AnnualViewComponent,
+    UserConsumptionSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +35,7 @@ import { ConsumptionFilterDialogComponent } from './dashboard/consumption-filter
     ReactiveFormsModule,
     DemoMaterialModule,
     GraphsModule,
+    InvoiceModule,
   ],
   providers : [DatePipe]
 

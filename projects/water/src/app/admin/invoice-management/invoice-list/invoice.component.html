@@ -1,0 +1,98 @@
+<mat-card>
+  <mat-card-header>
+    <div class="container">
+      <div>
+
+        <h5 class="tw-text-2xl tw-font-bold tw-text-gray-800"><span class='material-icons'>account_balance_wallet</span>Invoice Management</h5>
+      </div>
+      <div class="fill"></div>
+      <div>
+        <button  (click)="fetchUserListDialog()" class="tw-m-1 tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Generate Invoice</button>
+
+      </div>
+    </div>
+
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-card-content>
+      <mat-table [dataSource]="table_source" class="mat-elevation-z8" matSort *ngIf="table_source.data.length; else noData">
+        <!-- Invoice Number Column -->
+        <ng-container matColumnDef="invoice_no">
+          <mat-header-cell *matHeaderCellDef> Invoice No </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.invoice_no}} </mat-cell>
+        </ng-container>
+    
+        <!-- Invoice Amount Column -->
+        <ng-container matColumnDef="invoice_amount">
+          <mat-header-cell *matHeaderCellDef> Invoice Amount </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.invoice_amount}} </mat-cell>
+        </ng-container>
+    
+        <!-- User Number Column -->
+        <ng-container matColumnDef="user_no">
+          <mat-header-cell *matHeaderCellDef> User No </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.user_no}} </mat-cell>
+        </ng-container>
+    
+        <!-- User Name Column -->
+        <ng-container matColumnDef="user_name">
+          <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.user_name}} </mat-cell>
+        </ng-container>
+    
+        <!-- Landlord Number Column -->
+        <ng-container matColumnDef="landlord_no">
+          <mat-header-cell *matHeaderCellDef> Landlord No </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.landlord_no}} </mat-cell>
+        </ng-container>
+    
+        <!-- Landlord Date Column -->
+        <ng-container matColumnDef="landlord_date">
+          <mat-header-cell *matHeaderCellDef> Landlord Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.landlord_date | date}} </mat-cell>
+        </ng-container>
+    
+        <!-- Date Issued Column -->
+        <ng-container matColumnDef="date_issued">
+          <mat-header-cell *matHeaderCellDef> Date Issued </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.date_issued | date}} </mat-cell>
+        </ng-container>
+    
+        <!-- Date Updated Column -->
+        <ng-container matColumnDef="date_updated">
+          <mat-header-cell *matHeaderCellDef> Date Updated </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.date_updated | date}} </mat-cell>
+        </ng-container>
+    
+        <!-- Invoice Status Column -->
+        <ng-container matColumnDef="invoice_status">
+          <mat-header-cell *matHeaderCellDef> Invoice Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.invoice_status}} </mat-cell>
+        </ng-container>
+    
+        <!-- Define the columns for the table -->
+        <mat-header-row *matHeaderRowDef="rows_to_display" style="background-color: #DBEAFE; font-weight: bold; padding-top: 1rem;"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: rows_to_display"></mat-row>
+      </mat-table>
+    
+      <ng-template #noData>
+        <div class="alert alert-secondary" role="alert">No results to display.</div>
+      </ng-template>
+    </mat-card-content>
+    
+
+    <ng-template #noData>
+      <div class="alert alert-secondary" role="alert">There are no invoices to display</div>
+    </ng-template>
+
+
+
+
+
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+  </mat-card-footer>
+  <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+</mat-card>

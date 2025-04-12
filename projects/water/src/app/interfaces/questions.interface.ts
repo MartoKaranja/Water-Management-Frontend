@@ -1,4 +1,5 @@
 import { MeterDashboardComponent } from "../admin/meter-overview/meter-dashboard/meter-dashboard.component";
+import { UsersComponent } from "../client/client-dashboard/users/users.component";
 
 export interface Question {
   count: number;
@@ -153,6 +154,7 @@ export interface UserRecords {
   meter : Meter;
   landlord : Landlord;
   user_profile : UserProfile;
+  monthly_consumption ?: number;
 }
 
 export interface UserRecordsList{
@@ -289,7 +291,7 @@ export interface PaymentRecords{
   count: number;
   next: string;
   previous: string;
-  results: Payment[]
+  results: Payment[]                         
 }
 
 export interface Payment{
@@ -368,4 +370,72 @@ export interface MeterQueryResults
   'Backup battery switch alarm' : string;
   'Hall Metering fault alarm' : string;
 
+}
+
+export interface MonthlyRecords{
+  month: string,
+  username ?: string,
+  min_reading_date: string,
+  max_reading_date: string,
+  first_reading: number,
+  last_reading: number
+  consumption: number
+
+}
+
+export interface MonthlyRecordsList {
+  count: number;
+  next: string;
+  previous: string;
+  results: MonthlyRecords[];
+}
+
+export interface InvoiceList
+{
+  count: number;
+  next: string;
+  previous: string;
+  results: Invoice[];
+}
+
+export interface Invoice
+{
+  invoice_id : number;
+  user_no : number;
+  user_name : string;
+  landlord_no : number;
+  landlord_name : string;
+  invoice_amount : number;
+  date_issued : string;
+  invoice_status : string;
+  date_updated : string;
+}
+
+export interface UserSummaryList
+{
+  users : Users[];
+
+}
+export interface Users 
+{
+  user_no : number;
+  user_name : string;
+
+}
+
+
+export interface LandlordRecords{
+  user_id : number;
+  landlord_name : string;
+  num_clients : number;
+
+
+}
+
+export interface LandlordRecordsList
+{
+  count: number;
+  next: string;
+  previous: string;
+  results: LandlordRecords[];
 }

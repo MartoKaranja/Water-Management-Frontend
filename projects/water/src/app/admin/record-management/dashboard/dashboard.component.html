@@ -4,11 +4,17 @@
     <div class="container">
       <div>
 
-        <h5 class="tw-text-3xl tw-font-bold tw-text-gray-800"><span class='material-icons'>history_edu</span>Consumption Records</h5>
+        <h5 class="tw-text-2xl tw-font-bold tw-text-gray-800"><span class='material-icons'>history_edu</span>Consumption Records</h5>
       </div>
       <div class="fill"></div>
       <div>
-        <button type="button" class="tw-m-1 tw-text-white tw-bg-purple-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800" (click)="updateRecords()">Update Consumption Records</button>
+        <a routerLink="/record-management/monthly-view" class="tw-m-1 tw-text-white tw-bg-purple-400 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">
+          <!-- Use the i element with the material-icons class to insert the icon -->
+          <i class="material-icons">calendar_today</i>
+          <!-- Use the span element to wrap the text -->
+          <span>Monthly View</span>
+        </a>
+        <button type="button" class="tw-m-1 tw-text-white tw-bg-purple-600 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800" (click)="updateRecords()">Update Records</button>
         <button  (click)="openDialog()" class="tw-m-1 tw-text-white tw-bg-blue-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Filter Records</button>
         <button   (click)="openConsumptionFilterDialog()" class="tw-m-1 tw-text-white tw-bg-green-700 tw-hover:bg-blue-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-blue-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-bg-blue-600 dark:hover:tw-bg-blue-700 dark:focus:ring-blue-800">Calculate Consumption</button>
 
@@ -81,7 +87,7 @@
 
 
       <!-- Define the columns for the table -->
-      <mat-header-row *matHeaderRowDef="[ 'user_name', 'reading_time', 'consumption', 'meter_reading']"></mat-header-row>
+      <mat-header-row *matHeaderRowDef="[ 'user_name', 'reading_time', 'consumption', 'meter_reading']" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
       <mat-row *matRowDef="let row; columns: [ 'user_name', 'reading_time', 'consumption', 'meter_reading']"></mat-row>
     </mat-table>
 

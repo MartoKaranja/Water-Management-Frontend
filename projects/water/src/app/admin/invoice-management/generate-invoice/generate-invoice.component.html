@@ -1,0 +1,61 @@
+<mat-card class="mat-elevation-z4">
+  <mat-card-header>
+    <mat-card-title>Generate Invoice</mat-card-title>
+    <mat-card-subtitle>Select users to generate invoices</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="invoiceForm">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>User Name</mat-label>
+            <mat-select formControlName="selectedUser" [multiple]="true" #multiSelect required>
+              <mat-option>
+                <ngx-mat-select-search 
+                  [formControl]="userFilterCtrl"
+                  [showToggleAllCheckbox]="true"
+                  [toggleAllCheckboxChecked]="isChecked"
+                  [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                  (toggleAll)="toggleSelectAll($event)"
+                  [toggleAllCheckboxTooltipMessage]="tooltipMessage"
+                  [toggleAllCheckboxTooltipPosition]="'above'"
+                  placeholderLabel="Type to search user">
+                </ngx-mat-select-search>
+              </mat-option>
+              
+              <mat-option *ngFor="let user of filteredUsers | async" [value]="user.user_no">
+                {{ user.user_name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="invoiceForm.get('selectedUser')?.hasError('required')">
+              Please select at least one user
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" >
+              <input matStartDate (focus)="picker.open()" placeholder="Start date">
+              <input matEndDate (focus)="picker.open()" placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+        </div>
+      </div>
+      
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!invoiceForm.valid">
+          Generate Invoice
+        </button>
+        <button mat-raised-button color="warn" type="button" (click)="invoiceForm.reset()">
+          Reset
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

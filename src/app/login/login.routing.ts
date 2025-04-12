@@ -10,7 +10,7 @@ export const LoginRoutes: Routes = [
     path: '', component: LoginLayoutComponent, children: [
       {path: '', redirectTo:'login', pathMatch: 'full'},
       { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent }]
+      { path: 'signup', component: SignupComponent }
   },
 
 ];

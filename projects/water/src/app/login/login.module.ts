@@ -7,10 +7,6 @@ import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 
-
-
-
-
 @NgModule({
   declarations: [
     LoginLayoutComponent,

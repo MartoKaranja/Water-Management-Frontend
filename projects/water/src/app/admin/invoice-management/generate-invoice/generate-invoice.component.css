@@ -1,0 +1,17 @@
+.full-width {
+    width: 100%;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  mat-card {
+    margin: 20px;
+  }
+.mdc-notched-outline__notch /* Fix Conflict with bootstrap */
+{
+  border-right: none;
+}

@@ -44,6 +44,10 @@ export const AppRoutes: Routes = [
         loadChildren: () => import('./admin/admin-settings/admin-settings.module').then(m => m.AdminSettingsModule)
       },
       {
+        path: 'invoice-management',
+        loadChildren: () => import('./admin/invoice-management/invoice-management.module').then(m => m.InvoiceManagementModule)
+      },
+      {
         path: 'client-payment',
         loadChildren: () => import('./client/payment-management/payment-management.module').then(m => m.PaymentManagementModule)
       },

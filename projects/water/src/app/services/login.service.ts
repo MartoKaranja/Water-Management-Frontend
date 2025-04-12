@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './configService';
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +33,6 @@ export class LoginService {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('username');
 
-    return this.http.get<any>(this.configService.getApiUrl()+ 'logout/', { headers })
+    return this.http.get<any>(this.configService.getApiUrl() + 'logout/', { headers });
   }
-
 }

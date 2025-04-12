@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-md-7">
+        <app-user-consumption-summary (fetchHistoryEvent)="updateHistoryEvent($event)"></app-user-consumption-summary>
+    </div>
+    <div class="col-md-5">
+        <p>Graph display</p>
+    </div>
+
+</div>
+<hr>
+<mat-card id="history_table">
+<mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+<mat-card-header>
+    <h2 class="tw-flex items-center tw-text-2xl">
+        <span class="tw-mr-2">
+          <i class="material-icons">date_range</i>
+        </span>
+        <span>
+          {{ username ? username + "'s&nbsp;" : '' }}
+        </span>
+        Monthly Consumption Summary
+      </h2>
+
+</mat-card-header>
+
+<mat-card-content>
+    <mat-table [dataSource]="table_source"  class="mat-elevation-z8" matSort #consumptionSort="matSort" [ngStyle]="{ display: table_source.data?.length ? 'block' : 'none' }">
+    
+        <!-- Month Column -->
+        <ng-container matColumnDef="month">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Month </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.month}} </mat-cell>
+        </ng-container>
+
+        <!-- Month Column -->
+        <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+        </ng-container>
+    
+        <!-- Min Reading Date Column -->
+        <ng-container matColumnDef="min_reading_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Min Reading Date </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="row-center"> {{element.min_reading_date | date:'EE, MM dd, h:mm a'}} </mat-cell>
+        </ng-container>
+    
+        <!-- Max Reading Date Column -->
+        <ng-container matColumnDef="max_reading_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Max Reading Date </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="row-center"> {{element.max_reading_date  | date:'EE, MM dd, h:mm a'}} </mat-cell>
+        </ng-container>
+    
+        <!-- First Reading Column -->
+        <ng-container matColumnDef="first_reading">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> First Reading </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="row-center"> {{element.first_reading}} </mat-cell>
+        </ng-container>
+    
+        <!-- Last Reading Column -->
+        <ng-container matColumnDef="last_reading">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Last Reading </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="row-center"> {{element.last_reading}} </mat-cell>
+        </ng-container>
+    
+        <!-- Consumption Column -->
+        <ng-container matColumnDef="consumption">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Consumption </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="row-center row-bold"> {{element.consumption | number:'1.0-2'}} </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #DBEAFE; font-weight : bold; padding-top: 1rem;"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    
+
+    <ng-template #noData>
+    <div class="alert alert-secondary" role="alert">No records fetched</div>
+    </ng-template>
+
+
+
+
+
+</mat-card-content>
+<mat-card-footer>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]" showFirstLastButtons [length]="totalItems" ></mat-paginator>
+</mat-card-footer>
+
+</mat-card>
+  
+  
+  
